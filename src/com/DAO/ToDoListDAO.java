@@ -44,7 +44,7 @@ public class ToDoListDAO {
         }
         return status;
     }
-    public static int updateSubmission(ToDoList s) {
+    public static int updateTodo(ToDoList s) {
     	int status=0;
     		try {
     			Connection con = getConnection();
@@ -60,7 +60,7 @@ public class ToDoListDAO {
             }
     		return status;
     	}
-    public static int deleteSubmission(int id) {
+    public static int deleteTodo(int id) {
 		int status=0;
 		try {
 			Connection con = getConnection();
@@ -74,7 +74,7 @@ public class ToDoListDAO {
         }
 		return status;
 	}
-	public static ToDoList getSubmissionById(int id) {
+	public static ToDoList getTodoById(int id) {
 		ToDoList s = new ToDoList();
 		try {
 			Connection con = getConnection();
@@ -92,7 +92,7 @@ public class ToDoListDAO {
         }
 		return s;
 	}
-	public static List<ToDoList> getAllSubmissions(){
+	public static List<ToDoList> getAllTodos(){
 		List<ToDoList> list = new ArrayList<ToDoList>();
 		try {
 			Connection con = getConnection();
