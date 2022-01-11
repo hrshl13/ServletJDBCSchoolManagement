@@ -28,7 +28,7 @@ public class ToDoListDAO {
     private static final String DELETE_todo_SQL = "delete from todo_list where task_id = ?;";
     private static final String UPDATE_todo_SQL = "update todo_list set student_id=?,task=? where task_id = ?;";
     
-    public int insertTodo(ToDoList s) throws SQLException {
+    public int insertTask(ToDoList s) throws SQLException {
     	int status = 0;
         // try-with-resource statement will auto close the connection.
         try{
@@ -44,7 +44,7 @@ public class ToDoListDAO {
         }
         return status;
     }
-    public static int updateSubmission(ToDoList s) {
+    public static int updateTask(ToDoList s) {
     	int status=0;
     		try {
     			Connection con = getConnection();
@@ -60,7 +60,7 @@ public class ToDoListDAO {
             }
     		return status;
     	}
-    public static int deleteSubmission(int id) {
+    public static int deleteTask(int id) {
 		int status=0;
 		try {
 			Connection con = getConnection();
@@ -74,7 +74,7 @@ public class ToDoListDAO {
         }
 		return status;
 	}
-	public static ToDoList getSubmissionById(int id) {
+	public static ToDoList getTasksByStudentId(int id) {
 		ToDoList s = new ToDoList();
 		try {
 			Connection con = getConnection();
@@ -92,7 +92,7 @@ public class ToDoListDAO {
         }
 		return s;
 	}
-	public static List<ToDoList> getAllSubmissions(){
+	public static List<ToDoList> getAllTasks(){
 		List<ToDoList> list = new ArrayList<ToDoList>();
 		try {
 			Connection con = getConnection();
