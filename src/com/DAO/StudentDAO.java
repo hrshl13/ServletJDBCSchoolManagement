@@ -1,9 +1,9 @@
-package com.Connections;
+package com.DAO;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 
-public class Connections {
+public class StudentDAO {
 	public static void getCon() {
 		Connection con = null;
 		try {
