@@ -1,5 +1,157 @@
 package com.DAO;
 
-public class TeacherDAO {
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
+import com.Models.Teacher;
+
+public class TeacherDAO {
+	protected static Connection getConnection() {
+		Connection con = null;
+		try {
+			Class.forName("com.mysql.jdbc.Driver");	
+			con=DriverManager.getConnection("jdbc:mysql://localhost:3306/school_management?characterEncoding=latin1","sqluser","password");
+			System.out.println("Connection Created");
+		}catch(Exception e) {
+			System.out.println(e);
+		}
+		return con;
+	}
+	private static final String INSERT_teacher_SQL = "INSERT INTO faculty(fname,lname,dob,gender,email,phone_no, address, subject_id, passwd) VALUES (?, ?,?,?,?,?,?,?,?);";
+    private static final String SELECT_teacher_BY_ID = "select * from faculty where faculty_id =?;";
+    private static final String SELECT_ALL_teacher = "select * from faculty;";
+    private static final String DELETE_teacher_SQL = "delete from faculty where task_id = ?;";
+    private static final String UPDATE_teacher_SQL = "update faculty set fname=? ,lname=? ,dob=? ,gender=? ,email=? ,phone_no=? ,address=? ,subject_id=? ,passwd=? where faculty_id = ?;";
+    
+    public int insertTeacher(Teacher s) throws SQLException {
+    	int status = 0;
+        // try-with-resource statement will auto close the connection.
+        try{
+        	Connection con = getConnection();
+        	PreparedStatement ps = con.prepareStatement(INSERT_teacher_SQL);
+            ps.setString(1, s.getFname());
+            ps.setString(2, s.getLname());
+            ps.setString(3, s.getDob());
+            ps.setString(4, s.getGender());
+            ps.setString(5, s.getEmail());
+            ps.setString(6, s.getPhone_no());
+            ps.setString(7, s.getAddress());
+            ps.setInt(8, s.getSubject_id());
+            ps.setString(9, s.getPasswd());
+            status = ps.executeUpdate();
+            System.out.println("Records Inserted!");
+            con.close();
+        } catch (SQLException e) {
+            printSQLException(e);
+        }
+        return status;
+    }
+    public static int updateTeacher(Teacher s) {
+    	int status=0;
+    		try {
+    			Connection con = getConnection();
+    			PreparedStatement ps = con.prepareStatement(UPDATE_teacher_SQL);
+    			ps.setString(1, s.getFname());
+                ps.setString(2, s.getLname());
+                ps.setString(3, s.getDob());
+                ps.setString(4, s.getGender());
+                ps.setString(5, s.getEmail());
+                ps.setString(6, s.getPhone_no());
+                ps.setString(7, s.getAddress());
+                ps.setInt(8, s.getSubject_id());
+                ps.setString(9, s.getPasswd());
+                ps.setInt(10, s.getFaculty_id());
+    			status = ps.executeUpdate();
+    			System.out.println("Records Updated!");
+    			con.close();
+    		} catch (SQLException e) {
+                printSQLException(e);
+            }
+    		return status;
+    	}
+    public static int deleteTeacher(int id) {
+		int status=0;
+		try {
+			Connection con = getConnection();
+			PreparedStatement ps = con.prepareStatement(DELETE_teacher_SQL);
+			ps.setInt(1, id);
+			status = ps.executeUpdate();
+			System.out.println("Records Deleted!");
+			con.close();
+		} catch (SQLException e) {
+            printSQLException(e);
+        }
+		return status;
+	}
+	public static Teacher getTeacherById(int id) {
+		Teacher s = new Teacher();
+		try {
+			Connection con = getConnection();
+			PreparedStatement ps = con.prepareStatement(SELECT_teacher_BY_ID);
+			ps.setInt(1, id);
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				s.setFaculty_id(rs.getInt(1));
+				s.setFname(rs.getString(2));
+				s.setLname(rs.getString(3));
+				s.setDob(rs.getString(4));
+				s.setGender(rs.getString(5));
+				s.setEmail(rs.getString(6));
+				s.setPhone_no(rs.getString(7));
+				s.setAddress(rs.getString(8));
+				s.setSubject_id(rs.getInt(9));
+				s.setPasswd(rs.getString(10));
+			}
+			con.close();
+		} catch (SQLException e) {
+            printSQLException(e);
+        }
+		return s;
+	}
+	public static List<Teacher> getAllTeachers(){
+		List<Teacher> list = new ArrayList<Teacher>();
+		try {
+			Connection con = getConnection();
+			PreparedStatement ps = con.prepareStatement(SELECT_ALL_teacher);
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()) {
+				Teacher s= new Teacher();
+				s.setFaculty_id(rs.getInt(1));
+				s.setFname(rs.getString(2));
+				s.setLname(rs.getString(3));
+				s.setDob(rs.getString(4));
+				s.setGender(rs.getString(5));
+				s.setEmail(rs.getString(6));
+				s.setPhone_no(rs.getString(7));
+				s.setAddress(rs.getString(8));
+				s.setSubject_id(rs.getInt(9));
+				s.setPasswd(rs.getString(10));
+				list.add(s);
+			}
+			con.close();
+		} catch (SQLException e) {
+            printSQLException(e);
+        }	
+		return list;
+	}		
+    private static void printSQLException(SQLException ex) {
+        for (Throwable e: ex) {
+            if (e instanceof SQLException) {
+                e.printStackTrace(System.err);
+                System.err.println("SQLState: " + ((SQLException) e).getSQLState());
+                System.err.println("Error Code: " + ((SQLException) e).getErrorCode());
+                System.err.println("Message: " + e.getMessage());
+                Throwable t = ex.getCause();
+                while (t != null) {
+                    System.out.println("Cause: " + t);
+                    t = t.getCause();
+                }
+            }
+        }
+    }
 }
