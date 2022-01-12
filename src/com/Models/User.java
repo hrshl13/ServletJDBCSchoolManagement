@@ -1,7 +1,15 @@
 package com.Models;
 
 public class User {
-	String fname, lname, dob, gender, email, address, passwd, phone_no;
+	String fname, lname, dob, gender, email, address, passwd, phone_no, login_id;
+
+	public String getLogin_id() {
+		return login_id;
+	}
+
+	public void setLogin_id(String login_id) {
+		this.login_id = login_id;
+	}
 
 	public String getFname() {
 		return fname;

@@ -22,8 +22,8 @@ public class TeacherDAO {
 		}
 		return con;
 	}
-	private static final String INSERT_teacher_SQL = "INSERT INTO faculty(fname,lname,dob,gender,email,phone_no, address, subject_id, passwd) VALUES (?, ?,?,?,?,?,?,?,?);";
-    private static final String SELECT_teacher_BY_ID = "select * from faculty where faculty_id =?;";
+	private static final String INSERT_teacher_SQL = "INSERT INTO faculty(fname,lname,dob,gender,email,phone_no, address, subject_id, passwd, login_id) VALUES (?, ?,?,?,?,?,?,?,?,?);";
+    private static final String SELECT_teacher_BY_Login_ID = "select * from faculty where login_id =?;";
     private static final String SELECT_ALL_teacher = "select * from faculty;";
     private static final String DELETE_teacher_SQL = "delete from faculty where faculty_id = ?;";
     private static final String UPDATE_teacher_SQL = "update faculty set fname=? ,lname=? ,dob=? ,gender=? ,email=? ,phone_no=? ,address=? ,subject_id=? ,passwd=? where faculty_id = ?;";
@@ -43,6 +43,7 @@ public class TeacherDAO {
             ps.setString(7, s.getAddress());
             ps.setInt(8, s.getSubject_id());
             ps.setString(9, s.getPasswd());
+            ps.setString(10, s.getLogin_id());
             status = ps.executeUpdate();
             System.out.println("Records Inserted!");
             con.close();
@@ -92,20 +93,21 @@ public class TeacherDAO {
 		Teacher s = new Teacher();
 		try {
 			Connection con = getConnection();
-			PreparedStatement ps = con.prepareStatement(SELECT_teacher_BY_ID);
+			PreparedStatement ps = con.prepareStatement(SELECT_teacher_BY_Login_ID);
 			ps.setInt(1, id);
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
-				s.setFaculty_id(rs.getInt(1));
-				s.setFname(rs.getString(2));
-				s.setLname(rs.getString(3));
-				s.setDob(rs.getString(4));
-				s.setGender(rs.getString(5));
-				s.setEmail(rs.getString(6));
-				s.setPhone_no(rs.getString(7));
-				s.setAddress(rs.getString(8));
-				s.setSubject_id(rs.getInt(9));
-				s.setPasswd(rs.getString(10));
+				s.setFaculty_id(rs.getInt("faculty_id"));
+				s.setFname(rs.getString("fname"));
+				s.setLname(rs.getString("lname"));
+				s.setDob(rs.getString("dob"));
+				s.setGender(rs.getString("gender"));
+				s.setEmail(rs.getString("email"));
+				s.setPhone_no(rs.getString("phone_no"));
+				s.setAddress(rs.getString("address"));
+				s.setSubject_id(rs.getInt("subject_id"));
+				s.setPasswd(rs.getString("passwd"));
+				s.setLogin_id(rs.getString("login_id"));
 			}
 			con.close();
 		} catch (SQLException e) {
@@ -121,16 +123,17 @@ public class TeacherDAO {
 			ResultSet rs = ps.executeQuery();
 			while(rs.next()) {
 				Teacher s= new Teacher();
-				s.setFaculty_id(rs.getInt(1));
-				s.setFname(rs.getString(2));
-				s.setLname(rs.getString(3));
-				s.setDob(rs.getString(4));
-				s.setGender(rs.getString(5));
-				s.setEmail(rs.getString(6));
-				s.setPhone_no(rs.getString(7));
-				s.setAddress(rs.getString(8));
-				s.setSubject_id(rs.getInt(9));
-				s.setPasswd(rs.getString(10));
+				s.setFaculty_id(rs.getInt("faculty_id"));
+				s.setFname(rs.getString("fname"));
+				s.setLname(rs.getString("lname"));
+				s.setDob(rs.getString("dob"));
+				s.setGender(rs.getString("gender"));
+				s.setEmail(rs.getString("email"));
+				s.setPhone_no(rs.getString("phone_no"));
+				s.setAddress(rs.getString("address"));
+				s.setSubject_id(rs.getInt("subject_id"));
+				s.setPasswd(rs.getString("passwd"));
+				s.setLogin_id(rs.getString("login_id"));
 				list.add(s);
 			}
 			con.close();

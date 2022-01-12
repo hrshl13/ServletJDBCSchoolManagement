@@ -99,11 +99,12 @@ public class ToDoListDAO {
 		return s;
 	}
 
-	public static List<ToDoList> getAllTasks() {
+	public static List<ToDoList> getAllTasksByStudentId(int id) {
 		List<ToDoList> list = new ArrayList<ToDoList>();
 		try {
 			Connection con = getConnection();
-			PreparedStatement ps = con.prepareStatement(SELECT_ALL_todo);
+			PreparedStatement ps = con.prepareStatement(SELECT_todo_BY_Student_ID);
+			ps.setInt(1, id);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				ToDoList s = new ToDoList();
