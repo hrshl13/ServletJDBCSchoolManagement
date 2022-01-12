@@ -17,6 +17,7 @@
 		  }
 			int userId = 0;
 	%>
+	<%@include file="NavBar.jsp" %>
 	<h1>ToDo List</h1>
 	<h2>Add Task</h2>
 	<form action="/ToDoList" method="post">
