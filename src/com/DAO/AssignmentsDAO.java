@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.Models.Assignment;
+import com.Models.AssignmentModel;
 import com.Models.Teacher;
 public class AssignmentsDAO {
 	public static Connection getConnection() {
@@ -23,12 +23,13 @@ public class AssignmentsDAO {
 		return con;
 	}
 	private static final String INSERT_assignment_SQL = "INSERT INTO assignment(faculty_id,subject_id,assignment_topic,assignment_desp,submitted) VALUES (?,?,?,?,?);";
-    private static final String SELECT_assignment_BY_ID = "select * from assignment where assignment_id =?;";
+    private static final String SELECT_assignment_BY_Faculty_ID = "select * from assignment where faculty_id =?;";
+    private static final String SELECT_assignment_BY_standard = "select * from assignment where standard =?;";
     private static final String SELECT_ALL_assignment = "select * from assignment;";
     private static final String DELETE_assignment_SQL = "delete from assignment where assignment_id = ?;";
     private static final String UPDATE_assignment_SQL = "update faculty set faculty_id=? ,subject_id=? ,assignment_topic=? ,assignment_desp=? ,submitted=? where assignment_id = ?;";
     
-    public int insertAssignment(Assignment ass) throws SQLException {
+    public int insertAssignment(AssignmentModel ass) throws SQLException {
     	int status = 0;
         // try-with-resource statement will auto close the connection.
         try{
@@ -47,7 +48,7 @@ public class AssignmentsDAO {
         }
         return status;
     }
-    public static int updateAssignment(Assignment ass) {
+    public static int updateAssignment(AssignmentModel ass) {
     	int status=0;
     		try {
     			Connection con = getConnection();
@@ -79,34 +80,59 @@ public class AssignmentsDAO {
         }
 		return status;
 	}
-	public static Assignment getAssignmentById(int id) {
-		Assignment ass = new Assignment();
+	public static List<AssignmentModel> getAssignmentByFacultyId(int id) {
+		List<AssignmentModel> list = new ArrayList<AssignmentModel>();
 		try {
 			Connection con = getConnection();
-			PreparedStatement ps = con.prepareStatement(SELECT_assignment_BY_ID);
+			PreparedStatement ps = con.prepareStatement(SELECT_assignment_BY_Faculty_ID);
 			ps.setInt(1, id);
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
+				AssignmentModel ass = new AssignmentModel();
 				ass.setFaculty_id(rs.getInt(1));
 				ass.setSubject_id(rs.getInt(2));
 				ass.setAssignment_topic(rs.getString(3));
 				ass.setAssignment_desp(rs.getString(4));
 				ass.setSubmitted(rs.getInt(5));
+				list.add(ass);
 			}
 			con.close();
 		} catch (SQLException e) {
             printSQLException(e);
         }
-		return ass;
+		return list;
 	}
-	public static List<Assignment> getAllAssignments(){
-		List<Assignment> list = new ArrayList<Assignment>();
+	public static List<AssignmentModel> getAssignmentByStandard(String std) {
+		List<AssignmentModel> list = new ArrayList<AssignmentModel>();
+		
+		try {
+			Connection con = getConnection();
+			PreparedStatement ps = con.prepareStatement(SELECT_assignment_BY_standard);
+			ps.setString(1, std);
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				AssignmentModel ass = new AssignmentModel();
+				ass.setFaculty_id(rs.getInt(1));
+				ass.setSubject_id(rs.getInt(2));
+				ass.setAssignment_topic(rs.getString(3));
+				ass.setAssignment_desp(rs.getString(4));
+				ass.setSubmitted(rs.getInt(5));
+				list.add(ass);
+			}
+			con.close();
+		} catch (SQLException e) {
+            printSQLException(e);
+        }
+		return list;
+	}
+	public static List<AssignmentModel> getAllAssignments(){
+		List<AssignmentModel> list = new ArrayList<AssignmentModel>();
 		try {
 			Connection con = getConnection();
 			PreparedStatement ps = con.prepareStatement(SELECT_ALL_assignment);
 			ResultSet rs = ps.executeQuery();
 			while(rs.next()) {
-				Assignment ass= new Assignment();
+				AssignmentModel ass= new AssignmentModel();
 				ass.setFaculty_id(rs.getInt(1));
 				ass.setSubject_id(rs.getInt(2));
 				ass.setAssignment_topic(rs.getString(3));

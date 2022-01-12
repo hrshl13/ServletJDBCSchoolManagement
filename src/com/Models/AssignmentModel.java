@@ -1,6 +1,6 @@
 package com.Models;
 
-public class Assignment {
+public class AssignmentModel {
 	
 	String assignment_topic, assignment_desp;
 	int assignment_id, faculty_id, subject_id, submitted;
