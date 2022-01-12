@@ -2,7 +2,6 @@ package com.DAO;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-
 import com.Models.Subject;
 
 public class SubjectDAO {
