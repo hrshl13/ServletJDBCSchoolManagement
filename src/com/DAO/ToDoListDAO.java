@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.Models.ToDoList;
+import com.Models.ToDoListModel;
 
 public class ToDoListDAO {
 	protected static Connection getConnection() {
@@ -30,7 +30,7 @@ public class ToDoListDAO {
 	private static final String DELETE_todo_SQL = "delete from todo_list where task_id = ?;";
 	private static final String UPDATE_todo_SQL = "update todo_list set student_id=?,task=? where task_id = ?;";
 
-	public int insertTask(ToDoList s) throws SQLException {
+	public static int insertTask(ToDoListModel s) throws SQLException {
 		int status = 0;
 		// try-with-resource statement will auto close the connection.
 		try {
@@ -47,7 +47,7 @@ public class ToDoListDAO {
 		return status;
 	}
 
-	public static int updateTask(ToDoList s) {
+	public static int updateTask(ToDoListModel s) {
 
 		int status = 0;
 		try {
@@ -80,8 +80,8 @@ public class ToDoListDAO {
 		return status;
 	}
 
-	public static ToDoList getTasksByStudentId(int id) {
-		ToDoList s = new ToDoList();
+	public static ToDoListModel getTasksByStudentId(int id) {
+		ToDoListModel s = new ToDoListModel();
 		try {
 			Connection con = getConnection();
 			PreparedStatement ps = con.prepareStatement(SELECT_todo_BY_Student_ID);
@@ -99,15 +99,15 @@ public class ToDoListDAO {
 		return s;
 	}
 
-	public static List<ToDoList> getAllTasksByStudentId(int id) {
-		List<ToDoList> list = new ArrayList<ToDoList>();
+	public static List<ToDoListModel> getAllTasksByStudentId(int id) {
+		List<ToDoListModel> list = new ArrayList<ToDoListModel>();
 		try {
 			Connection con = getConnection();
 			PreparedStatement ps = con.prepareStatement(SELECT_todo_BY_Student_ID);
 			ps.setInt(1, id);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				ToDoList s = new ToDoList();
+				ToDoListModel s = new ToDoListModel();
 				s.setTask_id(rs.getInt(1));
 				s.setStudent_id(rs.getInt(2));
 				s.setTask(rs.getString(3));

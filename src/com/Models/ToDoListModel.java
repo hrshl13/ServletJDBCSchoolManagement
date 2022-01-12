@@ -1,6 +1,6 @@
 package com.Models;
 
-public class ToDoList {
+public class ToDoListModel {
 	int task_id, student_id;
 	String task;
 	public int getTask_id() {
