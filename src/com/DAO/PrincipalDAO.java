@@ -7,25 +7,15 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.Extras.createCon;
 import com.Models.Principal;
 
 public class PrincipalDAO {
-	public static Connection getConnection() {
-		Connection con = null;
-		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/servlet?characterEncoding=latin1","root","Shrutika");
-			System.out.println("Connection created !!");
-		}catch(Exception e) {
-			System.out.println(e);
-		}
-		return con;
-	}
 	
 	public static int insert(Principal s) {
 		int status = 0;
 		try {
-			Connection con = PrincipalDAO.getConnection();
+			Connection con = createCon.getConnection();
 			PreparedStatement ps = con.prepareStatement("insert into principal(principal_id,fname,lname,dob,gender,email,phone_no,address,passwd,login_id) values(?,?,?,?,?,?,?,?,?,?)");
 			ps.setInt(1, s.getPrincipal_id());
 			ps.setString(2, s.getFname());
@@ -49,7 +39,7 @@ public class PrincipalDAO {
 	public static int update(Principal s) {
 		int status =0 ;
 		try {
-			Connection con =PrincipalDAO.getConnection();
+			Connection con =createCon.getConnection();
 			PreparedStatement ps = con.prepareStatement("update student set principal_id=?,fname=?,lname=?,dob=?,gender=?,email=?,phone_no=?,address=?,passwd=?,login_id=?");
 			ps.setInt(1, s.getPrincipal_id());
 			ps.setString(2, s.getFname());
@@ -72,7 +62,7 @@ public class PrincipalDAO {
 	public static int delete(int principal_id) {
 		int status = 0;
 		try {
-			Connection con = PrincipalDAO.getConnection();
+			Connection con = createCon.getConnection();
 			PreparedStatement ps = con.prepareStatement("delete from principal where principal_id=?");
 			ps.setInt(1, principal_id);
 			status = ps.executeUpdate();
@@ -87,7 +77,7 @@ public class PrincipalDAO {
 	public static Principal getPrincipalById(int principal_id) {
 		Principal s = new Principal();
 		try {
-			Connection con = PrincipalDAO.getConnection();
+			Connection con = createCon.getConnection();
 			PreparedStatement ps = con.prepareStatement("select * from principal where principal_id=?");
 			ps.setInt(1, principal_id);
 			ResultSet rs = ps.executeQuery();
@@ -112,7 +102,7 @@ public class PrincipalDAO {
 	public static Principal getPrincipalByLoginId(String principal_id) {
 		Principal s = new Principal();
 		try {
-			Connection con = PrincipalDAO.getConnection();
+			Connection con = createCon.getConnection();
 			PreparedStatement ps = con.prepareStatement("select * from principal where login_id=?");
 			ps.setString(1, principal_id);
 			ResultSet rs = ps.executeQuery();
@@ -136,7 +126,7 @@ public class PrincipalDAO {
 	public static List<Principal> getAllPrincipals(){
 		List<Principal> list = new ArrayList<Principal>();
 		try {
-			Connection con = PrincipalDAO.getConnection();
+			Connection con = createCon.getConnection();
 			PreparedStatement ps = con.prepareStatement("select * from principal");
 			ResultSet rs = ps.executeQuery();
 			while(rs.next()) {

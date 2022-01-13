@@ -8,21 +8,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.Extras.createCon;
 import com.Models.ToDoListModel;
 
 public class ToDoListDAO {
-	protected static Connection getConnection() {
-		Connection con = null;
-		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/school_management?characterEncoding=latin1",
-					"sqluser", "password");
-			System.out.println("Connection Created");
-		} catch (Exception e) {
-			System.out.println(e);
-		}
-		return con;
-	}
 
 	private static final String INSERT_todo_SQL = "INSERT INTO todo_list(student_id, task) VALUES (?, ?);";
 	private static final String SELECT_todo_BY_Student_ID = "select * from todo_list where student_id =?;";
@@ -34,7 +23,7 @@ public class ToDoListDAO {
 		int status = 0;
 		// try-with-resource statement will auto close the connection.
 		try {
-			Connection con = getConnection();
+			Connection con = createCon.getConnection();
 			PreparedStatement ps = con.prepareStatement(INSERT_todo_SQL);
 			ps.setInt(1, s.getStudent_id());
 			ps.setString(2, s.getTask());
@@ -51,7 +40,7 @@ public class ToDoListDAO {
 
 		int status = 0;
 		try {
-			Connection con = getConnection();
+			Connection con = createCon.getConnection();
 			PreparedStatement ps = con.prepareStatement(UPDATE_todo_SQL);
 			ps.setInt(1, s.getStudent_id());
 			ps.setString(2, s.getTask());
@@ -68,7 +57,7 @@ public class ToDoListDAO {
 	public static int deleteTask(int id) {
 		int status = 0;
 		try {
-			Connection con = getConnection();
+			Connection con = createCon.getConnection();
 			PreparedStatement ps = con.prepareStatement(DELETE_todo_SQL);
 			ps.setInt(1, id);
 			status = ps.executeUpdate();
@@ -83,7 +72,7 @@ public class ToDoListDAO {
 	public static ToDoListModel getTasksByStudentId(int id) {
 		ToDoListModel s = new ToDoListModel();
 		try {
-			Connection con = getConnection();
+			Connection con = createCon.getConnection();
 			PreparedStatement ps = con.prepareStatement(SELECT_todo_BY_Student_ID);
 			ps.setInt(1, id);
 			ResultSet rs = ps.executeQuery();
@@ -102,7 +91,7 @@ public class ToDoListDAO {
 	public static List<ToDoListModel> getAllTasksByStudentId(int id) {
 		List<ToDoListModel> list = new ArrayList<ToDoListModel>();
 		try {
-			Connection con = getConnection();
+			Connection con = createCon.getConnection();
 			PreparedStatement ps = con.prepareStatement(SELECT_todo_BY_Student_ID);
 			ps.setInt(1, id);
 			ResultSet rs = ps.executeQuery();

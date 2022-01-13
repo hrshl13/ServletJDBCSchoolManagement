@@ -7,24 +7,14 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.Extras.createCon;
 import com.Models.Student;
 
 public class StudentDAO {
-	public static Connection getConnection() {
-		Connection con = null;
-		try {
-			Class.forName("com.mysql.jdbc.Driver");	
-			con=DriverManager.getConnection("jdbc:mysql://localhost:3306/servlet?characterEncoding=latin1","root","Shrutika");
-			System.out.println("Connection Created");
-		}catch(Exception e) {
-			System.out.println(e);
-		}
-		return con;
-	}
 	public static int insert(Student s) {
 		int status=0;
 		try {
-			Connection con = StudentDAO.getConnection();
+			Connection con = createCon.getConnection();
 			PreparedStatement ps = con.prepareStatement("insert into student(student_id,fname,lname,dob,gender,email,phone_no,address,passwd,standard,result,admission,login_id) values(?,?,?,?,?,?,?,?,?,?,?,?,?)");
 			ps.setInt(1, s.getStudent_id());
 			ps.setString(2, s.getFname());
@@ -51,7 +41,7 @@ public class StudentDAO {
 	public static int update(Student s) {
 		int status =0;
 		try {
-			Connection con = StudentDAO.getConnection();
+			Connection con = createCon.getConnection();
 			PreparedStatement ps = con.prepareStatement("update student set student_id=?,fname=?,lname=?,dob=?,gender=?,email=?,phone_no=?,address=?,passwd=?,standard=?,result=?,admission=?,login_id=?");
 			ps.setInt(1, s.getStudent_id());
 			ps.setString(2, s.getFname());
@@ -78,8 +68,8 @@ public class StudentDAO {
 	public static int delete(int student_id) {
 		int status = 0;
 		try {
-			Connection con = StudentDAO.getConnection();
-			PreparedStatement ps = con.prepareStatement("delete from student where student_id=?");
+			Connection con = createCon.getConnection();
+			PreparedStatement ps = con.prepareStatement("delete from student where student_id=?;");
 			ps.setInt(1, student_id);
 			status = ps.executeUpdate();
 			System.out.println("Records Deleted!");
@@ -92,8 +82,8 @@ public class StudentDAO {
 	public static Student getStudentByLoginId(String student_id) {
 		Student s = new Student();
 		try {
-			Connection con = StudentDAO.getConnection();
-			PreparedStatement ps = con.prepareStatement("select * from student where login_id=?");
+			Connection con = createCon.getConnection();
+			PreparedStatement ps = con.prepareStatement("select * from student where login_id=?;");
 			ps.setString(1, student_id);
 			ResultSet rs = ps.executeQuery();
 			if(rs.next()) {
@@ -119,7 +109,7 @@ public class StudentDAO {
 	public static Student getStudentById(int student_id) {
 		Student s = new Student();
 		try {
-			Connection con = StudentDAO.getConnection();
+			Connection con = createCon.getConnection();
 			PreparedStatement ps = con.prepareStatement("select * from student where student_id=?");
 			ps.setInt(1, student_id);
 			ResultSet rs = ps.executeQuery();
@@ -148,7 +138,7 @@ public class StudentDAO {
 	public static List<Student> getAllStudents(){
 		List<Student> list = new ArrayList<Student>();
 		try {
-			Connection con = StudentDAO.getConnection();
+			Connection con = createCon.getConnection();
 			PreparedStatement ps = con.prepareStatement("select * from student");
 			ResultSet rs = ps.executeQuery();
 			while(rs.next()) {

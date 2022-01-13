@@ -7,21 +7,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.Extras.createCon;
 import com.Models.AssignmentModel;
 import com.Models.Teacher;
 public class AssignmentsDAO {
-	public static Connection getConnection() {
-		Connection con = null;
-		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			
-			con=DriverManager.getConnection("jdbc:mysql://localhost:3306/servlet?characterEncoding=latin1","root","Sajet!2345");
-			System.out.println("Connection Created");
-		}catch(Exception e) {
-			System.out.println(e);
-		}
-		return con;
-	}
+	
 	private static final String INSERT_assignment_SQL = "INSERT INTO assignment(faculty_id,subject_id,assignment_topic,assignment_desp,submitted) VALUES (?,?,?,?,?);";
     private static final String SELECT_assignment_BY_Faculty_ID = "select * from assignment where faculty_id =?;";
     private static final String SELECT_assignment_BY_standard = "select * from assignment where standard =?;";
@@ -33,7 +23,7 @@ public class AssignmentsDAO {
     	int status = 0;
         // try-with-resource statement will auto close the connection.
         try{
-        	Connection con = getConnection();
+        	Connection con = createCon.getConnection();
         	PreparedStatement ps = con.prepareStatement(INSERT_assignment_SQL);
             ps.setInt(1, ass.getFaculty_id());
             ps.setInt(2, ass.getSubject_id());
@@ -51,7 +41,7 @@ public class AssignmentsDAO {
     public static int updateAssignment(AssignmentModel ass) {
     	int status=0;
     		try {
-    			Connection con = getConnection();
+    			Connection con = createCon.getConnection();
     			PreparedStatement ps = con.prepareStatement(UPDATE_assignment_SQL);
     			ps.setInt(1, ass.getFaculty_id());
                 ps.setInt(2, ass.getSubject_id());
@@ -69,7 +59,7 @@ public class AssignmentsDAO {
     public static int deleteAssignment(int id) {
 		int status=0;
 		try {
-			Connection con = getConnection();
+			Connection con = createCon.getConnection();
 			PreparedStatement ps = con.prepareStatement(DELETE_assignment_SQL);
 			ps.setInt(1, id);
 			status = ps.executeUpdate();
@@ -83,7 +73,7 @@ public class AssignmentsDAO {
 	public static List<AssignmentModel> getAssignmentByFacultyId(int id) {
 		List<AssignmentModel> list = new ArrayList<AssignmentModel>();
 		try {
-			Connection con = getConnection();
+			Connection con = createCon.getConnection();
 			PreparedStatement ps = con.prepareStatement(SELECT_assignment_BY_Faculty_ID);
 			ps.setInt(1, id);
 			ResultSet rs = ps.executeQuery();
@@ -106,7 +96,7 @@ public class AssignmentsDAO {
 		List<AssignmentModel> list = new ArrayList<AssignmentModel>();
 		
 		try {
-			Connection con = getConnection();
+			Connection con = createCon.getConnection();
 			PreparedStatement ps = con.prepareStatement(SELECT_assignment_BY_standard);
 			ps.setString(1, std);
 			ResultSet rs = ps.executeQuery();
@@ -128,7 +118,7 @@ public class AssignmentsDAO {
 	public static List<AssignmentModel> getAllAssignments(){
 		List<AssignmentModel> list = new ArrayList<AssignmentModel>();
 		try {
-			Connection con = getConnection();
+			Connection con = createCon.getConnection();
 			PreparedStatement ps = con.prepareStatement(SELECT_ALL_assignment);
 			ResultSet rs = ps.executeQuery();
 			while(rs.next()) {

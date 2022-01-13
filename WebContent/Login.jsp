@@ -5,20 +5,20 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Login</title>
 </head>
 <body>
-<h1>Login Page</h1>
-<% if(request.getAttribute("msg") != null) { %>
-    <p style="color: red">
-     <%= request.getAttribute("msg") %>
-    </p>
-<% } %>
-
-<form action="Login" method="post">
-	<input type="text" name="uname" placeholder="Login ID"><br>
-	<input type="password" name="passwd" placeholder="Password"><br>
-	<button type="submit">Login</button>
-</form>
+	<h1>Login Page</h1>
+	<% if(request.getAttribute("msg") != null) { %>
+	    <p style="color: red">
+	     <%= request.getAttribute("msg") %>
+	    </p>
+	<% } %>
+	
+	<form action="Login" method="post">
+		<input type="text" name="uname" placeholder="Login ID"><br>
+		<input type="password" name="passwd" placeholder="Password"><br>
+		<button type="submit">Login</button>
+	</form>
 </body>
 </html>

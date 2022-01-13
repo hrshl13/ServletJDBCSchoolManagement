@@ -2,20 +2,11 @@ package com.DAO;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.Extras.createCon;
 import com.Models.Subject;
 
 public class SubjectDAO {
-	protected static Connection getConnection() {
-		Connection con = null;
-		try {
-			Class.forName("com.mysql.jdbc.Driver");	
-			con=DriverManager.getConnection("jdbc:mysql://localhost:3306/school_management?characterEncoding=latin1","sqluser","password");
-			System.out.println("Connection Created");
-		}catch(Exception e) {
-			System.out.println(e);
-		}
-		return con;
-	}
 	private static final String INSERT_Sub_SQL = "INSERT INTO subject(subject_name, faculty_id) VALUES (?, ?);";
     private static final String SELECT_Sub_BY_ID = "select subject_id, subject_name, faculty_id from subject where subject_id =?;";
     private static final String SELECT_ALL_Sub = "select * from subject;";
@@ -26,7 +17,7 @@ public class SubjectDAO {
     	int status = 0;
         // try-with-resource statement will auto close the connection.
         try{
-        	Connection con = getConnection();
+        	Connection con = createCon.getConnection();
         	PreparedStatement ps = con.prepareStatement(INSERT_Sub_SQL);
             ps.setString(1, s.getSubject_name());
             ps.setInt(2, s.getFaculty_id());
@@ -40,7 +31,7 @@ public class SubjectDAO {
     public static int updateSubject(Subject s) {
     	int status=0;
     		try {
-    			Connection con = getConnection();
+    			Connection con = createCon.getConnection();
     			PreparedStatement ps = con.prepareStatement(UPDATE_Sub_SQL);
     			ps.setString(1, s.getSubject_name());
     			ps.setInt(2, s.getFaculty_id());
@@ -56,7 +47,7 @@ public class SubjectDAO {
     public static int deleteSubject(int id) {
 		int status=0;
 		try {
-			Connection con = getConnection();
+			Connection con = createCon.getConnection();
 			PreparedStatement ps = con.prepareStatement(DELETE_Sub_SQL);
 			ps.setInt(1, id);
 			status = ps.executeUpdate();
@@ -70,7 +61,7 @@ public class SubjectDAO {
 	public static Subject getSubjectById(int id) {
 		Subject s = new Subject();
 		try {
-			Connection con = getConnection();
+			Connection con = createCon.getConnection();
 			PreparedStatement ps = con.prepareStatement(SELECT_Sub_BY_ID);
 			ps.setInt(1, id);
 			ResultSet rs = ps.executeQuery();
@@ -88,7 +79,7 @@ public class SubjectDAO {
 	public static List<Subject> getAllSubjects(){
 		List<Subject> list = new ArrayList<Subject>();
 		try {
-			Connection con = getConnection();
+			Connection con = createCon.getConnection();
 			PreparedStatement ps = con.prepareStatement(SELECT_ALL_Sub);
 			ResultSet rs = ps.executeQuery();
 			while(rs.next()) {
