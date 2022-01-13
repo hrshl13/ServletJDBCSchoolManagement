@@ -21,41 +21,32 @@ import com.Models.ToDoListModel;
 @WebServlet("/ToDoList")
 public class ToDoList extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public ToDoList() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		response.sendRedirect("ToDoList.jsp");
+	}
+
+	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int id = Integer.parseInt(request.getParameter("id"));
+		ToDoListDAO.deleteTask(id);
+		PrintWriter out = response.getWriter();
+
+		out.print(id);
+		out.flush();
+		
+	}
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			this.handleRequest(request, response);
 		} catch (ServletException e) {
-			// TODO Auto-generated catch block
+
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
 	}
 
 	public void handleRequest(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException, SQLException{
@@ -67,7 +58,8 @@ public class ToDoList extends HttpServlet {
 		  }
 		  
 		  ToDoListModel obj = new ToDoListModel();
-		  obj.setStudent_id(Integer.parseInt(request.getParameter("userId")));
+		  System.out.println(request.getParameter("userId").split("/")[0]);
+		  obj.setStudent_id(Integer.parseInt(request.getParameter("userId").split("/")[0]));
 		  obj.setTask(request.getParameter("taskDes"));
 		  
 		  ToDoListDAO.insertTask(obj);

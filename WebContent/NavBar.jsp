@@ -3,8 +3,14 @@
 <%@ page import="com.Models.Student,com.Models.Teacher, com.Models.Principal" %>
 
 	<%
-	if (session == null){
+	if (session.getAttribute("type") == null){
 		response.sendRedirect("Forbidden.jsp");
+		return;
+	}else if(request.getParameter("logout")!=null){
+		session.removeAttribute("type");
+		session.removeAttribute("obj");
+		response.sendRedirect("Login.jsp");
+		return;
 	}
 	String type = (String)session.getAttribute("type");
 	String name = null;
@@ -22,11 +28,13 @@
 		name = prin.getFname()+" "+prin.getLname();
 		break;
 	}
+
 	%>
 <div id = "top">
 	<div id="logoProfile">
 		<h1>School Management</h1>
 		<a class="pro-link" href="${pageContext.request.contextPath}/Profile.jsp"><%=name %></a>
+		<form method="post"><input name="logout" type="submit" class=button value="Logout"></form>
 	</div>
 	<ul class="nav">
 		<li>

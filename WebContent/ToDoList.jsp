@@ -29,7 +29,7 @@
 	%>
 	<h1>ToDo List</h1>
 	<h2>Add Task</h2>
-	<form action="/ToDoList" method="post">
+	<form action="ToDoList" method="post">
 		<textarea name="taskDes" rows="3" cols="50"></textarea>
 		<input type="hidden" name="userId" value=<%=userId%>/>
 		<input type="submit" value="Add"/>
@@ -39,16 +39,12 @@
 	<div>
 		<!-- Rendering Todo list by the given id -->
 		<ul>
-		<li class="task"><input type='checkbox' id=1  name='task_1' />Task 1</li>
-		<li class="task"><input type='checkbox' id=2  name='task_2' />Task 2</li>
-		<li class="task"><input type='checkbox' id=3  name='task_3' />Task 3</li>
-		<li class="task"><input type='checkbox' id=4  name='task_4' />Task 4</li>
 		<%
 		List<ToDoListModel> list = ToDoListDAO.getAllTasksByStudentId(userId);
 		if (list.size() == 0){
 			%>
 			
-			<div>Yayy!! No tasks To Do!</div>
+			<div class="free">Yayy!! No tasks To Do!</div>
 			
 			<%
 			
@@ -56,8 +52,8 @@
 			for (ToDoListModel el : list){
 				int taskId = el.getTask_id();
 				%>
-				<li>
-					<input class='task' type='checkbox' id=<%=taskId %> name='task_'+<%=taskId %> />
+				<li class='task'>
+					<input type='checkbox' id=<%=taskId %> name='task_'+<%=taskId %> />
 					<label for='task_'+<%=taskId %> class=''><%=el.getTask() %></label>
 				<li>
 				<%
@@ -104,28 +100,44 @@
 		var xmlHttpRequest;
 		const checks = document.getElementsByClassName("task");
 		console.log(checks);
-		checks.forEach(check=>{
-			console.log(e.target.id);
-			check.firstChild.addEventListener("click", e =>{
-				e.target.parentElement.style.animationPlayState = "running";
-				e.target.parentElement.addEventListener('animationend', () => {
-		            e.target.parentElement.remove();
+		for (let check =0; check < checks.length;check++){
+			console.log(checks[check]);
+			checks[check].firstChild.addEventListener("click", e =>{
+				console.log(window.ActiveXObject);
+				if(window.XMLHttpRequest){
+					
+					request = new XMLHttpRequest();
+					
+				}
+				else if(window.ActiveXObject){
+					
+					request = new ActiveXObject("Microsoft.XMLHTTP");
+				} 
+				var url="ToDoList?id="+e.target.id;
+				try{
+					request.onreadystatechange=sendInfo;
+					request.open("DELETE",url,true);
+					request.send();
+					
+				}catch(e){
+					alert("Unable to connect server");
+				}
 		        });
-			})
-		});
+			}
+
 		
-		if(window.XMLHttpRequest){  
-			xmlHttpRequest=new XMLHttpRequest();  
-		} else if(window.ActiveXObject){  
-			xmlHttpRequest=new ActiveXObject("Microsoft.XMLHTTP");  
-		}
-		
-		function getInfo(){  
+		//Callback function after deletion
+		function sendInfo(){  
 			if(this.readyState == 4 && this.status == 200){  
 				var responseVal=xmlHttpRequest.responseText;  
 				console.log(responseVal);  
-				if(responseVal != 1){
-					
+				if(responseVal >= 0){
+					e = document.getElementById(responseVal);
+					e.parentElement.style.animationPlayState = "running";
+					e.target.parentElement.addEventListener('animationend', () => {
+			        e.target.parentElement.remove();});
+				}else{
+					alert("Couldn't delete task!!\nThere's some issue on the server!!");
 				}
 			}  
 		}
