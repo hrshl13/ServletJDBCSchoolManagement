@@ -26,7 +26,7 @@ public class PrincipalDAO {
 		int status = 0;
 		try {
 			Connection con = PrincipalDAO.getConnection();
-			PreparedStatement ps = con.prepareStatement("insert into principal(principal_id,fname,lname,dob,gender,email,phone_no,address,passwd) values(?,?,?,?,?,?,?,?,?)");
+			PreparedStatement ps = con.prepareStatement("insert into principal(principal_id,fname,lname,dob,gender,email,phone_no,address,passwd,login_id) values(?,?,?,?,?,?,?,?,?,?)");
 			ps.setInt(1, s.getPrincipal_id());
 			ps.setString(2, s.getFname());
 			ps.setString(3, s.getLname());
@@ -36,6 +36,7 @@ public class PrincipalDAO {
 			ps.setString(7, s.getPhone_no());
 			ps.setString(8, s.getAddress());
 			ps.setString(9, s.getPasswd());
+			ps.setString(10, s.getLogin_id());
 			status = ps.executeUpdate();
 			System.out.println("Records Inserted!");
 			con.close();
@@ -49,7 +50,7 @@ public class PrincipalDAO {
 		int status =0 ;
 		try {
 			Connection con =PrincipalDAO.getConnection();
-			PreparedStatement ps = con.prepareStatement("update student set principal_id=?,fname=?,lname=?,dob=?,gender=?,email=?,phone_no=?,address=?,passwd=?");
+			PreparedStatement ps = con.prepareStatement("update student set principal_id=?,fname=?,lname=?,dob=?,gender=?,email=?,phone_no=?,address=?,passwd=?,login_id=?");
 			ps.setInt(1, s.getPrincipal_id());
 			ps.setString(2, s.getFname());
 			ps.setString(3, s.getLname());
@@ -59,6 +60,7 @@ public class PrincipalDAO {
 			ps.setString(7, s.getPhone_no());
 			ps.setString(8, s.getAddress());
 			ps.setString(9, s.getPasswd());
+			ps.setString(10, s.getLogin_id());
 			System.out.println("Records Updated!");
 			con.close();
 		}catch(Exception e) {
@@ -99,6 +101,7 @@ public class PrincipalDAO {
 				s.setPhone_no(rs.getString(7));
 				s.setAddress(rs.getString(8));
 				s.setPasswd(rs.getString(9));
+				s.setLogin_id(rs.getString(10));
 			}
 			con.close();
 		}catch(Exception e) {
@@ -124,6 +127,7 @@ public class PrincipalDAO {
 				s.setPhone_no(rs.getString(7));
 				s.setAddress(rs.getString(8));
 				s.setPasswd(rs.getString(9));
+				s.setLogin_id(rs.getString(10));
 				list.add(s);
 			}
 			con.close();
