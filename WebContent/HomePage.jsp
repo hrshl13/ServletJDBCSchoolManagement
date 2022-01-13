@@ -7,6 +7,8 @@
 <title>Home Page</title>
 </head>
 <body>
-This is Home Page
+	<%@include file="NavBar.jsp" %>
+	<h1>Welcome <%=name %></h1>
+
 </body>
 </html>

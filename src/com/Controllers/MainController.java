@@ -56,7 +56,7 @@ public class MainController extends HttpServlet {
 		out.println("<h1>Servlet Welcome at "+request.getContextPath()+"</h1>");
 		out.println("</body>");
 		out.println("</html>");
-		StudentDAO.getCon();
+		StudentDAO.getConnection();
 	}
 
 }

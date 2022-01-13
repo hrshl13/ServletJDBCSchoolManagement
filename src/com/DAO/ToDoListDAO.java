@@ -16,7 +16,7 @@ public class ToDoListDAO {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/school_management?characterEncoding=latin1",
-					"sqluser", "password");
+					"user1", "7045165072");
 			System.out.println("Connection Created");
 		} catch (Exception e) {
 			System.out.println(e);
