@@ -5,20 +5,21 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="Login.css" type='text/css'>
 <title>Login</title>
 </head>
 <body>
-	<h1>Login Page</h1>
-	<% if(request.getAttribute("msg") != null) { %>
-	    <p style="color: red">
-	     <%= request.getAttribute("msg") %>
-	    </p>
-	<% } %>
-	
-	<form action="Login" method="post">
-		<input type="text" name="uname" placeholder="Login ID"><br>
-		<input type="password" name="passwd" placeholder="Password"><br>
-		<button type="submit">Login</button>
+	<form id="login" action="Login" method="post">
+		<h1 class="page-title">Login Page</h1>
+		<% if(request.getAttribute("msg") != null) { %>
+	    	<p class="error">
+		     <%= request.getAttribute("msg") %>
+		    </p>
+		<% } %>
+		<input class="input" type="text" name="uname" placeholder="Login ID"><br>
+		<input class="input" type="password" name="passwd" placeholder="Password"><br>
+		<button class="submit" type="submit">Login</button>
 	</form>
 </body>
 </html>
