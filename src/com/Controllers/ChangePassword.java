@@ -34,39 +34,40 @@ public class ChangePassword extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		processRequest(request,response);
-	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		processRequest(request,response);
 	}
 	public void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String curpass = Hash.encode(request.getParameter("curpass"));
 		String newpass = Hash.encode(request.getParameter("newpass"));
 		String repass = Hash.encode( request.getParameter("repass"));
+		RequestDispatcher rd = request.getRequestDispatcher("ChangePassword.jsp");
 		if (curpass.isBlank()) {
 			request.setAttribute("msg", "Please Enter Current Password!!!");
+			rd.forward(request, response);
 		}
 		else if(newpass.isBlank()) {
 			request.setAttribute("msg", "Please Enter Current Password!!!");
+			rd.forward(request, response);
 		}
 		else if(newpass.isBlank()) {
 			request.setAttribute("msg", "Please Enter Current Password!!!");
+			rd.forward(request, response);
 		}
-		RequestDispatcher rd = request.getRequestDispatcher("ChangePassword.jsp");
 		HttpSession session = request.getSession(false);
 		User user = (User) session.getAttribute("obj");
 		if (!curpass.equals(user.getPasswd())) {
 			request.setAttribute("msg", "Please Enter correct Current Password!!!");
+			rd.forward(request, response);
 		}
 		else if (!newpass.equals(repass)) {
 			request.setAttribute("msg", "New Password and Retype Password should be same!!!");
+			rd.forward(request, response);
 		}
 		else {
 			user.setPasswd(newpass);

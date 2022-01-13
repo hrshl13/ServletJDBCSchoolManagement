@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" errorPage="Error.jsp"
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" 
 	import="java.util.*"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -8,34 +8,17 @@
 <title>Profile Page-</title>
 </head>
 <body>
-<% 
-	if (session==null)
-	{
-	    RequestDispatcher rd = request.getRequestDispatcher("Forbidden.jsp");
-	    rd.forward(request,response);
-	  } 
-	response.setHeader("Cache-Control", "no-cache,no-store,must-revalidate"); //HTTP 1.1
-	response.setHeader("Pragma", "no-cache");
-	response.setHeader("Expires", "0");
-	session.setMaxInactiveInterval(600);
-
-%>
 
 	<%@include file="NavBar.jsp" %>
 	<% 
-		Dictionary d = (Dictionary)session.getAttribute("Details");
+	HashMap<String,String> D=new HashMap<String,String>();
 	%>
-	<table align="center">
+	<table>
 	<% 
-		Enumeration enm=d.keys();
-		Enumeration emn=d.elements();
-		while(enm.hasMoreElements()){ 
-			out.println("<tr><td class='Key'>");
-			enm.nextElement();
-			out.println("</td><td class='Element'>");
-			emn.nextElement();
-			out.println("</td></tr>");
-		}
+	 for(Map.Entry<String, String> m : D.entrySet()){    
+			out.println("<tr><td class='Key'>"+m.getKey()+"</td><td class='Element'>"+m.getValue()+"</td></tr>");
+			System.out.println(m.getKey()+" : "+m.getValue());
+		   }  
 	%>
 	</table>
 	<form action="ChangePassword.jsp" method="post">

@@ -10,18 +10,7 @@
 <body>
 
 <%@include file="NavBar.jsp" %>
-<% 
-	if (session==null)
-	{
-	    RequestDispatcher rd = request.getRequestDispatcher("Forbidden.jsp");
-	    rd.forward(request,response);
-	  } 
-	response.setHeader("Cache-Control", "no-cache,no-store,must-revalidate"); //HTTP 1.1
-	response.setHeader("Pragma", "no-cache");
-	response.setHeader("Expires", "0");
-	session.setMaxInactiveInterval(600);
 
-%>
 <div class="bigcontainer">
 	<div class="smallcontainer" >
 		Assignments!!!

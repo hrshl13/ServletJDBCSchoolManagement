@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Go Back Cheater!!!</title>
 </head>
 <body>
 Forbidden Page - 403 Error
