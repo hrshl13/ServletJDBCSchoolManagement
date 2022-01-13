@@ -3,7 +3,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>You have got an error!</title>
 </head>
 <body>
 Ooops! You might not wanna go there!

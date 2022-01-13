@@ -40,23 +40,7 @@ public class MainController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		PrintWriter out = response.getWriter();
-		float res1=0;
-		float a = Float.parseFloat(request.getParameter("n1"));
-		float b = Float.parseFloat(request.getParameter("n2"));
-		String opr = request.getParameter("operation");
-		
-		if (opr.equals("Addition")) {res1=a+b;}
-		else if (opr.equals("Subtraction")) {res1=a-b;}
-		else if (opr.equals("Multiplication")) {res1=a*b;}
-		else if (opr.equals("Division")) {res1=a/b;}
-		out.println("<html>");
-		out.println("<body>");
-		out.println("<h1> The Result of "+opr+" of "+ a+" and "+b+" is "+res1+"</h1>");
-		out.println("<h1>Servlet Welcome at "+request.getContextPath()+"</h1>");
-		out.println("</body>");
-		out.println("</html>");
-		StudentDAO.getCon();
+	
 	}
 
 }

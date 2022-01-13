@@ -26,7 +26,7 @@
 		<input type="submit" value="Add"/>
 	</form>
 	<hr/>
-	<h2>Curent Todo</h2>
+	<h2>Current Todo</h2>
 	<div>
 		<!-- Rendering Todo list by the given id -->
 		<ul>
