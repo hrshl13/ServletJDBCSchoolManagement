@@ -17,7 +17,7 @@ public class SyllabusDAO {
 		int status=0;
 		try {
 			Connection con = createCon.getConnection();
-			PreparedStatement ps = con.prepareStatement("insert into Syllabus(syllabus_id, subject_id,standard,chapter) values(?,?,?,?)");
+			PreparedStatement ps = con.prepareStatement("insert into syllabus(syllabus_id, subject_id,standard,chapter) values(?,?,?,?)");
 			ps.setInt(1, s.getSyllabus_id());
 			ps.setInt(2, s.getSubject_id());
 			ps.setString(3, s.getStandard());
@@ -35,7 +35,7 @@ public class SyllabusDAO {
 		int status=0;
 		try {
 			Connection con = createCon.getConnection();
-			PreparedStatement ps = con.prepareStatement("Update Syllabus set syllabus_id=?, subject_id=? ,standard=?, chapter=?"); 
+			PreparedStatement ps = con.prepareStatement("Update syllabus set syllabus_id=?, subject_id=? ,standard=?, chapter=?"); 
 			ps.setInt(1, s.getSyllabus_id());
 			ps.setInt(2, s.getSubject_id());
 			ps.setString(3, s.getStandard());
@@ -53,7 +53,7 @@ public class SyllabusDAO {
 		int status=0;
 		try {
 			Connection con = createCon.getConnection();
-			PreparedStatement ps = con.prepareStatement("Delete from Syllabus where syllabus_id=?"); 
+			PreparedStatement ps = con.prepareStatement("Delete from syllabus where syllabus_id=?"); 
 			ps.setInt(1, syllabus_id);
 			status = ps.executeUpdate();
 			System.out.println("Records Deleted!");
@@ -69,7 +69,7 @@ public class SyllabusDAO {
 		Syllabus s = new Syllabus();
 		try {
 			Connection con = createCon.getConnection();
-			PreparedStatement ps = con.prepareStatement("select * from Syllabus where id=?");
+			PreparedStatement ps = con.prepareStatement("select * from syllabus where id=?");
 			ps.setInt(1, syllabus_id);
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
@@ -89,7 +89,7 @@ public class SyllabusDAO {
 		List<Syllabus> list = new ArrayList<Syllabus>();
 		try {
 			Connection con = createCon.getConnection();
-			PreparedStatement ps = con.prepareStatement("select * from Syllabus");
+			PreparedStatement ps = con.prepareStatement("select * from syllabus");
 			ResultSet rs = ps.executeQuery();
 			while(rs.next()) {
 				Syllabus s = new Syllabus(); 

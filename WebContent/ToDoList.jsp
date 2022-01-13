@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" errorPage="Error.jsp"
     pageEncoding="ISO-8859-1"%>
     <%@page import="com.DAO.ToDoListDAO, java.util.*,com.Models.ToDoListModel" %>
 <!DOCTYPE html>
@@ -8,6 +8,18 @@
 <title>To-Do</title>
 </head>
 <body>
+<% 
+	if (session==null)
+	{
+	    RequestDispatcher rd = request.getRequestDispatcher("Forbidden.jsp");
+	    rd.forward(request,response);
+	  } 
+	response.setHeader("Cache-Control", "no-cache,no-store,must-revalidate"); //HTTP 1.1
+	response.setHeader("Pragma", "no-cache");
+	response.setHeader("Expires", "0");
+	session.setMaxInactiveInterval(600);
+
+%>
 	<!-- Getting userId for loading list -->
 	<%@include file="NavBar.jsp" %>
 	<%

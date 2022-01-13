@@ -4,9 +4,8 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Home Page</title>
+<title>Change Password</title>
 </head>
-<body>
 <% 
 	if (session==null)
 	{
@@ -19,8 +18,26 @@
 	session.setMaxInactiveInterval(600);
 
 %>
-	<%@include file="NavBar.jsp" %>
-	<h1>Welcome <%=name %></h1>
-
+<body>
+<centre>Change Passowrd</centre>
+<form action="ChangePassword" method="post">
+	<table align="center">
+		<tr>
+			<td>Current Password</td>
+			<td><input type="password" name="curpass"></td>
+		</tr>
+		<tr>
+			<td>New Password</td>
+			<td><input type="password" name="newpass"></td>
+		</tr>
+		<tr>
+			<td>Retype New Password</td>
+			<td><input type="password" name="repass"></td>
+		</tr>
+		<tr>
+		<td colspan="2"><button type="submit">Change Password</button></td>
+		</tr>
+	</table>
+</form>
 </body>
 </html>

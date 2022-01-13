@@ -40,7 +40,6 @@ public class ToDoList extends HttpServlet {
 		try {
 			this.handleRequest(request, response);
 		} catch (ServletException e) {
-
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
