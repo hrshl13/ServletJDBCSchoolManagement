@@ -8,10 +8,16 @@
 <title>Insert title here</title>
 </head>
 <body>
-Welcome to Login Page
+<h1>Login Page</h1>
+<% if(request.getAttribute("msg") != null) { %>
+    <p style="color: red">
+     <%= request.getAttribute("msg") %>
+    </p>
+<% } %>
+
 <form action="Login" method="get">
-	Enter username: <input type="text" name="uname"><br>
-	Enter password: <input type="password" name="passwd"><br>
+	<input type="text" name="uname" placeholder="Login ID"><br>
+	<input type="password" name="passwd" placeholder="Password"><br>
 	<button type="submit">Login</button>
 </form>
 </body>

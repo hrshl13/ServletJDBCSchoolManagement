@@ -106,7 +106,30 @@ public class PrincipalDAO {
 		}
 		return s;
 	}
-	
+	public static Principal getPrincipalByLoginId(String principal_id) {
+		Principal s = new Principal();
+		try {
+			Connection con = PrincipalDAO.getConnection();
+			PreparedStatement ps = con.prepareStatement("select * from principal where login_id=?");
+			ps.setString(1, principal_id);
+			ResultSet rs = ps.executeQuery();
+			if(rs.next()) {
+				s.setPrincipal_id(rs.getInt(1));
+				s.setFname(rs.getString(2));
+				s.setLname(rs.getString(3));
+				s.setDob(rs.getString(4));
+				s.setGender(rs.getString(5));
+				s.setEmail(rs.getString(6));
+				s.setPhone_no(rs.getString(7));
+				s.setAddress(rs.getString(8));
+				s.setPasswd(rs.getString(9));
+			}
+			con.close();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return s;
+	}
 	public static List<Principal> getAllPrincipals(){
 		List<Principal> list = new ArrayList<Principal>();
 		try {

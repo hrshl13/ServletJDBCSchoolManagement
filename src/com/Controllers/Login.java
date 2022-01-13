@@ -2,20 +2,21 @@ package com.Controllers;
 
 import jakarta.servlet.http.HttpServlet;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.List;
 
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import jakarta.servlet.http.HttpSessionEvent;
 
-import com.DAO.TeacherDAO;
 import com.Models.Teacher;
+import com.Models.Student;
+import com.Models.Principal;
+import com.DAO.TeacherDAO;
 import com.DAO.StudentDAO;
 import com.DAO.PrincipalDAO;
+import com.Extras.Hash;
 
 /**
  * Servlet implementation class Login
@@ -36,39 +37,69 @@ public class Login extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		processRequest(request, response);
+		response.sendRedirect("Login.jsp");
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		//Authenticating login details
 		processRequest(request, response);
-	}	
-	protected boolean getUnamePassword(String uname,String passwd) {
-		boolean ans = false;
-		 List<Teacher> teacherList = TeacherDAO.getAllTeachers();
-		 for (Teacher t: teacherList) {
-			 if (uname.equals(t.getFaculty_id()) && passwd.equals(t.getPasswd())){
-				 ans = true;
-			 }
-		 }
-		 return ans;
 	}
+	
 	 protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-			PrintWriter out = response.getWriter();
 			String uname=request.getParameter("uname");
-			String passwd=request.getParameter("passwd");
+			String passwd= Hash.encode(request.getParameter("passwd"));
+			RequestDispatcher rd = request.getRequestDispatcher("Login.jsp");
 			
-			if (uname.equals("harshal") && passwd.equals("gondkar")){
-				HttpSession session = request.getSession();
-				response.sendRedirect("HomePage.jsp");
+			if (uname.toLowerCase().startsWith("s")){
+				Student cur = StudentDAO.getStudentByLoginId(uname);
+				 if(cur.getPasswd().equals(null)) {
+					 request.setAttribute("msg", "No Registrations with the given Login ID!!!");
+				 }else if(cur.getPasswd().equals(passwd)) {
+					 //On Successful Authentication, Creating a session and redirecting to homepage
+					 HttpSession session = request.getSession();
+					 session.setAttribute("type", "Student");
+					 session.setAttribute("obj", cur);
+					 response.sendRedirect("HomePage.jsp");
+					 
+				 }else {
+					 request.setAttribute("msg", "Wrong Password!!!");
+				 }
 				}
+			else if (uname.toLowerCase().startsWith("t")) {
+				Teacher cur = TeacherDAO.getTeacherByLoginId(uname);
+				if(cur.getPasswd().equals(null)) {
+					 request.setAttribute("msg", "No Registrations with the given Login ID!!!");
+				 }else if(cur.getPasswd().equals(passwd)) {
+					 //On Successful Authentication, Creating a session and redirecting to homepage
+					 HttpSession session = request.getSession();
+					 session.setAttribute("type", "Teacher");
+					 session.setAttribute("obj", cur);
+					 response.sendRedirect("HomePage.jsp");
+				 }else {
+					 request.setAttribute("msg", "Wrong Password!!!");
+				 }
+				}
+			else if (uname.toLowerCase().startsWith("p")) {
+				Principal cur = PrincipalDAO.getPrincipalByLoginId(uname);
+				if(cur.getPasswd().equals(null)) {
+					 request.setAttribute("msg", "No Registrations with the given Login ID!!!");
+				 }else if(cur.getPasswd().equals(passwd)) {
+					 //On Successful Authentication, Creating a session and redirecting to homepage
+					 HttpSession session = request.getSession();
+					 session.setAttribute("type", "Principal");
+					 session.setAttribute("obj", cur);
+					 response.sendRedirect("HomePage.jsp");
+				 }else {
+					 request.setAttribute("msg", "Wrong Password!!!");
+				 }
+			}
 			else {
-				   out.println("<meta http-equiv='refresh' content='3;URL=index.jsp'>");//redirects after 3 seconds
-				   out.println("<p style='color:red;'>User or password incorrect!</p>");
-				}
+				request.setAttribute("msg", "Invalid Username!!!");
+			}
+			//Redirecting to appropriate page
+			rd.forward(request, response);
 	 }
 }

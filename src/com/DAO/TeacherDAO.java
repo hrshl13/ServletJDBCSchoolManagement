@@ -115,6 +115,32 @@ public class TeacherDAO {
         }
 		return s;
 	}
+	public static Teacher getTeacherByLoginId(String id) {
+		Teacher s = new Teacher();
+		try {
+			Connection con = getConnection();
+			PreparedStatement ps = con.prepareStatement("SELECT * FROM faculty WHERE login_id = ?;");
+			ps.setString(1, id);
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				s.setFaculty_id(rs.getInt("faculty_id"));
+				s.setFname(rs.getString("fname"));
+				s.setLname(rs.getString("lname"));
+				s.setDob(rs.getString("dob"));
+				s.setGender(rs.getString("gender"));
+				s.setEmail(rs.getString("email"));
+				s.setPhone_no(rs.getString("phone_no"));
+				s.setAddress(rs.getString("address"));
+				s.setSubject_id(rs.getInt("subject_id"));
+				s.setPasswd(rs.getString("passwd"));
+				s.setLogin_id(rs.getString("login_id"));
+			}
+			con.close();
+		} catch (SQLException e) {
+            printSQLException(e);
+        }
+		return s;
+	}
 	public static List<Teacher> getAllTeachers(){
 		List<Teacher> list = new ArrayList<Teacher>();
 		try {

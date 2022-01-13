@@ -87,7 +87,33 @@ public class StudentDAO {
 		}
 		return status;
 	}
-	
+	public static Student getStudentByLoginId(String student_id) {
+		Student s = new Student();
+		try {
+			Connection con = StudentDAO.getConnection();
+			PreparedStatement ps = con.prepareStatement("select * from student where login_id=?");
+			ps.setString(1, student_id);
+			ResultSet rs = ps.executeQuery();
+			if(rs.next()) {
+				s.setStudent_id(rs.getInt(1));
+				s.setFname(rs.getString(2));
+				s.setLname(rs.getString(3));
+				s.setDob(rs.getString(4));
+				s.setGender(rs.getString(5));
+				s.setEmail(rs.getString(6));
+				s.setPhone_no(rs.getString(7));
+				s.setAddress(rs.getString(8));
+				s.setPasswd(rs.getString(9));
+				s.setStandard(rs.getString(10));
+				s.setResult(rs.getString(11));
+				s.setAdmission_date(rs.getString(12));
+			}
+			con.close();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return s;
+	}
 	public static Student getStudentById(int student_id) {
 		Student s = new Student();
 		try {
