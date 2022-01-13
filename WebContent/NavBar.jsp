@@ -1,17 +1,19 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" 
     pageEncoding="ISO-8859-1"%>
 <%@ page import="com.Models.Student,com.Models.Teacher, com.Models.Principal" %>
 
 	<%
-	if (session.getAttribute("type") == null){
+	if (session.getAttribute("type") == null)
+	{
 		response.sendRedirect("Forbidden.jsp");
 		return;
-	}else if(request.getParameter("logout")!=null){
-		session.removeAttribute("type");
-		session.removeAttribute("obj");
-		response.sendRedirect("Login.jsp");
-		return;
 	}
+	response.setHeader("Cache-Control", "no-cache,no-store,must-revalidate"); //HTTP 1.1
+	response.setHeader("Pragma", "no-cache");
+	response.setHeader("Expires", "0");
+	session.setMaxInactiveInterval(600);
+	
+	
 	String type = (String)session.getAttribute("type");
 	String name = null;
 	switch(type){
@@ -34,7 +36,7 @@
 	<div id="logoProfile">
 		<h1>School Management</h1>
 		<a class="pro-link" href="${pageContext.request.contextPath}/Profile.jsp"><%=name %></a>
-		<form method="post"><input name="logout" type="submit" class=button value="Logout"></form>
+		<form action="/Logout" method="post"><input name="logout" type="submit" class=button value="Logout"></form>
 	</div>
 	<ul class="nav">
 		<li>

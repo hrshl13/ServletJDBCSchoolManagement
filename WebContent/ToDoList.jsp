@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" errorPage="Error.jsp"
     pageEncoding="ISO-8859-1"%>
     <%@page import="com.DAO.ToDoListDAO, java.util.*,com.Models.ToDoListModel" %>
 <!DOCTYPE html>
@@ -8,6 +8,7 @@
 <title>To-Do</title>
 </head>
 <body>
+
 	<!-- Getting userId for loading list -->
 	<%@include file="NavBar.jsp" %>
 	<%

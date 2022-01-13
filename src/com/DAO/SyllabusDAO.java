@@ -65,12 +65,31 @@ public class SyllabusDAO {
 		return status;
 	}
 	
-	public static Syllabus getSyllabusBysyllabus_id(int syllabus_id) {
+	public static Syllabus getSyllabusById(int syllabus_id) {
 		Syllabus s = new Syllabus();
 		try {
 			Connection con = createCon.getConnection();
-			PreparedStatement ps = con.prepareStatement("select * from syllabus where id=?");
+			PreparedStatement ps = con.prepareStatement("select * from syllabus where syllabus_id=?");
 			ps.setInt(1, syllabus_id);
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				s.setSyllabus_id(rs.getInt(1));
+				s.setSubject_id(rs.getInt(2));
+				s.setStandard(rs.getString(3));
+				s.setChapter(rs.getString(4));
+			}
+			con.close();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return s;
+	}
+	public static Syllabus getSyllabusBySubject(int id) {
+		Syllabus s = new Syllabus();
+		try {
+			Connection con = createCon.getConnection();
+			PreparedStatement ps = con.prepareStatement("select * from syllabus where subject_id=?");
+			ps.setInt(1, id);
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
 				s.setSyllabus_id(rs.getInt(1));
