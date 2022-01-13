@@ -8,20 +8,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.Extras.createCon;
 import com.Models.Teacher;
 
 public class TeacherDAO {
-	protected static Connection getConnection() {
-		Connection con = null;
-		try {
-			Class.forName("com.mysql.jdbc.Driver");	
-			con=DriverManager.getConnection("jdbc:mysql://localhost:3306/school_management?characterEncoding=latin1","sqluser","password");
-			System.out.println("Connection Created");
-		}catch(Exception e) {
-			System.out.println(e);
-		}
-		return con;
-	}
 	private static final String INSERT_teacher_SQL = "INSERT INTO faculty(fname,lname,dob,gender,email,phone_no, address, subject_id, passwd, login_id) VALUES (?, ?,?,?,?,?,?,?,?,?);";
     private static final String SELECT_teacher_BY_Login_ID = "select * from faculty where login_id =?;";
     private static final String SELECT_ALL_teacher = "select * from faculty;";
@@ -32,7 +22,7 @@ public class TeacherDAO {
     	int status = 0;
         // try-with-resource statement will auto close the connection.
         try{
-        	Connection con = getConnection();
+        	Connection con = createCon.getConnection();
         	PreparedStatement ps = con.prepareStatement(INSERT_teacher_SQL);
             ps.setString(1, s.getFname());
             ps.setString(2, s.getLname());
@@ -55,7 +45,7 @@ public class TeacherDAO {
     public static int updateTeacher(Teacher s) {
     	int status=0;
     		try {
-    			Connection con = getConnection();
+    			Connection con = createCon.getConnection();
     			PreparedStatement ps = con.prepareStatement(UPDATE_teacher_SQL);
     			ps.setString(1, s.getFname());
                 ps.setString(2, s.getLname());
@@ -78,7 +68,7 @@ public class TeacherDAO {
     public static int deleteTeacher(int id) {
 		int status=0;
 		try {
-			Connection con = getConnection();
+			Connection con = createCon.getConnection();
 			PreparedStatement ps = con.prepareStatement(DELETE_teacher_SQL);
 			ps.setInt(1, id);
 			status = ps.executeUpdate();
@@ -92,7 +82,7 @@ public class TeacherDAO {
 	public static Teacher getTeacherById(int id) {
 		Teacher s = new Teacher();
 		try {
-			Connection con = getConnection();
+			Connection con = createCon.getConnection();
 			PreparedStatement ps = con.prepareStatement(SELECT_teacher_BY_Login_ID);
 			ps.setInt(1, id);
 			ResultSet rs = ps.executeQuery();
@@ -118,7 +108,7 @@ public class TeacherDAO {
 	public static Teacher getTeacherByLoginId(String id) {
 		Teacher s = new Teacher();
 		try {
-			Connection con = getConnection();
+			Connection con = createCon.getConnection();
 			PreparedStatement ps = con.prepareStatement("SELECT * FROM faculty WHERE login_id = ?;");
 			ps.setString(1, id);
 			ResultSet rs = ps.executeQuery();
@@ -144,7 +134,7 @@ public class TeacherDAO {
 	public static List<Teacher> getAllTeachers(){
 		List<Teacher> list = new ArrayList<Teacher>();
 		try {
-			Connection con = getConnection();
+			Connection con = createCon.getConnection();
 			PreparedStatement ps = con.prepareStatement(SELECT_ALL_teacher);
 			ResultSet rs = ps.executeQuery();
 			while(rs.next()) {

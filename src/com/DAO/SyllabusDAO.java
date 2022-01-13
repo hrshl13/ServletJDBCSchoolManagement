@@ -7,27 +7,16 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.Extras.createCon;
 import com.Models.Syllabus;
 
 
 public class SyllabusDAO {
-	public static Connection getConnection() {
-		Connection con = null;
-		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			con=DriverManager.getConnection("jdbc:mysql://localhost:3306/servlet?characterEncoding=latin1","root","Shrutika");
-			System.out.println("Connection Created");
-		}
-		catch(Exception e) {
-			System.out.println(e);
-		}
-		return con;	
-	}
 	
 	public static int insert(Syllabus s) {
 		int status=0;
 		try {
-			Connection con = SyllabusDAO.getConnection();
+			Connection con = createCon.getConnection();
 			PreparedStatement ps = con.prepareStatement("insert into Syllabus(syllabus_id, subject_id,standard,chapter) values(?,?,?,?)");
 			ps.setInt(1, s.getSyllabus_id());
 			ps.setInt(2, s.getSubject_id());
@@ -45,7 +34,7 @@ public class SyllabusDAO {
 	public static int update(Syllabus s) {
 		int status=0;
 		try {
-			Connection con = SyllabusDAO.getConnection();
+			Connection con = createCon.getConnection();
 			PreparedStatement ps = con.prepareStatement("Update Syllabus set syllabus_id=?, subject_id=? ,standard=?, chapter=?"); 
 			ps.setInt(1, s.getSyllabus_id());
 			ps.setInt(2, s.getSubject_id());
@@ -63,7 +52,7 @@ public class SyllabusDAO {
 	public static int delete(int syllabus_id) {
 		int status=0;
 		try {
-			Connection con = SyllabusDAO.getConnection();
+			Connection con = createCon.getConnection();
 			PreparedStatement ps = con.prepareStatement("Delete from Syllabus where syllabus_id=?"); 
 			ps.setInt(1, syllabus_id);
 			status = ps.executeUpdate();
@@ -79,7 +68,7 @@ public class SyllabusDAO {
 	public static Syllabus getSyllabusBysyllabus_id(int syllabus_id) {
 		Syllabus s = new Syllabus();
 		try {
-			Connection con = SyllabusDAO.getConnection();
+			Connection con = createCon.getConnection();
 			PreparedStatement ps = con.prepareStatement("select * from Syllabus where id=?");
 			ps.setInt(1, syllabus_id);
 			ResultSet rs = ps.executeQuery();
@@ -99,7 +88,7 @@ public class SyllabusDAO {
 	public static List<Syllabus> getAllSyllabus(){
 		List<Syllabus> list = new ArrayList<Syllabus>();
 		try {
-			Connection con = SyllabusDAO.getConnection();
+			Connection con = createCon.getConnection();
 			PreparedStatement ps = con.prepareStatement("select * from Syllabus");
 			ResultSet rs = ps.executeQuery();
 			while(rs.next()) {

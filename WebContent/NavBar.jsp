@@ -3,6 +3,9 @@
 <%@ page import="com.Models.Student,com.Models.Teacher, com.Models.Principal" %>
 
 	<%
+	if (session == null){
+		response.sendRedirect("Forbidden.jsp");
+	}
 	String type = (String)session.getAttribute("type");
 	String name = null;
 	switch(type){
