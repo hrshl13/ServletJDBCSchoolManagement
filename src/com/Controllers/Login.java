@@ -55,8 +55,9 @@ public class Login extends HttpServlet {
 			
 			if (uname.toLowerCase().startsWith("s")){
 				Student cur = StudentDAO.getStudentByLoginId(uname);
-				 if(cur.getPasswd().equals(null)) {
+				 if(cur.getPasswd()==null) {
 					 request.setAttribute("msg", "No Registrations with the given Login ID!!!");
+					 rd.forward(request, response);
 				 }else if(cur.getPasswd().equals(passwd)) {
 					 //On Successful Authentication, Creating a session and redirecting to homepage
 					 HttpSession session = request.getSession();
@@ -66,12 +67,14 @@ public class Login extends HttpServlet {
 					 
 				 }else {
 					 request.setAttribute("msg", "Wrong Password!!!");
+					 rd.forward(request, response);
 				 }
 				}
 			else if (uname.toLowerCase().startsWith("t")) {
 				Teacher cur = TeacherDAO.getTeacherByLoginId(uname);
 				if(cur.getPasswd().equals(null)) {
 					 request.setAttribute("msg", "No Registrations with the given Login ID!!!");
+					 rd.forward(request, response);
 				 }else if(cur.getPasswd().equals(passwd)) {
 					 //On Successful Authentication, Creating a session and redirecting to homepage
 					 HttpSession session = request.getSession();
@@ -80,12 +83,14 @@ public class Login extends HttpServlet {
 					 response.sendRedirect("HomePage.jsp");
 				 }else {
 					 request.setAttribute("msg", "Wrong Password!!!");
+					 rd.forward(request, response);
 				 }
 				}
 			else if (uname.toLowerCase().startsWith("p")) {
 				Principal cur = PrincipalDAO.getPrincipalByLoginId(uname);
 				if(cur.getPasswd().equals(null)) {
 					 request.setAttribute("msg", "No Registrations with the given Login ID!!!");
+					 rd.forward(request, response);
 				 }else if(cur.getPasswd().equals(passwd)) {
 					 //On Successful Authentication, Creating a session and redirecting to homepage
 					 HttpSession session = request.getSession();
@@ -94,12 +99,13 @@ public class Login extends HttpServlet {
 					 response.sendRedirect("HomePage.jsp");
 				 }else {
 					 request.setAttribute("msg", "Wrong Password!!!");
+					 rd.forward(request, response);
 				 }
 			}
 			else {
 				request.setAttribute("msg", "Invalid Username!!!");
+				rd.forward(request, response);
 			}
-			//Redirecting to appropriate page
-			rd.forward(request, response);
+			
 	 }
 }

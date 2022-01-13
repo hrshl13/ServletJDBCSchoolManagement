@@ -15,7 +15,7 @@
     </p>
 <% } %>
 
-<form action="Login" method="get">
+<form action="Login" method="post">
 	<input type="text" name="uname" placeholder="Login ID"><br>
 	<input type="password" name="passwd" placeholder="Password"><br>
 	<button type="submit">Login</button>
