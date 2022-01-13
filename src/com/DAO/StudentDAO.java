@@ -25,7 +25,7 @@ public class StudentDAO {
 		int status=0;
 		try {
 			Connection con = StudentDAO.getConnection();
-			PreparedStatement ps = con.prepareStatement("insert into student(student_id,fname,lname,dob,gender,email,phone_no,address,passwd,standard,result,admission) values(?,?,?,?,?,?,?,?,?,?,?,?)");
+			PreparedStatement ps = con.prepareStatement("insert into student(student_id,fname,lname,dob,gender,email,phone_no,address,passwd,standard,result,admission,login_id) values(?,?,?,?,?,?,?,?,?,?,?,?,?)");
 			ps.setInt(1, s.getStudent_id());
 			ps.setString(2, s.getFname());
 			ps.setString(3, s.getLname());
@@ -38,6 +38,7 @@ public class StudentDAO {
 			ps.setString(10, s.getStandard());
 			ps.setString(11, s.getResult());
 			ps.setString(12, s.getAdmission_date());
+			ps.setString(13, s.getLogin_id());
 			status = ps.executeUpdate();
 			System.out.println("Records Inserted !!");
 			con.close();
@@ -51,7 +52,7 @@ public class StudentDAO {
 		int status =0;
 		try {
 			Connection con = StudentDAO.getConnection();
-			PreparedStatement ps = con.prepareStatement("update student set student_id=?,fname=?,lname=?,dob=?,gender=?,email=?,phone_no=?,address=?,passwd=?,standard=?,result=?,admission=?");
+			PreparedStatement ps = con.prepareStatement("update student set student_id=?,fname=?,lname=?,dob=?,gender=?,email=?,phone_no=?,address=?,passwd=?,standard=?,result=?,admission=?,login_id=?");
 			ps.setInt(1, s.getStudent_id());
 			ps.setString(2, s.getFname());
 			ps.setString(3, s.getLname());
@@ -64,6 +65,7 @@ public class StudentDAO {
 			ps.setString(10, s.getStandard());
 			ps.setString(11, s.getResult());
 			ps.setString(12, s.getAdmission_date());
+			ps.setString(13, s.getLogin_id());
 			status = ps.executeUpdate();
 			System.out.println("Records Updated !!");
 			con.close();
@@ -134,6 +136,7 @@ public class StudentDAO {
 				s.setStandard(rs.getString(10));
 				s.setResult(rs.getString(11));
 				s.setAdmission_date(rs.getString(12));
+				s.setLogin_id(rs.getString(13));
 			}
 			con.close();
 		}catch(Exception e) {
@@ -162,6 +165,7 @@ public class StudentDAO {
 				s.setStandard(rs.getString(10));
 				s.setResult(rs.getString(11));
 				s.setAdmission_date(rs.getString(12));
+				s.setLogin_id(rs.getString(13));
 				list.add(s);
 			}
 			con.close();
