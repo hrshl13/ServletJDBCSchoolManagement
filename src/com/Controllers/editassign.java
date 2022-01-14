@@ -13,7 +13,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 
-
+@WebServlet("/editassign")
 public class editassign extends HttpServlet {
 	private static final long serialVersionUID= 1L;
 	
