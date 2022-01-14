@@ -40,7 +40,7 @@ public class PrincipalDAO {
 		int status =0 ;
 		try {
 			Connection con =createCon.getConnection();
-			PreparedStatement ps = con.prepareStatement("update student set principal_id=?,fname=?,lname=?,dob=?,gender=?,email=?,phone_no=?,address=?,passwd=?,login_id=?");
+			PreparedStatement ps = con.prepareStatement("update student set principal_id=?,fname=?,lname=?,dob=?,gender=?,email=?,phone_no=?,address=?,passwd=? where login_id=?");
 			ps.setInt(1, s.getPrincipal_id());
 			ps.setString(2, s.getFname());
 			ps.setString(3, s.getLname());
@@ -116,6 +116,7 @@ public class PrincipalDAO {
 				s.setPhone_no(rs.getString(7));
 				s.setAddress(rs.getString(8));
 				s.setPasswd(rs.getString(9));
+				s.setLogin_id(rs.getString("login_id"));
 			}
 			con.close();
 		}catch(Exception e) {

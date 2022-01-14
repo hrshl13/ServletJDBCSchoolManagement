@@ -99,6 +99,7 @@ public class StudentDAO {
 				s.setStandard(rs.getString(10));
 				s.setResult(rs.getString(11));
 				s.setAdmission_date(rs.getString(12));
+				s.setLogin_id(rs.getString("login_id"));
 			}
 			con.close();
 		}catch(Exception e) {
@@ -127,6 +128,7 @@ public class StudentDAO {
 				s.setResult(rs.getString(11));
 				s.setAdmission_date(rs.getString(12));
 				s.setLogin_id(rs.getString(13));
+				
 			}
 			con.close();
 		}catch(Exception e) {

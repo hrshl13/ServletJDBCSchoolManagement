@@ -13,26 +13,26 @@
 	<!-- Getting userId for loading list -->
 	<%@include file="NavBar.jsp" %>
 	<%
-		int userId=0;
+		String userId="";
 		switch(type){
 		case "Student":
 			Student stud = (Student)session.getAttribute("obj");
-			userId = stud.getStudent_id();
+			userId = stud.getLogin_id();
 			break;
 		case "Teacher":
 			Teacher fac = (Teacher)session.getAttribute("obj");
-			userId = fac.getFaculty_id() ;
+			userId = fac.getLogin_id() ;
 			break;
 		case "Principal":
 			Principal prin = (Principal)session.getAttribute("obj");
-			userId = prin.getPrincipal_id();
+			userId = prin.getLogin_id();
 			break;
 		}
 	%>
 	<h1 class="page-title">ToDo List</h1>
 	<form id="add-task" action="ToDoList" method="post">
-		<textarea class="input" name="taskDes" rows="3" cols="50"></textarea>
-		<input type="hidden" name="userId" value=<%=userId%>/>
+		<textarea class="input" name="taskDes" rows="3" cols="50" placeHolder="Task"></textarea>
+		<input type="hidden" name="userId" value=<%=userId%> />
 		<input class="submit" type="submit" value="Add"/>
 	</form>
 	<div id="all-tasks">
@@ -41,7 +41,7 @@
 			<!-- Rendering Todo list by the given id -->
 			<ul>
 				<%
-				List<ToDoListModel> list = ToDoListDAO.getAllTasksByStudentId(userId);
+				List<ToDoListModel> list = ToDoListDAO.getAllTasksByUserId(userId);
 				if (list.size() == 0){
 					%>
 					
@@ -53,8 +53,8 @@
 					for (ToDoListModel el : list){
 						int taskId = el.getTask_id();
 						System.out.println(taskId);
-						out.println("<li class='task'><input type='checkbox' id=${taskId}  name='task_'+${String.valueOf(taskId)}  />");
-						out.println("<label for='task_'${taskId} class=''>${el.getTask()}</label> <li>");
+						out.println("<li class='task'><input type='checkbox' id="+taskId+"  name='task_"+taskId+"'  />");
+						out.println("<label for='task_"+taskId+"' class=''>"+el.getTask()+"</label> <li>");
 						}
 					}
 				%>
