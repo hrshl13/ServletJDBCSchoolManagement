@@ -47,8 +47,7 @@ public class ViewEditSyllabus extends HttpServlet {
 	public void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
 		Teacher teacher= (Teacher)session.getAttribute("obj");
-		Syllabus s = SyllabusDAO.getSyllabusBySubject(teacher.getSubject_id());
-		List<Syllabus> ls = SyllabusDAO.getAllSyllabus();
-		
+		List<Syllabus> s = SyllabusDAO.getSyllabusBySubject(teacher.getSubject_id());
+		session.setAttribute("List", s);
 	}
 }
