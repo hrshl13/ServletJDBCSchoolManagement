@@ -72,7 +72,7 @@ public class ChangePassword extends HttpServlet {
 		else {
 			user.setPasswd(newpass);
 			if(session.getAttribute("type").equals("Student")) {
-				Student student = new Student();
+				Student student =  (Student) user;
 				StudentDAO.update(student);
 				response.sendRedirect("Logout");
 			}
@@ -84,9 +84,9 @@ public class ChangePassword extends HttpServlet {
 			else if (session.getAttribute("type").equals("Principal")) {
 				Principal principal = new Principal();
 				PrincipalDAO.insert(principal);
-				RequestDispatcher rd1= request.getRequestDispatcher("Logout");
-				rd1.forward(request, response);
-
+//				RequestDispatcher rd1= request.getRequestDispatcher("Logout");
+//				rd1.forward(request, response);
+				response.sendRedirect("/Logout");
 			}
 		}
 	}
