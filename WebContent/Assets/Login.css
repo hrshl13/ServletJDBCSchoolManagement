@@ -26,6 +26,8 @@ body{
 	height: 2em;
 	width :20em;
 	padding: 0.3em 0.8em;
+	border:none;
+	outline:none;
 	border-radius:0.9em;
 	font-size:1.2em;
 	color: #303030;
