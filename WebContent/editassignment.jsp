@@ -19,10 +19,10 @@
 		<ul>
 			<li class="lyst">
 				<div class="addform">
-				<form>
+				<form action="editassign" method="post">
 					<input type="text" name="asstopic" placeholder="Assignment Topic"/>
 					<textarea rows="3" cols="50" name="assdesc" >Assignment description</textarea>
-					<select class="stdlist">
+					<select class="stdlist" name="stdlist">
 						<option value="I">I</option>
 						<option value="II">II</option>
 						<option value="III">III</option>
@@ -35,6 +35,10 @@
 						<option value="X">X</option>
 					</select>
 					<input type="submit" id="subbtn" value="Submit" />
+					
+					<script>
+					
+					</script>
 				</form>
 				</div>
 			</li>
