@@ -52,12 +52,9 @@
 				}else{
 					for (ToDoListModel el : list){
 						int taskId = el.getTask_id();
-						%>
-						<li class='task'>
-							<input type='checkbox' id=<%=taskId %> name='task_'+<%=taskId %> />
-							<label for='task_'+<%=taskId %> class=''><%=el.getTask() %></label>
-						<li>
-						<%
+						System.out.println(taskId);
+						out.println("<li class='task'><input type='checkbox' id=${taskId}  name='task_'+${String.valueOf(taskId)}  />");
+						out.println("<label for='task_'${taskId} class=''>${el.getTask()}</label> <li>");
 						}
 					}
 				%>
@@ -67,35 +64,38 @@
 	
 	<!-- Script for removing a task -->
 	<script>
-		var xmlHttpRequest;
+		var ajax;
 		const checks = document.getElementsByClassName("task");
-		console.log(checks);
 		for (let check =0; check < checks.length;check++){
-			console.log(checks[check]);
-			checks[check].firstChild.addEventListener("click", e =>{
-				console.log(window.ActiveXObject);
-				if(window.XMLHttpRequest){
-					
-					request = new XMLHttpRequest();
-					
-				}
-				else if(window.ActiveXObject){
-					
-					request = new ActiveXObject("Microsoft.XMLHTTP");
-				} 
-				var url="ToDoList?id="+e.target.id;
-				try{
-					request.onreadystatechange=sendInfo;
-					request.open("DELETE",url,true);
-					request.send();
-					
-				}catch(e){
-					alert("Unable to connect server");
-				}
-		        });
-			}
+			console.log(checks[check].children[0].onClick);
+			checks[check].children[0].onClick = remove;
+		    console.log(checks[check].children[0].onClick);
+		}
 
-		
+		//OnClick function for checkBoxes
+		function remove (e){
+			console.log("event");
+			console.log(window.ActiveXObject, window.XMLHttpRequest);
+			if(window.XMLHttpRequest){
+				
+				ajax = new XMLHttpRequest();
+				
+			}
+			else if(window.ActiveXObject){
+				
+				ajax = new ActiveXObject("Microsoft.XMLHTTP");
+			} 
+			
+			var url="ToDoList?id="+e.target.id;
+			try{
+				ajax.onreadystatechange=sendInfo;
+				ajax.open("DELETE",url,true);
+				ajax.send();
+				
+			}catch(e){
+				alert("Unable to connect server");
+			}
+	      }
 		//Callback function after deletion
 		function sendInfo(){  
 			if(this.readyState == 4 && this.status == 200){  
