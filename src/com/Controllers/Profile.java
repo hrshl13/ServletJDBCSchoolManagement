@@ -1,6 +1,8 @@
 package com.Controllers;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map.Entry;
+
 import com.Models.Principal;
 import com.Models.Student;
 import com.Models.Teacher;
@@ -45,17 +47,17 @@ public class Profile extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		processRequest(request, response);
-	}
+//	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//		// TODO Auto-generated method stub
+//		processRequest(request, response);
+//	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		processRequest(request, response);
 	}
 	
 	public void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -71,6 +73,7 @@ public class Profile extends HttpServlet {
 		D.put("Phone Number", user.getPhone_no());
 		D.put("Address", user.getAddress());
 		D.put("Login ID", user.getLogin_id());
+		System.out.println("In Profile Java");
 		
 	if (session.getAttribute("type").equals("Student")) {
 		Student student = (Student) session.getAttribute("obj");	
@@ -78,19 +81,27 @@ public class Profile extends HttpServlet {
 		D.put("Standard", student.getStandard());
 		D.put("Admission Date", student.getAdmission_date());
 		session.setAttribute("Details", D);
+		System.out.println("In Profile Java-Student type");
+		for(Entry<String, String> m : D.entrySet()){    
+			System.out.println("<tr><td class='Key'>"+m.getKey()+"</td><td class='Element'>"+m.getValue()+"</td></tr>");
+			System.out.println(m.getKey()+" : "+m.getValue());
+		   }  
 		rd.forward(request, response);
+		
 	}
 	else if (session.getAttribute("type").equals("Teacher")) {
 		Teacher teacher = (Teacher) session.getAttribute("obj");
 		D.put("ID", String.valueOf(teacher.getFaculty_id()));
 		D.put("Subject ID", String.valueOf(teacher.getSubject_id()));
 		session.setAttribute("Details", D);
+		System.out.println("In Profile Java-Teacher type");
 		rd.forward(request, response);
 	}
 	else if (session.getAttribute("type").equals("Principal")) {
 		Principal principal = (Principal) session.getAttribute("obj");
 		D.put("ID", String.valueOf(principal.getPrincipal_id()));
 		session.setAttribute("Details", D);
+		System.out.println("In Profile Java-Principal type");
 		rd.forward(request, response);
 	}
 	

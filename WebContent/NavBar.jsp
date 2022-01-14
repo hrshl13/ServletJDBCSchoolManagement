@@ -35,7 +35,7 @@
 <div id = "top">
 	<div id="logoProfile">
 		<h1>School Management</h1>
-		<a class="pro-link" href="${pageContext.request.contextPath}/Profile.jsp"><%=name %></a>
+		<a class="pro-link" href="${pageContext.request.contextPath}/Profile"><%=name %></a>
 		<form action="/Logout" method="post"><input name="logout" type="submit" class=button value="Logout"></form>
 	</div>
 	<ul class="nav">
