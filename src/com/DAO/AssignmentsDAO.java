@@ -50,6 +50,7 @@ public class AssignmentsDAO {
                 ps.setString(4, ass.getAssignment_desp());
                 ps.setInt(5, ass.getSubmitted());
                 ps.setString(6, ass.getStd());
+                ps.setInt(7, ass.getAssignment_id());
     			status = ps.executeUpdate();
     			System.out.println("Records Updated!");
     			con.close();
@@ -81,12 +82,13 @@ public class AssignmentsDAO {
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
 				AssignmentModel ass = new AssignmentModel();
-				ass.setFaculty_id(rs.getInt(1));
-				ass.setSubject_id(rs.getInt(2));
-				ass.setAssignment_topic(rs.getString(3));
-				ass.setAssignment_desp(rs.getString(4));
-				ass.setSubmitted(rs.getInt(5));
-				ass.setStd(rs.getString(6));
+				ass.setAssignment_id(rs.getInt("assignment_id"));
+				ass.setFaculty_id(rs.getInt("faculty_id"));
+				ass.setSubject_id(rs.getInt("subject_id"));
+				ass.setAssignment_topic(rs.getString("assignment_topic"));
+				ass.setAssignment_desp(rs.getString("assignemnt_desp"));
+				ass.setSubmitted(rs.getInt("submitted"));
+				ass.setStd(rs.getString("Standard"));
 				list.add(ass);
 			}
 			con.close();
@@ -105,12 +107,13 @@ public class AssignmentsDAO {
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
 				AssignmentModel ass = new AssignmentModel();
-				ass.setFaculty_id(rs.getInt(1));
-				ass.setSubject_id(rs.getInt(2));
-				ass.setAssignment_topic(rs.getString(3));
-				ass.setAssignment_desp(rs.getString(4));
-				ass.setSubmitted(rs.getInt(5));
-				ass.setStd(rs.getString(6));
+				ass.setAssignment_id(rs.getInt("assignment_id"));
+				ass.setFaculty_id(rs.getInt("faculty_id"));
+				ass.setSubject_id(rs.getInt("subject_id"));
+				ass.setAssignment_topic(rs.getString("assignment_topic"));
+				ass.setAssignment_desp(rs.getString("assignemnt_desp"));
+				ass.setSubmitted(rs.getInt("submitted"));
+				ass.setStd(rs.getString("Standard"));
 				list.add(ass);
 			}
 			con.close();
@@ -127,12 +130,13 @@ public class AssignmentsDAO {
 			ResultSet rs = ps.executeQuery();
 			while(rs.next()) {
 				AssignmentModel ass= new AssignmentModel();
-				ass.setFaculty_id(rs.getInt(1));
-				ass.setSubject_id(rs.getInt(2));
-				ass.setAssignment_topic(rs.getString(3));
-				ass.setAssignment_desp(rs.getString(4));
-				ass.setSubmitted(rs.getInt(5));
-				ass.setStd(rs.getString(6));
+				ass.setAssignment_id(rs.getInt("assignment_id"));
+				ass.setFaculty_id(rs.getInt("faculty_id"));
+				ass.setSubject_id(rs.getInt("subject_id"));
+				ass.setAssignment_topic(rs.getString("assignment_topic"));
+				ass.setAssignment_desp(rs.getString("assignemnt_desp"));
+				ass.setSubmitted(rs.getInt("submitted"));
+				ass.setStd(rs.getString("Standard"));
 				list.add(ass);
 			}
 			con.close();
