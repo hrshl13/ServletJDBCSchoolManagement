@@ -2,8 +2,14 @@ package com.Models;
 
 public class AssignmentModel {
 	
-	String assignment_topic, assignment_desp;
+	String assignment_topic, assignment_desp,std;
 	int assignment_id, faculty_id, subject_id, submitted;
+	public String getStd() {
+		return std;
+	}
+	public void setStd(String std) {
+		this.std = std;
+	}
 	public int getAssignment_id() {
 		return assignment_id;
 	}
