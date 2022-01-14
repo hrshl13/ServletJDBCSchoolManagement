@@ -84,7 +84,9 @@ public class ChangePassword extends HttpServlet {
 			else if (session.getAttribute("type").equals("Principal")) {
 				Principal principal = new Principal();
 				PrincipalDAO.insert(principal);
-				response.sendRedirect("Logout");
+				RequestDispatcher rd1= request.getRequestDispatcher("Logout");
+				rd1.forward(request, response);
+
 			}
 		}
 	}

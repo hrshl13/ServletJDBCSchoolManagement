@@ -9,8 +9,8 @@
 <% 
 	if (session==null)
 	{
-	    RequestDispatcher rd = request.getRequestDispatcher("Forbidden.jsp");
-	    rd.forward(request,response);
+	    response.sendRedirect("Forbidden.jsp");
+	    return;
 	  } 
 	response.setHeader("Cache-Control", "no-cache,no-store,must-revalidate"); //HTTP 1.1
 	response.setHeader("Pragma", "no-cache");
@@ -18,8 +18,13 @@
 	session.setMaxInactiveInterval(600);
 
 %>
+<% if(request.getAttribute("msg") != null) { %>
+	    	<p class="error">
+		     <%= request.getAttribute("msg") %>
+		    </p>
+		<% } %>
 <body>
-<centre>Change Passowrd</centre>
+<h1 style="position:center;">Change Password</h1>
 <form action="ChangePassword" method="post">
 	<table align="center">
 		<tr>
