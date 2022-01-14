@@ -51,6 +51,9 @@ body{
 	cursor:pointer;
 	background:#F4E6C5;
 }
+.logout .fas {
+	color:#312509;
+}
 
 .nav{
 	margin:0;

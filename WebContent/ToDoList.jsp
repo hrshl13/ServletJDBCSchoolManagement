@@ -29,41 +29,43 @@
 			break;
 		}
 	%>
-	<h1>ToDo List</h1>
-	<h2>Add Task</h2>
-	<form action="ToDoList" method="post">
-		<textarea name="taskDes" rows="3" cols="50"></textarea>
+	<h1 class="page-title">ToDo List</h1>
+	<form id="add-task" action="ToDoList" method="post">
+		<textarea class="input" name="taskDes" rows="3" cols="50"></textarea>
 		<input type="hidden" name="userId" value=<%=userId%>/>
-		<input type="submit" value="Add"/>
+		<input class="submit" type="submit" value="Add"/>
 	</form>
-	<hr/>
-	<h2>Current Todo</h2>
-	<div>
-		<!-- Rendering Todo list by the given id -->
-		<ul>
-		<%
-		List<ToDoListModel> list = ToDoListDAO.getAllTasksByStudentId(userId);
-		if (list.size() == 0){
-			%>
-			
-			<div class="free">Yayy!! No tasks To Do!</div>
-			
-			<%
-			
-		}else{
-			for (ToDoListModel el : list){
-				int taskId = el.getTask_id();
-				%>
-				<li class='task'>
-					<input type='checkbox' id=<%=taskId %> name='task_'+<%=taskId %> />
-					<label for='task_'+<%=taskId %> class=''><%=el.getTask() %></label>
-				<li>
+	<div id="all-tasks">
+		<h2>Current Todo</h2>
+		<div>
+			<!-- Rendering Todo list by the given id -->
+			<ul>
 				<%
-				}
-			}
-		%>
-		</ul>
+				List<ToDoListModel> list = ToDoListDAO.getAllTasksByStudentId(userId);
+				if (list.size() == 0){
+					%>
+					
+					<div class="free">Yayy!! No tasks To Do!</div>
+					
+					<%
+					
+				}else{
+					for (ToDoListModel el : list){
+						int taskId = el.getTask_id();
+						%>
+						<li class='task'>
+							<input type='checkbox' id=<%=taskId %> name='task_'+<%=taskId %> />
+							<label for='task_'+<%=taskId %> class=''><%=el.getTask() %></label>
+						<li>
+						<%
+						}
+					}
+				%>
+			</ul>
+		</div>
 	</div>
+	
+	<!-- Script for removing a task -->
 	<script>
 		var xmlHttpRequest;
 		const checks = document.getElementsByClassName("task");

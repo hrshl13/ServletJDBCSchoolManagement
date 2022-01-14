@@ -1,7 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" 
     pageEncoding="ISO-8859-1"%>
 <%@ page import="com.Models.Student,com.Models.Teacher, com.Models.Principal" %>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/fontawesome.min.css" />
 <link rel="stylesheet" href="Assets/NavBar.css" type='text/css'>
+
+
 	<%
 	if (session.getAttribute("type") == null)
 	{
@@ -37,7 +42,7 @@
 		<h1 id="site-name">School Management</h1>
 		<div>
 			<a class="pro-link" href="${pageContext.request.contextPath}/Profile.jsp"><%=name %></a>
-			<form action="Logout" method="post"><input name="logout" type="submit" class="logout" value="Logout"></form>
+			<form action="Logout" method="post"><button name="logout" type="submit" class="logout"><i class="fas fa-sign-out-alt"></i></button></form>
 		</div>
 		
 	</div>
