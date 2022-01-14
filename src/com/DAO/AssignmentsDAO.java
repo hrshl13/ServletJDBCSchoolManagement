@@ -12,14 +12,14 @@ import com.Models.AssignmentModel;
 import com.Models.Teacher;
 public class AssignmentsDAO {
 	
-	private static final String INSERT_assignment_SQL = "INSERT INTO assignment(faculty_id,subject_id,assignment_topic,assignment_desp,submitted) VALUES (?,?,?,?,?);";
+	private static final String INSERT_assignment_SQL = "INSERT INTO assignment(faculty_id,subject_id,assignment_topic,assignment_desp,submitted,standard) VALUES (?,?,?,?,?,?);";
     private static final String SELECT_assignment_BY_Faculty_ID = "select * from assignment where faculty_id =?;";
     private static final String SELECT_assignment_BY_standard = "select * from assignment where standard =?;";
     private static final String SELECT_ALL_assignment = "select * from assignment;";
     private static final String DELETE_assignment_SQL = "delete from assignment where assignment_id = ?;";
-    private static final String UPDATE_assignment_SQL = "update faculty set faculty_id=? ,subject_id=? ,assignment_topic=? ,assignment_desp=? ,submitted=? where assignment_id = ?;";
+    private static final String UPDATE_assignment_SQL = "update faculty set faculty_id=? ,subject_id=? ,assignment_topic=? ,assignment_desp=? ,submitted=?, standard=? where assignment_id = ?;";
     
-    public int insertAssignment(AssignmentModel ass) throws SQLException {
+    public static int insertAssignment(AssignmentModel ass) throws SQLException {
     	int status = 0;
         // try-with-resource statement will auto close the connection.
         try{
@@ -30,6 +30,7 @@ public class AssignmentsDAO {
             ps.setString(3, ass.getAssignment_topic());
             ps.setString(4, ass.getAssignment_desp());
             ps.setInt(5, ass.getSubmitted());
+            ps.setString(6, ass.getStd());
             status = ps.executeUpdate();
             System.out.println("Records Inserted!");
             con.close();
@@ -48,6 +49,7 @@ public class AssignmentsDAO {
                 ps.setString(3, ass.getAssignment_topic());
                 ps.setString(4, ass.getAssignment_desp());
                 ps.setInt(5, ass.getSubmitted());
+                ps.setString(6, ass.getStd());
     			status = ps.executeUpdate();
     			System.out.println("Records Updated!");
     			con.close();
@@ -84,6 +86,7 @@ public class AssignmentsDAO {
 				ass.setAssignment_topic(rs.getString(3));
 				ass.setAssignment_desp(rs.getString(4));
 				ass.setSubmitted(rs.getInt(5));
+				ass.setStd(rs.getString(6));
 				list.add(ass);
 			}
 			con.close();
@@ -107,6 +110,7 @@ public class AssignmentsDAO {
 				ass.setAssignment_topic(rs.getString(3));
 				ass.setAssignment_desp(rs.getString(4));
 				ass.setSubmitted(rs.getInt(5));
+				ass.setStd(rs.getString(6));
 				list.add(ass);
 			}
 			con.close();
@@ -128,6 +132,7 @@ public class AssignmentsDAO {
 				ass.setAssignment_topic(rs.getString(3));
 				ass.setAssignment_desp(rs.getString(4));
 				ass.setSubmitted(rs.getInt(5));
+				ass.setStd(rs.getString(6));
 				list.add(ass);
 			}
 			con.close();

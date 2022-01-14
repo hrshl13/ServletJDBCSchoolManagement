@@ -54,7 +54,7 @@
 				break;
 			case "Teacher":
 		%>
-				<li><a href='${pageContext.request.contextPath}/' >Assignment</a></li>
+				<li><a href='${pageContext.request.contextPath}/editassignment.jsp' >Assignment</a></li>
 				<li><a href='${pageContext.request.contextPath}/' >Manage Syllabus</a></li>
 		<% 
 				break;
