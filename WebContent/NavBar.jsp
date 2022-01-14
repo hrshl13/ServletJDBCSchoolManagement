@@ -1,17 +1,24 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" 
     pageEncoding="ISO-8859-1"%>
 <%@ page import="com.Models.Student,com.Models.Teacher, com.Models.Principal" %>
 
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/fontawesome.min.css" />
+<link rel="stylesheet" href="Assets/NavBar.css" type='text/css'>
+
+
 	<%
-	if (session.getAttribute("type") == null){
+	if (session.getAttribute("type") == null)
+	{
 		response.sendRedirect("Forbidden.jsp");
 		return;
-	}else if(request.getParameter("logout")!=null){
-		session.removeAttribute("type");
-		session.removeAttribute("obj");
-		response.sendRedirect("Login.jsp");
-		return;
 	}
+	response.setHeader("Cache-Control", "no-cache,no-store,must-revalidate"); //HTTP 1.1
+	response.setHeader("Pragma", "no-cache");
+	response.setHeader("Expires", "0");
+	session.setMaxInactiveInterval(600);
+	
+	
 	String type = (String)session.getAttribute("type");
 	String name = null;
 	switch(type){
@@ -32,9 +39,12 @@
 	%>
 <div id = "top">
 	<div id="logoProfile">
-		<h1>School Management</h1>
-		<a class="pro-link" href="${pageContext.request.contextPath}/Profile.jsp"><%=name %></a>
-		<form method="post"><input name="logout" type="submit" class=button value="Logout"></form>
+		<h1 id="site-name">School Management</h1>
+		<div>
+			<a class="pro-link" href="${pageContext.request.contextPath}/Profile.jsp"><%=name %></a>
+			<form action="Logout" method="post"><button name="logout" type="submit" class="logout"><i class="fas fa-sign-out-alt"></i></button></form>
+		</div>
+		
 	</div>
 	<ul class="nav">
 		<li>

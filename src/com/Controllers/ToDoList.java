@@ -40,7 +40,6 @@ public class ToDoList extends HttpServlet {
 		try {
 			this.handleRequest(request, response);
 		} catch (ServletException e) {
-
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -61,7 +60,7 @@ public class ToDoList extends HttpServlet {
 		  System.out.println(request.getParameter("userId").split("/")[0]);
 		  obj.setStudent_id(Integer.parseInt(request.getParameter("userId").split("/")[0]));
 		  obj.setTask(request.getParameter("taskDes"));
-		  
+		   
 		  ToDoListDAO.insertTask(obj);
 		 
 		  response.sendRedirect("ToDoList.jsp");

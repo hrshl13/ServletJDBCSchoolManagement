@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" errorPage="Error.jsp"
     pageEncoding="ISO-8859-1"%>
     <%@page import="com.DAO.ToDoListDAO, java.util.*,com.Models.ToDoListModel" %>
 <!DOCTYPE html>
@@ -6,8 +6,10 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>To-Do</title>
+<link rel="stylesheet" href="Assets/ToDo.css" type='text/css'>
 </head>
 <body>
+
 	<!-- Getting userId for loading list -->
 	<%@include file="NavBar.jsp" %>
 	<%
@@ -27,75 +29,43 @@
 			break;
 		}
 	%>
-	<h1>ToDo List</h1>
-	<h2>Add Task</h2>
-	<form action="ToDoList" method="post">
-		<textarea name="taskDes" rows="3" cols="50"></textarea>
+	<h1 class="page-title">ToDo List</h1>
+	<form id="add-task" action="ToDoList" method="post">
+		<textarea class="input" name="taskDes" rows="3" cols="50"></textarea>
 		<input type="hidden" name="userId" value=<%=userId%>/>
-		<input type="submit" value="Add"/>
+		<input class="submit" type="submit" value="Add"/>
 	</form>
-	<hr/>
-	<h2>Current Todo</h2>
-	<div>
-		<!-- Rendering Todo list by the given id -->
-		<ul>
-		<%
-		List<ToDoListModel> list = ToDoListDAO.getAllTasksByStudentId(userId);
-		if (list.size() == 0){
-			%>
-			
-			<div class="free">Yayy!! No tasks To Do!</div>
-			
-			<%
-			
-		}else{
-			for (ToDoListModel el : list){
-				int taskId = el.getTask_id();
-				%>
-				<li class='task'>
-					<input type='checkbox' id=<%=taskId %> name='task_'+<%=taskId %> />
-					<label for='task_'+<%=taskId %> class=''><%=el.getTask() %></label>
-				<li>
+	<div id="all-tasks">
+		<h2>Current Todo</h2>
+		<div>
+			<!-- Rendering Todo list by the given id -->
+			<ul>
 				<%
-				}
-			}
-		%>
-		</ul>
+				List<ToDoListModel> list = ToDoListDAO.getAllTasksByStudentId(userId);
+				if (list.size() == 0){
+					%>
+					
+					<div class="free">Yayy!! No tasks To Do!</div>
+					
+					<%
+					
+				}else{
+					for (ToDoListModel el : list){
+						int taskId = el.getTask_id();
+						%>
+						<li class='task'>
+							<input type='checkbox' id=<%=taskId %> name='task_'+<%=taskId %> />
+							<label for='task_'+<%=taskId %> class=''><%=el.getTask() %></label>
+						<li>
+						<%
+						}
+					}
+				%>
+			</ul>
+		</div>
 	</div>
-	<style>
-		@keyframes hide {
-		    0% {
-		        opacity: 1;
-		        height: 100%;
-		        line-height: 100%;
-		        padding: 20px;
-		        margin-bottom: 10px;
-		    }
-		    75% {
-		        opacity: 0;
-		        height: 100%;
-		        line-height: 100%;
-		        padding: 20px;
-		        margin-bottom: 10px;
-		    }
-		    100% {
-		        opacity: 0;
-		        height: 0px;
-		        line-height: 0px;
-		        padding: 0px;
-		        margin-bottom: 0px;
-		    }
-		}
-		.task{
-			background-color: #77dd11;
-		    padding: 20px;
-		    margin-bottom: 10px;
-		    animation-name: hide;
-		    animation-duration: 2s;
-		    animation-fill-mode: forwards;
-		    animation-play-state: paused;
-		}
-	</style>
+	
+	<!-- Script for removing a task -->
 	<script>
 		var xmlHttpRequest;
 		const checks = document.getElementsByClassName("task");

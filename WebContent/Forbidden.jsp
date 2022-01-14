@@ -4,9 +4,24 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Go Back Cheater!!!</title>
+<style>
+body{
+	margin:0;
+	padding:0;
+	background: #4DFFFF;
+	color:#A90000;
+	display:flex;
+	height:100vh;
+	width:100vw;
+	justify-content:center;
+	align-items:center;
+	font-weight:900;
+	font-size:8em;
+}
+</style>
 </head>
 <body>
-Forbidden Page - 403 Error
+	Forbidden Page - 403 Error
 </body>
 </html>
