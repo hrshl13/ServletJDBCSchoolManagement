@@ -111,7 +111,7 @@ public class AssignmentsDAO {
 				ass.setFaculty_id(rs.getInt("faculty_id"));
 				ass.setSubject_id(rs.getInt("subject_id"));
 				ass.setAssignment_topic(rs.getString("assignment_topic"));
-				ass.setAssignment_desp(rs.getString("assignemnt_desp"));
+				ass.setAssignment_desp(rs.getString("assignment_desp"));
 				ass.setSubmitted(rs.getInt("submitted"));
 				ass.setStd(rs.getString("standard"));
 				list.add(ass);

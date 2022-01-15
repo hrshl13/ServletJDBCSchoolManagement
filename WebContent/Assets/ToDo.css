@@ -11,6 +11,7 @@
     }
     25%{
     	background-color: #77dd11;
+    	text-decoration:strikethrough;
     }
     75% {
         opacity: 0;

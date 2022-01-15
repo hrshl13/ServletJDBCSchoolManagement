@@ -50,6 +50,7 @@ public class ViewAssignment extends HttpServlet {
 		HttpSession session = request.getSession(false);
 		Student student = (Student)session.getAttribute("obj");
 		sub.setStudent_id(student.getStudent_id());
+		sub.setMarks(0);
 		int status = SubmissionDAO.insertSubmission(sub);
 		PrintWriter out = response.getWriter();
 		if (status > 0) {
@@ -61,38 +62,5 @@ public class ViewAssignment extends HttpServlet {
 		out.flush();
 		
 	}
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		try {
-			this.handleRequest(request, response);
-		} catch (ServletException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
 	}
-	public void handleRequest(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException, SQLException{
-		HttpSession session = request.getSession(false);
-		  if (session == null)
-		  {
-		    RequestDispatcher rd = request.getRequestDispatcher("Forbidden.jsp");
-		    rd.forward(request,response);
-		  }
-		  
-		  ToDoListModel obj = new ToDoListModel();
-		  obj.setUser_id(request.getParameter("userId"));
-		  obj.setTask(request.getParameter("taskDes"));
-		  if (obj.getTask().isBlank()) {
-			  RequestDispatcher rd = request.getRequestDispatcher("ToDoList.jsp");
-			  request.setAttribute("msg", "Task Cannot be empty!!!");
-			  rd.forward(request,response);
-		  }else {
-			  ToDoListDAO.insertTask(obj);
-			  response.sendRedirect("ToDoList.jsp");
-		  }
-		  
-		  
-		
-	}
-}
+	

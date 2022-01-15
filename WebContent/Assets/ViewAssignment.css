@@ -1,0 +1,124 @@
+@charset "ISO-8859-1";
+
+@keyframes hide {
+    0% {
+    	
+        opacity: 1;
+        height: 100%;
+        line-height: 100%;
+        padding: 20px;
+        margin-bottom: 10px;
+    }
+    25%{
+    	background-color: #77dd11;
+    }
+    75% {
+        opacity: 0;
+        height: 100%;
+        line-height: 100%;
+        padding: 20px;
+        margin-bottom: 10px;
+    }
+    100% {
+        opacity: 0;
+        height: 0px;
+        line-height: 0px;
+        padding: 0px;
+        margin-bottom: 0px;
+    }
+}
+
+.error {
+  border-radius: 0.4vw;
+  padding: 1vw;
+  border: 0.1vw solid #ff304f;
+  color: #ff304f;
+  box-shadow: 0.2vw 0.2vw 0.8vw 0.2vw #fdc6ce;
+  background-color: #fdc6ce;
+}
+
+.section-title{
+	font-size:3em;
+}
+
+#all-assgn #free{
+	font-size:2em;
+}
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #ccc;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--mainColor);
+}
+body {
+  width: 100vw; 
+  height: 1100px;
+  overflow-x: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ccc;
+}
+:root {
+  --mainColor: #000;
+}
+.main .tasks {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column wrap;
+  position: relative;
+  top: 5%;
+}
+.main .tasks div {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 10px 0;
+  padding: 10px;
+  width: 80%;
+  height: 60px;
+  background-color: #ddd;
+  transition: 0.2s;
+}
+.tasks input[type="checkbox"] {
+  appearance: none;
+}
+ .tasks label {
+  position: relative;
+  margin-left: 40px;
+  font-weight: bold;
+  cursor: pointer;
+}
+ .tasks label::before {
+  content: "";
+  position: absolute;
+  top: -5px;
+  left: -40px;
+  width: 25px;
+  height: 25px;
+  background-color: #fff;
+  border: 1px solid #777;
+  border-radius: 5px;
+}
+.tasks input[type="checkbox"]:checked + label::after {
+  content: "";
+  position: absolute;
+  left: -34px;
+  top: 1px;
+  width: 15px;
+  height: 15px;
+  background-color: var(--mainColor);
+  border-radius: 4px;
+}
+
+.tasks input[type="checkbox"]:checked + label {
+  text-decoration: line-through wavy var(--mainColor);
+}
+.tasks input[type="checkbox"]:checked + label,
+.tasks input[type="checkbox"]:checked ~ img {
+  opacity: 0.7;
+}

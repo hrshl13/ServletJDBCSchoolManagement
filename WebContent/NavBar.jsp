@@ -58,7 +58,7 @@
 			
 			switch(type){
 			case "Student":%>
-				<li><a href='${pageContext.request.contextPath}/' >Assignment</a></li>
+				<li><a href='${pageContext.request.contextPath}/ViewAssignment.jsp' >Assignment</a></li>
 				<li><a href='${pageContext.request.contextPath}/' >Syllabus</a></li>
 		<%
 				break;
