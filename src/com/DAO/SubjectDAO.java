@@ -67,9 +67,7 @@ public class SubjectDAO {
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
 				s.setSubject_id(rs.getInt(1));
-				s.setSubject_name(rs.getString(2));
-				s.setFaculty_id(rs.getInt(3));
-			}
+				s.setSubject_name(rs.getString(2));			}
 			con.close();
 		} catch (SQLException e) {
             printSQLException(e);
@@ -86,7 +84,6 @@ public class SubjectDAO {
 				Subject s= new Subject();
 				s.setSubject_id(rs.getInt(1));
 				s.setSubject_name(rs.getString(2));
-				s.setFaculty_id(rs.getInt(3));
 				list.add(s);
 			}
 			con.close();
