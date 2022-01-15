@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="com.DAO.SubjectDAO, com.Models.Subject, java.util.*" %>
+    pageEncoding="ISO-8859-1" import="com.DAO.SubjectDAO, com.Models.Subject, java.util.*, com.Models.Syllabus" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,6 +8,7 @@
 <link href="assets/viewstudentSyllabus.css" >
 </head>
 <body>
+<%@include file="NavBar.jsp" %>
 <h2>Your Syllabus</h2>
  
 <form action="viewstudentSyllabus" method="post" class="custom-select" style="width:200px;">
@@ -23,5 +24,13 @@
   </select>
   <button type="submit" class="submit"> Submit </button>
 </form>
+<%
+	List<Syllabus> list2 = (List<Syllabus>) request.getAttribute("sub");
+	if (list2 != null){
+		for(Syllabus syllab: list2){
+			out.println("<div class= 'label'>"  + syllab.getChapter() + "</div>");
+		}
+	}
+%>
 </body>
 </html>
