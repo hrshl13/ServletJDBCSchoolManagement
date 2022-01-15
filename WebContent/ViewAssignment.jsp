@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1" 
-    import="com.Models.Student, com.Models.AssignmentModel, com.DAO.AssignmentsDAO, java.util.List"%>
+    import="com.Models.Student, com.Models.AssignmentModel, com.DAO.AssignmentsDAO, java.util.List, com.DAO.SubmissionDAO"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,10 +33,13 @@
 			<% 
 					for (AssignmentModel Am : list){
 						int AssgnId = Am.getAssignment_id();
-						out.println("<li class='task'><input type='checkbox' onclick='remove("+AssgnId+")' class='check' id="+AssgnId+"  name='task_"+AssgnId+"'  />");
-						out.println("<label for='task_"+AssgnId+"' class=''>"+Am.getAssignment_topic()+"</label> <li>");
+						System.out.println(SubmissionDAO.checkSubmitted(AssgnId, student.getStudent_id()));
+							if (SubmissionDAO.checkSubmitted(AssgnId, student.getStudent_id())){
+								out.println("<li class='task'><input type='checkbox' onclick='remove("+AssgnId+")' class='check' id="+AssgnId+"  name='task_"+AssgnId+"'  />");
+								out.println("<label for='task_"+AssgnId+"' class=''>"+Am.getAssignment_topic()+"</label> <li>");
+							}
+						
 						}
-					
 			%>
 			</ul>
 			<%} %>

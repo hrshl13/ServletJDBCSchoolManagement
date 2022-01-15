@@ -1,16 +1,19 @@
-body {
-  background-color: #8f91ba;
+@charset "ISO-8859-1";
+
+.container{
+	display:flex;
+	flex-direction: column;
+	align-items:center;
 }
-.title {
-  font-size: 4vw;
-  text-align: center;
+.page-title{
+	font-size:4em;
 }
-addform{
+.addform{
 	width:100vw;
 	display:flex;
 	justify-content:center;
 }
-.addform .subject{
+.addform .input{
 	padding: 0.5em 0.8em;
 	border:none;
 	outline:none;
@@ -37,4 +40,8 @@ addform{
     background: #047a1e;
     cursor: pointer;
     transform: translate(0px, -2px);
+}
+
+.section-title{
+	font-size:3em;
 }
