@@ -77,6 +77,11 @@ body{
   	background-color: #222a34;
   	color: white;
 }
+#add-task .submit:hover {
+    background: #047a1e;
+    cursor: pointer;
+    transform: translate(0px, -2px);
+}
 #all-tasks{
 	width:100vw;
 	display:flex;
