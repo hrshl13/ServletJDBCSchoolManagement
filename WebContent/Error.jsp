@@ -7,7 +7,7 @@
 </head>
 <body>
 Ooops! You might not wanna go there!
-Cause of the error:
+Cause of the error: 
 <%= exception %>
 </body>
 </html>

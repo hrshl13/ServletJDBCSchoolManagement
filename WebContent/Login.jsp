@@ -22,4 +22,3 @@
 		<button class="submit" type="submit">Login</button>
 	</form>
 </body>
-</html>

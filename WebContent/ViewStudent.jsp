@@ -15,7 +15,7 @@
         background-color: #eeeeee;
         border: 1px solid #dddddd;
         border-radius: 5px;
-        background-color: #009879;
+        background-color: #009879; 
         color: #dddddd;
         margin: 0 0 0 570px;
     }

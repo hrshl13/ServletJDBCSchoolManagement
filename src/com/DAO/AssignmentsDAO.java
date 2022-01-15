@@ -13,7 +13,7 @@ import com.Models.Teacher;
 public class AssignmentsDAO {
 	
 	private static final String INSERT_assignment_SQL = "INSERT INTO assignment(faculty_id,subject_id,assignment_topic,assignment_desp,submitted,standard) VALUES (?,?,?,?,?,?);";
-    private static final String SELECT_assignment_BY_Faculty_ID = "select * from assignment where faculty_id =?;";
+    private static final String SELECT_assignment_BY_Faculty_ID = "select * from assignment where faculty_id =?";
     private static final String SELECT_assignment_BY_standard = "select * from assignment where standard =?;";
     private static final String SELECT_ALL_assignment = "select * from assignment;";
     private static final String DELETE_assignment_SQL = "delete from assignment where assignment_id = ?;";
@@ -80,15 +80,15 @@ public class AssignmentsDAO {
 			PreparedStatement ps = con.prepareStatement(SELECT_assignment_BY_Faculty_ID);
 			ps.setInt(1, id);
 			ResultSet rs = ps.executeQuery();
-			if (rs.next()) {
+			while (rs.next()) {
 				AssignmentModel ass = new AssignmentModel();
 				ass.setAssignment_id(rs.getInt("assignment_id"));
 				ass.setFaculty_id(rs.getInt("faculty_id"));
 				ass.setSubject_id(rs.getInt("subject_id"));
 				ass.setAssignment_topic(rs.getString("assignment_topic"));
-				ass.setAssignment_desp(rs.getString("assignemnt_desp"));
+				ass.setAssignment_desp(rs.getString("assignment_desp"));
 				ass.setSubmitted(rs.getInt("submitted"));
-				ass.setStd(rs.getString("Standard"));
+				ass.setStd(rs.getString("standard"));
 				list.add(ass);
 			}
 			con.close();
@@ -105,7 +105,7 @@ public class AssignmentsDAO {
 			PreparedStatement ps = con.prepareStatement(SELECT_assignment_BY_standard);
 			ps.setString(1, std);
 			ResultSet rs = ps.executeQuery();
-			if (rs.next()) {
+			while (rs.next()) {
 				AssignmentModel ass = new AssignmentModel();
 				ass.setAssignment_id(rs.getInt("assignment_id"));
 				ass.setFaculty_id(rs.getInt("faculty_id"));
@@ -113,7 +113,7 @@ public class AssignmentsDAO {
 				ass.setAssignment_topic(rs.getString("assignment_topic"));
 				ass.setAssignment_desp(rs.getString("assignemnt_desp"));
 				ass.setSubmitted(rs.getInt("submitted"));
-				ass.setStd(rs.getString("Standard"));
+				ass.setStd(rs.getString("standard"));
 				list.add(ass);
 			}
 			con.close();
@@ -136,7 +136,7 @@ public class AssignmentsDAO {
 				ass.setAssignment_topic(rs.getString("assignment_topic"));
 				ass.setAssignment_desp(rs.getString("assignemnt_desp"));
 				ass.setSubmitted(rs.getInt("submitted"));
-				ass.setStd(rs.getString("Standard"));
+				ass.setStd(rs.getString("standard"));
 				list.add(ass);
 			}
 			con.close();

@@ -7,7 +7,6 @@
 
 <link rel="stylesheet" href="Assets/NavBar.css" type='text/css'>
 
-
 	<%
 	if (session.getAttribute("type") == null)
 	{

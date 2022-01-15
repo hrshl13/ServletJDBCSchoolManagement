@@ -9,7 +9,7 @@
 body{
 	margin:0;
 	padding:0;
-	background: #4DFFFF;
+	background: #4DFFFF; 
 	color:#A90000;
 	display:flex;
 	height:100vh;

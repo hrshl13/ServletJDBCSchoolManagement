@@ -19,7 +19,7 @@
         margin: 0 0 0 570px;
     }
 
-    .content-table{
+    .content-table{ 
         border-collapse: collapse;
         margin: 25px 0;
         font-size: 0.9em;

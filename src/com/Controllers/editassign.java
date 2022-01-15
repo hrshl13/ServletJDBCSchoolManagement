@@ -1,5 +1,6 @@
 package com.Controllers;
 
+import java.io.IOException;
 import java.sql.SQLException;
 
 import com.DAO.AssignmentsDAO;
@@ -41,7 +42,12 @@ public class editassign extends HttpServlet {
 			int stat;
 			stat = AssignmentsDAO.insertAssignment(assmodel);
 			System.out.println("Values added!!");
-			
+			try {
+				response.sendRedirect("editassignment.jsp");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
