@@ -13,7 +13,7 @@ public class SubmissionDAO {
     private static final String DELETE_Subm_SQL = "delete from submission where submission_id = ?;";
     private static final String UPDATE_Subm_SQL = "update submission set assignment_id=?, student_id=?, marks=? where submission_id = ?;";
     
-    public int insertSubmission(Submission s) throws SQLException {
+    public static int insertSubmission(Submission s){
     	int status = 0;
         // try-with-resource statement will auto close the connection.
         try{

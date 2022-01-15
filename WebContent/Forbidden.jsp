@@ -19,10 +19,42 @@ body{
 	font-weight:900;
 	font-size:8em;
 }
+.Link{
+	height:1vh;
+	width:1vw;
+	justify-content:center;
+	align-items:center;
+	font-weight:9;
+	font-size:1em;
+	display:flex;
+}
+a:link {
+  color: green;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+a:visited {
+  color: pink;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+a:hover {
+  color: red;
+  background-color: transparent;
+  text-decoration: underline;
+}
+
+a:active {
+  color: yellow;
+  background-color: transparent;
+  text-decoration: underline;
+}
 </style>
 </head>
 <body>
-	Forbidden Page - 403 Error
-	<h4><a href="${pageContext.request.contextPath}/Login.jsp"></a></h4>
+	Forbidden Page - 403 Error<br>
+	<div class="Link">Go back to <a href="${pageContext.request.contextPath}/Login.jsp">Login Page</a></div>
 </body>
 </html>

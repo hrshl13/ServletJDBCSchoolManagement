@@ -45,8 +45,6 @@
 			</li>
 			
 			<!-- Getting userId for loading list -->
-	
-	
 			<%
 			int id=0;
 			Teacher fac = (Teacher)session.getAttribute("obj");
@@ -71,24 +69,10 @@
 						}
 					}
 			 		%>
-		 
-		 
-		
 		</ul>
-		
-		
-		
-		
-		
-		
 	</div>
-    
-		
-		
 </div>
-
-
-
 </body>
 </html>
+
 
