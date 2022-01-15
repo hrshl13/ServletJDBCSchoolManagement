@@ -33,7 +33,8 @@
 			<% 
 					for (AssignmentModel Am : list){
 						int AssgnId = Am.getAssignment_id();
-							if (!SubmissionDAO.checkSubmitted(AssgnId, student.getStudent_id())){
+						System.out.println(SubmissionDAO.checkSubmitted(AssgnId, student.getStudent_id()));
+							if (SubmissionDAO.checkSubmitted(AssgnId, student.getStudent_id())){
 								out.println("<li class='task'><input type='checkbox' onclick='remove("+AssgnId+")' class='check' id="+AssgnId+"  name='task_"+AssgnId+"'  />");
 								out.println("<label for='task_"+AssgnId+"' class=''>"+Am.getAssignment_topic()+"</label> <li>");
 							}
