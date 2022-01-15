@@ -2,7 +2,7 @@ package com.Models;
 
 public class Student extends User{
 	int student_id;
-	String  standard, result, admission_date;
+	String  Fname, Lname, standard, result, admission_date;
 
 	public String getStandard() {
 		return standard;

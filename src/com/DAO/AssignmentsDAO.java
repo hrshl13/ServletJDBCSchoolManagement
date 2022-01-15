@@ -15,6 +15,7 @@ public class AssignmentsDAO {
 	private static final String INSERT_assignment_SQL = "INSERT INTO assignment(faculty_id,subject_id,assignment_topic,assignment_desp,submitted,standard) VALUES (?,?,?,?,?,?);";
     private static final String SELECT_assignment_BY_Faculty_ID = "select * from assignment where faculty_id =?";
     private static final String SELECT_assignment_BY_standard = "select * from assignment where standard =?;";
+    private static final String SELECT_assignment_BY_assignment_ID = "select * from assignment where assignment_id =?;";
     private static final String SELECT_ALL_assignment = "select * from assignment;";
     private static final String DELETE_assignment_SQL = "delete from assignment where assignment_id = ?;";
     private static final String UPDATE_assignment_SQL = "update faculty set faculty_id=? ,subject_id=? ,assignment_topic=? ,assignment_desp=? ,submitted=?, standard=? where assignment_id = ?;";
@@ -111,7 +112,7 @@ public class AssignmentsDAO {
 				ass.setFaculty_id(rs.getInt("faculty_id"));
 				ass.setSubject_id(rs.getInt("subject_id"));
 				ass.setAssignment_topic(rs.getString("assignment_topic"));
-				ass.setAssignment_desp(rs.getString("assignemnt_desp"));
+				ass.setAssignment_desp(rs.getString("assignment_desp"));
 				ass.setSubmitted(rs.getInt("submitted"));
 				ass.setStd(rs.getString("standard"));
 				list.add(ass);
@@ -122,6 +123,31 @@ public class AssignmentsDAO {
         }
 		return list;
 	}
+	public static AssignmentModel getAssignmentByAssign_ID(int id) {
+		
+		AssignmentModel ass = new AssignmentModel();
+		try {
+			Connection con = createCon.getConnection();
+			PreparedStatement ps = con.prepareStatement(SELECT_assignment_BY_assignment_ID);
+			ps.setInt(1, id);
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				ass.setAssignment_id(rs.getInt("assignment_id"));
+				ass.setFaculty_id(rs.getInt("faculty_id"));
+				ass.setSubject_id(rs.getInt("subject_id"));
+				ass.setAssignment_topic(rs.getString("assignment_topic"));
+				ass.setAssignment_desp(rs.getString("assignment_desp"));
+				ass.setSubmitted(rs.getInt("submitted"));
+				ass.setStd(rs.getString("standard"));
+			}
+			
+			con.close();
+		} catch (SQLException e) {
+            printSQLException(e);
+        }
+		return ass;
+	}
+	
 	public static List<AssignmentModel> getAllAssignments(){
 		List<AssignmentModel> list = new ArrayList<AssignmentModel>();
 		try {
@@ -134,7 +160,7 @@ public class AssignmentsDAO {
 				ass.setFaculty_id(rs.getInt("faculty_id"));
 				ass.setSubject_id(rs.getInt("subject_id"));
 				ass.setAssignment_topic(rs.getString("assignment_topic"));
-				ass.setAssignment_desp(rs.getString("assignemnt_desp"));
+				ass.setAssignment_desp(rs.getString("assignment_desp"));
 				ass.setSubmitted(rs.getInt("submitted"));
 				ass.setStd(rs.getString("standard"));
 				list.add(ass);
