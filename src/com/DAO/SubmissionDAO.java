@@ -110,8 +110,9 @@ public class SubmissionDAO {
 			ps.setInt(1, ass_id);
 			ps.setInt(2, stud_id);
 			ResultSet rs = ps.executeQuery();
+			boolean res = rs.next();
 			con.close();
-			return !rs.next();
+			return !res;
 		} catch (SQLException e) {
             printSQLException(e);
         }	
