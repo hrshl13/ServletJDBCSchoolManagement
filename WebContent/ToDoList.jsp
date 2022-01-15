@@ -42,7 +42,7 @@
 	</form>
 	<div id="all-tasks">
 		<h2 class="section-title">Current Todo</h2>
-			<div id="free">Yayy!! No tasks To Do!</div>
+			<div id="free">Yayy!! No Tasks To Do!</div>
 			<!-- Rendering Todo list by the given id -->
 			<%
 				List<ToDoListModel> list = ToDoListDAO.getAllTasksByUserId(userId);

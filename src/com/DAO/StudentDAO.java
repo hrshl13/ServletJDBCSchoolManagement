@@ -15,7 +15,7 @@ public class StudentDAO {
 		int status=0;
 		try {
 			Connection con = createCon.getConnection();
-			PreparedStatement ps = con.prepareStatement("insert into student(student_id,fname,lname,dob,gender,email,phone_no,address,passwd,standard,result,admission,login_id) values(?,?,?,?,?,?,?,?,?,?,?,?,?)");
+			PreparedStatement ps = con.prepareStatement("insert into student(student_id,fname,lname,dob,gender,email,phone_no,address,passwd,standard,result,admission_date,login_id) values(?,?,?,?,?,?,?,?,?,?,?,?,?)");
 			ps.setInt(1, s.getStudent_id());
 			ps.setString(2, s.getFname());
 			ps.setString(3, s.getLname());
@@ -42,7 +42,7 @@ public class StudentDAO {
 		int status =0;
 		try {
 			Connection con = createCon.getConnection();
-			PreparedStatement ps = con.prepareStatement("update student set student_id=?,fname=?,lname=?,dob=?,gender=?,email=?,phone_no=?,address=?,passwd=?,standard=?,result=?,admission=?,login_id=?");
+			PreparedStatement ps = con.prepareStatement("update student set student_id=?,fname=?,lname=?,dob=?,gender=?,email=?,phone_no=?,address=?,passwd=?,standard=?,result=?,admission_date=?,login_id=?");
 			ps.setInt(1, s.getStudent_id());
 			ps.setString(2, s.getFname());
 			ps.setString(3, s.getLname());

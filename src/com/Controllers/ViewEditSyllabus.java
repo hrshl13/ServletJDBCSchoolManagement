@@ -51,8 +51,7 @@ public class ViewEditSyllabus extends HttpServlet {
 		HttpSession session = request.getSession(false);
 		Teacher teacher= (Teacher)session.getAttribute("obj");
 		String standard = request.getParameter("stdlist");
-		List<Syllabus> s = SyllabusDAO.getSyllabusByStandard(standard);
-		
+		List<Syllabus> s = SyllabusDAO.getSyllabusByStandard(standard);		
 		session.setAttribute("List", s);
 	}
 }
