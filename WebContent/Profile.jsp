@@ -174,11 +174,5 @@
       </div>
 
 
-	<form action="ChangePassword.jsp" method="post">
-	<button type="submit">Change Password</button>
-	</form>
-	<form action="Logout" method="post">
-	<button type="submit">Logout</button>
-	</form>
 </body>
 </html>
