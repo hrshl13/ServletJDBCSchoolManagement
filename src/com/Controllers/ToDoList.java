@@ -59,9 +59,15 @@ public class ToDoList extends HttpServlet {
 		  ToDoListModel obj = new ToDoListModel();
 		  obj.setUser_id(request.getParameter("userId"));
 		  obj.setTask(request.getParameter("taskDes"));
-		  ToDoListDAO.insertTask(obj);
-		 
-		  response.sendRedirect("ToDoList.jsp");
+		  if (obj.getTask().isBlank()) {
+			  RequestDispatcher rd = request.getRequestDispatcher("ToDoList.jsp");
+			  request.setAttribute("msg", "Task Cannot be empty!!!");
+			  rd.forward(request,response);
+		  }else {
+			  ToDoListDAO.insertTask(obj);
+			  response.sendRedirect("ToDoList.jsp");
+		  }
+		  
 		  
 		
 	}

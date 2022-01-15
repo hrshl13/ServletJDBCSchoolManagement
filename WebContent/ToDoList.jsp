@@ -30,41 +30,43 @@
 		}
 	%>
 	<h1 class="page-title">ToDo List</h1>
+	<% if(request.getAttribute("msg") != null) { %>
+	    	<p class="error">
+		     <%= request.getAttribute("msg") %>
+		    </p>
+	<% } %>
 	<form id="add-task" action="ToDoList" method="post">
 		<textarea class="input" name="taskDes" rows="3" cols="50" placeHolder="Task"></textarea>
 		<input type="hidden" name="userId" value=<%=userId%> />
 		<input class="submit" type="submit" value="Add"/>
 	</form>
 	<div id="all-tasks">
-		<h2>Current Todo</h2>
-		<div>
+		<h2 class="section-title">Current Todo</h2>
+			<div id="free">Yayy!! No tasks To Do!</div>
 			<!-- Rendering Todo list by the given id -->
-			<ul>
-				<%
+			<%
 				List<ToDoListModel> list = ToDoListDAO.getAllTasksByUserId(userId);
-				if (list.size() == 0){
-					%>
-					
-					<div class="free">Yayy!! No tasks To Do!</div>
-					
-					<%
-					
-				}else{
+				if (list.size() != 0){
+			%>
+			<ul>		
+			<% 
 					for (ToDoListModel el : list){
 						int taskId = el.getTask_id();
 						out.println("<li class='task'><input type='checkbox' onclick='remove("+taskId+")' class='check' id="+taskId+"  name='task_"+taskId+"'  />");
 						out.println("<label for='task_"+taskId+"' class=''>"+el.getTask()+"</label> <li>");
 						}
-					}
-				%>
+					
+			%>
 			</ul>
-		</div>
+			<%} %>
 	</div>
 	
 	<!-- Script for removing a task -->
 	<script>
 		var ajax;
-
+		if(document.getElementsByClassName("task").length != 0){
+			document.getElementById("free").style.display = "none";
+		}
 		//OnClick function for checkBoxes
 		function remove (id){
 			console.log(id);
@@ -94,10 +96,16 @@
 				var responseVal= ajax.responseText;  
 				console.log(responseVal);  
 				if(responseVal >= 0){
+					console.log(document.getElementsByClassName("task").length)
 					e = document.getElementById(responseVal);
 					e.parentElement.style.animationPlayState = "running";
 					e.parentElement.addEventListener('animationend', () => {
-			        e.parentElement.remove();});
+				        e.parentElement.remove();
+				        if(document.getElementsByClassName("task").length == 0){
+							document.getElementById("free").style.display = "block";
+						}
+					});
+					
 				}else{
 					alert("Couldn't delete task!!\nThere's some issue on the server!!");
 				}

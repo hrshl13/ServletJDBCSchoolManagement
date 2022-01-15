@@ -34,9 +34,19 @@ body{
 	justify-content:center;
 	align-items:center;
 }
-
+.error {
+  border-radius: 0.4vw;
+  padding: 1vw;
+  border: 0.1vw solid #ff304f;
+  color: #ff304f;
+  box-shadow: 0.2vw 0.2vw 0.8vw 0.2vw #fdc6ce;
+  background-color: #fdc6ce;
+}
 .page-title{
 	font-size:4em;
+}
+.section-title{
+	font-size:3em;
 }
 #add-task{
 	width:100vw;
@@ -72,6 +82,9 @@ body{
 	flex-direction:column;
 	align-items:center;
 	justify-content:center;
+}
+#all-tasks #free{
+	font-size:2em;
 }
 #all-tasks ul{
 	list-style-type: none;
