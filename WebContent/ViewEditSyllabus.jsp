@@ -98,8 +98,8 @@ if (request.getParameter("sylID")!=null){
 </form>
 Your Syllabus for this Term:
 <% 
-ViewEditSyllabus ves = new ViewEditSyllabus();
-List<Syllabus> l =(List<Syllabus>) session.getAttribute("List");
+
+List<Syllabus> l = (List<Syllabus>) session.getAttribute("List");
 %>
 
 <div class="content-table">
@@ -109,14 +109,15 @@ List<Syllabus> l =(List<Syllabus>) session.getAttribute("List");
 		<th>Chapters</th>
 		<th>Delete</th>
 	</tr>
-	<% for (Syllabus sub:l){
+	<% if(l.size()!=0){
+	for (Syllabus sub:l){
 		%>
 			<tr><form action="#" method="post">
 				<td><div class="sylID"><%=sub.getSyllabus_id()%></div></td>
 				<td><div class="chapName"><%=sub.getChapter()%></div></td>
 				<td><button type="submit" value="Delete">Delete</button></form></td>
 			</tr>	
-		<% } %>
+		<% } }%>
 	<table>
 </div>
 
