@@ -52,7 +52,7 @@
 				}else{
 					for (ToDoListModel el : list){
 						int taskId = el.getTask_id();
-						out.println("<li class='task'><input type='checkbox' class='check' id="+taskId+"  name='task_"+taskId+"'  />");
+						out.println("<li class='task'><input type='checkbox' onclick='remove("+taskId+")' class='check' id="+taskId+"  name='task_"+taskId+"'  />");
 						out.println("<label for='task_"+taskId+"' class=''>"+el.getTask()+"</label> <li>");
 						}
 					}
@@ -64,15 +64,10 @@
 	<!-- Script for removing a task -->
 	<script>
 		var ajax;
-		const checks = document.getElementsByClassName("check");
-		for (let check =0; check < checks.length;check++){
-			checks[check].addEventListener("click",remove);
-		}
 
 		//OnClick function for checkBoxes
-		function remove (e){
-			console.log("event");
-			console.log(window.ActiveXObject, window.XMLHttpRequest);
+		function remove (id){
+			console.log(id);
 			if(window.XMLHttpRequest){
 				
 				ajax = new XMLHttpRequest();
@@ -83,7 +78,7 @@
 				ajax = new ActiveXObject("Microsoft.XMLHTTP");
 			} 
 			
-			var url="ToDoList?id="+e.target.id;
+			var url="ToDoList?id="+id;
 			try{
 				ajax.onreadystatechange=sendInfo;
 				ajax.open("DELETE",url,true);
@@ -96,13 +91,13 @@
 		//Callback function after deletion
 		function sendInfo(){  
 			if(this.readyState == 4 && this.status == 200){  
-				var responseVal=xmlHttpRequest.responseText;  
+				var responseVal= ajax.responseText;  
 				console.log(responseVal);  
 				if(responseVal >= 0){
 					e = document.getElementById(responseVal);
 					e.parentElement.style.animationPlayState = "running";
-					e.target.parentElement.addEventListener('animationend', () => {
-			        e.target.parentElement.remove();});
+					e.parentElement.addEventListener('animationend', () => {
+			        e.parentElement.remove();});
 				}else{
 					alert("Couldn't delete task!!\nThere's some issue on the server!!");
 				}
