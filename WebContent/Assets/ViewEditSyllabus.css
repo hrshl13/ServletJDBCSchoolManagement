@@ -1,5 +1,12 @@
 @charset "ISO-8859-1";
- 
+ .head{
+ text-align: center; 
+ font-family: monospace; 
+ color: #009879;
+ }
+ .head:hover{
+ cursor:alais;
+ }
  .subhead{
 text-align: center;
 font-family: monospace;
@@ -11,8 +18,13 @@ font-size:25px;
         background-color: #009879;
         color: #f3f3f3;
         font-size:12px;
-         margin: 0 0 0 650px;
           padding: 8px 12px;
+}
+#subbtn:hover{
+	 transform: translate(0,-2px);
+    cursor:pointer;
+    transition:0.5s;
+    background:linear-gradient(to right, #56ab2f , #a8e063) ;
 }
    .stdlist{
         padding: 8px 12px;
@@ -23,9 +35,14 @@ font-size:25px;
         border-radius: 5px;
         background-color: #009879;
         color: #dddddd;
-        margin: 0 0 0 570px;
+        margin: 0 0 0 520px;
+        width:400px;
     }
-
+.stdlist:hover{
+	transform: translate(0,-2px);
+    cursor:pointer;
+    transition:0.5s;
+}
     .content-table table{
         border-collapse: collapse;
         margin: 25px 0;
@@ -65,3 +82,24 @@ font-size:25px;
     .content-table tbody tr:hover{
         color: #009879;
     }
+
+    #newSyl{
+    padding: 8px 12px;
+        color: white;
+        font-weight: bold;
+        background-color: #eeeeee;
+        border: 1px solid #dddddd;
+        border-radius: 5px;
+        background-color: #009879;
+        color: #dddddd;
+        width:480px;
+        margin: 0 0 0 520px;
+    }
+    #newSyl::placeholder{
+    color: white;
+   }
+   #newSyl:hover{
+   	transform: translate(0,-2px);
+    cursor:text;
+    transition:0.5s;
+   }

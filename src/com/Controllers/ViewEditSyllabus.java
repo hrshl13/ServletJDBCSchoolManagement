@@ -39,7 +39,7 @@ public class ViewEditSyllabus extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doPost(request,response);
+		response.sendRedirect("ViewEditSyllabus.jsp");
 	}
 
 	/**
@@ -47,13 +47,21 @@ public class ViewEditSyllabus extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		processRequest(request,response);	
-		RequestDispatcher rd = request.getRequestDispatcher("ViewEditSyllabus.jsp");
-		rd.forward(request, response);
+		//processRequest(request,response);	
+		//RequestDispatcher rd = request.getRequestDispatcher("ViewEditSyllabus.jsp");
+		//rd.forward(request, response);
+		try {
+			this.handleRequest(request, response);
+		} catch (ServletException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	public void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
-		Teacher teacher= (Teacher)session.getAttribute("obj");
 		String standard = request.getParameter("stdlist");
 		List<Syllabus> s = SyllabusDAO.getSyllabusByStandard(standard);		
 		session.setAttribute("List", s);
@@ -65,18 +73,20 @@ public class ViewEditSyllabus extends HttpServlet {
 		    RequestDispatcher rd = request.getRequestDispatcher("Forbidden.jsp");
 		    rd.forward(request,response);
 		  }
-		  
-		  ToDoListModel obj = new ToDoListModel();
-		  obj.setUser_id(request.getParameter("userId"));
-		  obj.setTask(request.getParameter("taskDes"));
-		  if (obj.getTask().isBlank()) {
+		  Syllabus syl = new Syllabus();
+		  Teacher teacher= (Teacher)session.getAttribute("obj");
+		  syl.setChapter(request.getParameter("newSyl"));
+		  syl.setStandard(request.getParameter("std"));
+		  syl.setSubject_id(teacher.getSubject_id());
+		  if (syl.getChapter().isBlank()) {
 			  RequestDispatcher rd = request.getRequestDispatcher("ToDoList.jsp");
 			  request.setAttribute("msg", "Task Cannot be empty!!!");
 			  rd.forward(request,response);
 		  }else {
-			  ToDoListDAO.insertTask(obj);
-			  response.sendRedirect("ToDoList.jsp");
+			  SyllabusDAO.insert(syl);
+			  response.sendRedirect("ViewEditSyllabus.jsp");
 		  }
+
 	}
  
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
