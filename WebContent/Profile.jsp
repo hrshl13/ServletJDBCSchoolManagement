@@ -11,9 +11,9 @@
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css'>
     <!-- Font Awesome CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
+	<%-- <link rel="stylesheet" href="Profile.css" type='text/css'>--%>
 <style>
-    body {
+body {
     background: #67B26F;  /* fallback for old browsers */
     background: -webkit-linear-gradient(to right, #4ca2cd, #67B26F);  /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(to right, #4ca2cd, #67B26F); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
@@ -73,9 +73,7 @@
     .Probtn button:hover {
         background-color: #008CBA;
         color: white;
-    }
-
-</style>
+    }</style>
 </head>
 <body>
 	<% 
@@ -172,7 +170,5 @@
         </div>
       </div>
       </div>
-
-
 </body>
 </html>

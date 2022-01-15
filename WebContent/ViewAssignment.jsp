@@ -45,7 +45,7 @@
 	<!-- Script for removing a task -->
 	<script>
 		var ajax;
-		if(document.getElementsByClassName("Assgn").length != 0){
+		if(document.getElementsByClassName("task").length != 0){
 			document.getElementById("free").style.display = "none";
 		}
 		//OnClick function for checkBoxes
