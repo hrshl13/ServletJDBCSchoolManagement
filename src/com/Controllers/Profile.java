@@ -56,7 +56,7 @@ public class Profile extends HttpServlet {
 	
 		HttpSession session = request.getSession(false);
 		User user = (User)session.getAttribute("obj");
-		D.put("Name", user.getFname()+user.getLname());
+		D.put("Name", user.getFname()+" "+user.getLname());
 		D.put("Date of Birth", user.getDob());
 		D.put("Gender", user.getGender());
 		D.put("Email", user.getEmail());

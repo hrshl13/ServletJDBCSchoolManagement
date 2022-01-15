@@ -1,4 +1,19 @@
 @charset "ISO-8859-1";
+ 
+ .subhead{
+text-align: center;
+font-family: monospace;
+color: #009879;
+font-size:25px;
+}
+#subbtn{
+	border-radius: 5px 5px 5px 5px;
+        background-color: #009879;
+        color: #f3f3f3;
+        font-size:12px;
+         margin: 0 0 0 650px;
+          padding: 8px 12px;
+}
    .stdlist{
         padding: 8px 12px;
         color: white;
@@ -11,12 +26,11 @@
         margin: 0 0 0 570px;
     }
 
-    .content-table{
+    .content-table table{
         border-collapse: collapse;
         margin: 25px 0;
-        font-size: 0.9em;
-        width: auto
-        font-size: 15px;
+        width: 40%;
+        font-size: 25px;
         font-family: monospace;
         border-radius: 5px 5px 0 0;
         overflow: hidden;
@@ -29,7 +43,7 @@
         background-color: #009879;
         color: #f3f3f3;
     }
-    .content-table thead tr{
+    .content-table th tr{
         background-color: #009879;
         color: #ffffff;
         text-align: left;
