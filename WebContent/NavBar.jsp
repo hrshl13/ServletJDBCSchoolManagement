@@ -58,21 +58,21 @@
 			
 			switch(type){
 			case "Student":%>
-				<li><a href='${pageContext.request.contextPath}/' >Assignment</a></li>
-				<li><a href='${pageContext.request.contextPath}/' >Syllabus</a></li>
+				<li><a href='${pageContext.request.contextPath}/ViewAssignment.jsp' >Assignment</a></li>
+				<li><a href='${pageContext.request.contextPath}/viewstudentSyllabus.jsp' >Syllabus</a></li>
 		<%
 				break;
 			case "Teacher":
 		%>
 				<li><a href='${pageContext.request.contextPath}/editassignment.jsp' >Assignment</a></li>
-				<li><a href='${pageContext.request.contextPath}/' >Manage Syllabus</a></li>
+				<li><a href='${pageContext.request.contextPath}/ViewEditSyllabus.jsp' >Manage Syllabus</a></li>
 		<% 
 				break;
 			case "Principal":
 		%>
 		
-				<li><a href='${pageContext.request.contextPath}/' >Manage Faculties</a></li>
-				<li><a href='${pageContext.request.contextPath}/' >Manage Students</a></li>
+				<li><a href='${pageContext.request.contextPath}/ViewTeacher.jsp' >Manage Faculties</a></li>
+				<li><a href='${pageContext.request.contextPath}/ViewStudent.jsp' >Manage Students</a></li>
 		<%
 				break;
 			}
