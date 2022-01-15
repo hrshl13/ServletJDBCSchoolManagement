@@ -73,8 +73,13 @@ public class ChangePassword extends HttpServlet {
 			if(session.getAttribute("type").equals("Student")) {
 				Student student =  (Student) session.getAttribute("obj");
 				student.setPasswd(newpass);
-				StudentDAO.update(student);
-				response.sendRedirect("Logout");
+				int status = StudentDAO.update(student);
+				if (status>0) {
+					response.sendRedirect("Logout");
+				}
+				else {
+					System.out.println("Unsuccessful!");
+				}
 			}
 			else if (session.getAttribute("type").equals("Teacher")) {
 				Teacher teacher = (Teacher) session.getAttribute("obj");
@@ -86,8 +91,6 @@ public class ChangePassword extends HttpServlet {
 				Principal principal = (Principal) session.getAttribute("obj");
 				principal.setPasswd(newpass);
 				PrincipalDAO.update(principal);
-//				RequestDispatcher rd1= request.getRequestDispatcher("Logout");
-//				rd1.forward(request, response);
 				response.sendRedirect("Logout");
 			}
 		}

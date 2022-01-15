@@ -12,15 +12,76 @@
 
 <%-- <%@include file="NavBar.jsp" %> --%>
 <%
-int del = Integer.parseInt(request.getParameter("sylID"));
-int status = SyllabusDAO.delete(del);
-if (status==0){
-	%> <p class="error">Unsuccessful!!</p><% 
-}else{
-	%> <p class="suc">Successful!!</p><% 
+if (request.getParameter("sylID")!=null){
+	int del = Integer.parseInt(request.getParameter("sylID"));
+	int status = SyllabusDAO.delete(del);
+	if (status==0){
+		%> <p class="error">Unsuccessful!!</p><% 
+	}else{
+		%> <p class="suc">Successful!!</p><% 
+	}
 }
 %>
+<style>
+    .stdlist{
+        padding: 8px 12px;
+        color: white;
+        font-weight: bold;
+        background-color: #eeeeee;
+        border: 1px solid #dddddd;
+        border-radius: 5px;
+        background-color: #009879;
+        color: #dddddd;
+        margin: 0 0 0 570px;
+    }
+
+    .content-table{
+        border-collapse: collapse;
+        margin: 25px 0;
+        font-size: 0.9em;
+        /* min-width: 400px; */
+        width: 40%;
+        font-size: 15px;
+        font-family: monospace;
+        border-radius: 5px 5px 0 0;
+        overflow: hidden;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .content-table tr td button{
+        border-radius: 5px 5px 5px 5px;
+        background-color: #009879;
+        color: #f3f3f3;
+    }
+    .content-table thead tr{
+        background-color: #009879;
+        color: #ffffff;
+        text-align: left;
+        font-weight: bold;
+    }
+    .content-table th,
+    .content-table td{
+        padding: 12px 15px;
+    }
+    .content-table tbody tr{
+        border-bottom: 1px solid #dddddd;
+    }
+    .content-table tbody tr:nth-of-type(even){
+        background-color: #f3f3f3;
+    }
+    .content-table tbody tr:last-of-type{
+        border-bottom: 2px solid #009879;
+    }
+    .content-table tbody tr:hover{
+        color: #009879;
+    }
+
+</style>
+
 <form action="ViewEditSyllabus" method="post">
+<h1 style="text-align: center; font-family: monospace; color: #009879;">Edit Syllabus</h1>
+    <br><br><br>
 <select class="stdlist" name="stdlist">
 						<option value="I">I</option>
 						<option value="II">II</option>
@@ -37,29 +98,31 @@ if (status==0){
 </form>
 Your Syllabus for this Term:
 <% 
-ViewEditSyllabus ves = new ViewEditSyllabus();
-ves.processRequest(request, response);
-List<Syllabus> l =(List<Syllabus>) session.getAttribute("List");
+
+List<Syllabus> l = (List<Syllabus>) session.getAttribute("List");
 %>
 
-<div class="List">
+<div class="content-table">
 	<table>
 	<tr>
 		<th>ID</th>
 		<th>Chapters</th>
 		<th>Delete</th>
 	</tr>
-		<% for(int i=0;i<l.size();i++){
-			Syllabus sl = new Syllabus();
-			sl = (Syllabus) l.get(i);
-			%>
-			<tr><form action="#" method="post">
-				<td><div class="sylID"><%=sl.getSyllabus_id()%></div></td>
-				<td><div class="chapName"><%=sl.getChapter()%></div></td>
-				<td><button type="submit" name="Delete">Delete</button></form></td>
+	<%
+		if (l != null){
+			for (Syllabus sub:l){
+		%>
+			<tr>
+				<form action="#" method="post">
+					<td><div class="sylID"><%=sub.getSyllabus_id()%></div></td>
+					<td><div class="chapName"><%=sub.getChapter()%></div></td>
+					<td><button type="submit" value="Delete">Delete</button></td>
+				</form>
 			</tr>	
-		<% } %>
-	<table>
+		<% 	}
+		} %>
+	</table>
 </div>
 
 </body>

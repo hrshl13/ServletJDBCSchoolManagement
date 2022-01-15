@@ -13,7 +13,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-
+//iooioojoi
 @WebServlet("/AddStudent")
 public class AddStudent extends HttpServlet{
 
@@ -76,7 +76,7 @@ public class AddStudent extends HttpServlet{
 	    	System.out.println("Unsuccessful");
 		}
 	}
-
+//yuhi
 }
 
 

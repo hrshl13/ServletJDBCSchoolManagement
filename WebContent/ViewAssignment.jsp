@@ -16,7 +16,7 @@
   --mainColor: #000;
 }	
 body {
-  width: 100vw;
+  width: 100vw; 
   height: 1100px;
   overflow-x: hidden;
   display: flex;
@@ -163,55 +163,39 @@ body {
 </style>
 </head>
 <body>
+<div id="all-tasks">
+		<h2 class="section-title">Current Todo</h2>
+			<div id="free">Yayy!! No Tasks To Do!</div>
+			<!-- Rendering Todo list by the given id -->
+			<%
+				List<ToDoListModel> list = ToDoListDAO.getAllTasksByUserId(userId);
+				if (list.size() != 0){
+			%>
+			<ul>		
+			<% 
+					for (ToDoListModel el : list){
+						int taskId = el.getTask_id();
+						out.println("<li class='task'><input type='checkbox' onclick='remove("+taskId+")' class='check' id="+taskId+"  name='task_"+taskId+"'  />");
+						out.println("<label for='task_"+taskId+"' class=''>"+el.getTask()+"</label> <li>");
+						}
+					
+			%>
+			</ul>
+			<%} %>
+	</div>
 <div class="main">
   <header>
     <h1>Assignments</h1>
   </header>
-  <form action="db.py" method="POST" class="tasks" id="daily-tasks">
+  <form action="ViewAssignment" method="post" class="tasks" id="daily-tasks">
         <div>
       <input type="checkbox" id="task1" checked>
       <label for="task1">Assignment 01</label> 
       <div class="custom-file">
       <input type="file" class="custom-file-input">
+	</div>
 </div>
-    </div>
-    <div>
-      <input type="checkbox" id="task2">
-      <label for="task2">Assignment 02</label>
-    </div>
 
-    <div>
-      <input type="checkbox" id="task3">
-      <label for="task3">Assignment 03</label>
-    </div>
-    <div>
-      <input type="checkbox" id="task4">
-      <label for="task4">Assignment 04</label>
-    </div>
-    <div>
-      <input type="checkbox" id="task5">
-      <label for="task5">Assignment 05</label>
-    </div>
-    <div>
-      <input type="checkbox" id="task6">
-      <label for="task6">Assignment 06</label>
-    </div>
-    <div>
-      <input type="checkbox" id="task7">
-      <label for="task7">Assignment 07</label>
-    </div>
-    <div>
-      <input type="checkbox" id="task8">
-      <label for="task8">Assignment 08</label>
-    </div>
-    <div>
-      <input type="checkbox" id="task9">
-      <label for="task9">Assignment 09</label>
-    </div>
-    <div>
-      <input type="checkbox" id="task10">
-      <label for="task10">Assignment 10</label>
-    </div>
   </form>
   </div>
 </body>

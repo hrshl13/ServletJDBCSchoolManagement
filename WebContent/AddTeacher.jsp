@@ -56,7 +56,7 @@
         appearance: none;
         border: 1px solid #d5dbd9;
         width: 100%; height: 100%;
-        padding: 8px 10px;
+        padding: 8px 10px; 
         border-radius: 3px;
         outline: none;
     }
