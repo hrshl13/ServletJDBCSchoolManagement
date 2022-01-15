@@ -73,11 +73,19 @@
     
 </style>
 <body>
+
+<% if(request.getAttribute("msg") != null) { %>
+   <p class="error">
+     <%= request.getAttribute("msg") %>
+   </p>
+<% } %>
+
+
 <div class="wrapper">
         <div class="title">
             New Student
         </div>
-        <form action="AddStudent">
+        <form action="AddStudent" method="post">
             <div class="input_field">
                 <label>First Name</label>
                 <input type="text" class="input" name="fname">
@@ -95,7 +103,7 @@
             </div>
             <div class="input_field">
                 <label>Phone</label>
-                <input type="number" class="input" name="phone_no">
+                <input type="text" class="input" name="phone_no">
             </div>
             <div class="input_field">
                 <label>email</label>
