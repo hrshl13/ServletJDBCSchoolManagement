@@ -12,6 +12,7 @@ body{
 	background: #4DFFFF; 
 	color:#A90000;
 	display:flex;
+	flex-direction:column;
 	height:100vh;
 	width:100vw;
 	justify-content:center;
@@ -19,38 +20,22 @@ body{
 	font-weight:900;
 	font-size:8em;
 }
+
 .Link{
-	height:1vh;
-	width:1vw;
-	justify-content:center;
-	align-items:center;
 	font-weight:9;
-	font-size:1em;
-	display:flex;
-}
-a:link {
-  color: green;
-  background-color: transparent;
-  text-decoration: none;
+	font-size:0.5em;
 }
 
-a:visited {
-  color: pink;
-  background-color: transparent;
-  text-decoration: none;
+a{
+  color:#5C0000;
 }
 
 a:hover {
-  color: red;
-  background-color: transparent;
   text-decoration: underline;
+  color: #A90000;
+  background-color: transparent;
 }
 
-a:active {
-  color: yellow;
-  background-color: transparent;
-  text-decoration: underline;
-}
 </style>
 </head>
 <body>
