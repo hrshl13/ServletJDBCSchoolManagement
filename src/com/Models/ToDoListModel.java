@@ -1,19 +1,19 @@
 package com.Models;
 
 public class ToDoListModel {
-	int task_id, student_id;
-	String task;
+	int task_id;
+	String task, user_id;
+	public String getUser_id() {
+		return user_id;
+	}
+	public void setUser_id(String user_id) {
+		this.user_id = user_id;
+	}
 	public int getTask_id() {
 		return task_id;
 	}
 	public void setTask_id(int task_id) {
 		this.task_id = task_id;
-	}
-	public int getStudent_id() {
-		return student_id;
-	}
-	public void setStudent_id(int student_id) {
-		this.student_id = student_id;
 	}
 	public String getTask() {
 		return task;

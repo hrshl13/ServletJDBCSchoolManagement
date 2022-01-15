@@ -57,10 +57,8 @@ public class ToDoList extends HttpServlet {
 		  }
 		  
 		  ToDoListModel obj = new ToDoListModel();
-		  System.out.println(request.getParameter("userId").split("/")[0]);
-		  obj.setStudent_id(Integer.parseInt(request.getParameter("userId").split("/")[0]));
+		  obj.setUser_id(request.getParameter("userId"));
 		  obj.setTask(request.getParameter("taskDes"));
-		   
 		  ToDoListDAO.insertTask(obj);
 		 
 		  response.sendRedirect("ToDoList.jsp");

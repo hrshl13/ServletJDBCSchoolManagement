@@ -2,6 +2,12 @@
     pageEncoding="ISO-8859-1"%>
 <%@ page import="com.Models.Student,com.Models.Teacher, com.Models.Principal" %>
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/brands.min.css" integrity="sha512-rQgMaFKZKIoTKfYInSVMH1dSM68mmPYshaohG8pK17b+guRbSiMl9dDbd3Sd96voXZeGerRIFFr2ewIiusEUgg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<link rel="stylesheet" href="Assets/NavBar.css" type='text/css'>
+
+
 	<%
 	if (session.getAttribute("type") == null)
 	{
@@ -34,9 +40,12 @@
 	%>
 <div id = "top">
 	<div id="logoProfile">
-		<h1>School Management</h1>
-		<a class="pro-link" href="${pageContext.request.contextPath}/Profile.jsp"><%=name %></a>
-		<form action="/Logout" method="post"><input name="logout" type="submit" class=button value="Logout"></form>
+		<h1 id="site-name">School Management</h1>
+		<div>
+			<a class="pro-link" href="${pageContext.request.contextPath}/Profile.jsp"><%=name %></a>
+			<form action="Logout" method="post"><button name="logout" type="submit" class="logout"><i class="fas fa-sign-out-alt"></i></button></form>
+		</div>
+		
 	</div>
 	<ul class="nav">
 		<li>
@@ -56,7 +65,7 @@
 				break;
 			case "Teacher":
 		%>
-				<li><a href='${pageContext.request.contextPath}/' >Assignment</a></li>
+				<li><a href='${pageContext.request.contextPath}/editassignment.jsp' >Assignment</a></li>
 				<li><a href='${pageContext.request.contextPath}/' >Manage Syllabus</a></li>
 		<% 
 				break;

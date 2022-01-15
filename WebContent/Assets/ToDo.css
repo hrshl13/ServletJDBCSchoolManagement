@@ -1,0 +1,113 @@
+@charset "ISO-8859-1";
+
+@keyframes hide {
+    0% {
+    	
+        opacity: 1;
+        height: 100%;
+        line-height: 100%;
+        padding: 20px;
+        margin-bottom: 10px;
+    }
+    25%{
+    	background-color: #77dd11;
+    }
+    75% {
+        opacity: 0;
+        height: 100%;
+        line-height: 100%;
+        padding: 20px;
+        margin-bottom: 10px;
+    }
+    100% {
+        opacity: 0;
+        height: 0px;
+        line-height: 0px;
+        padding: 0px;
+        margin-bottom: 0px;
+    }
+}
+
+body{
+	display:flex;
+	flex-direction:column;
+	justify-content:center;
+	align-items:center;
+}
+
+.page-title{
+	font-size:4em;
+}
+#add-task{
+	width:100vw;
+	display:flex;
+	justify-content:center;
+}
+#add-task .input{
+	padding: 0.5em 0.8em;
+	border:none;
+	outline:none;
+	border-radius:0.9em;
+	font-size:1.2em;
+	color: #303030;
+	background: #efefef;
+	font-weight: 700;
+	margin:0em 0.5em;
+}
+#add-task .submit{
+	padding: 0.5em 0.8em;
+	border-radius:0.5em;
+	font-size:5em;
+	font-weight: 700;
+	outline:none;
+	border:none;
+	cursor:pointer;
+	font-size: 16px;
+  	background-color: #222a34;
+  	color: white;
+}
+#all-tasks{
+	width:100vw;
+	display:flex;
+	flex-direction:column;
+	align-items:center;
+	justify-content:center;
+}
+#all-tasks ul{
+	list-style-type: none;
+	width:80vw;
+	overflow-y: scroll;
+	overflow-x:none;
+	max-height: 60vh;
+}
+#all-tasks ul::-webkit-scrollbar{
+	display:inline;
+	width:0.3em;
+	border-radius:5em;
+	background-color: #fff;
+}
+#all-tasks ul::-webkit-scrollbar-thumb{
+	background: #aaa;
+	border-radius:5em;
+}
+.task{
+	border-radius:0.6em;
+	border: 1px solid #efefef;
+	box-shadow: 0.3em 0.3em 0.5em 0.1em #888888;
+    padding: 20px;
+    margin-bottom: 10px;
+    animation-name: hide;
+    animation-duration: 2s;
+    animation-fill-mode: forwards;
+    animation-play-state: paused;
+    display:flex;
+    align-items:center;
+    margin:0.5em 0.8em 0.6em 0.8em;
+    font-size:1.3em;
+}
+.task input[type=checkbox]{
+	height: 1.5em;
+	width: 1.5em;
+	border-radius:1em;
+	margin:0.8em;
+}
