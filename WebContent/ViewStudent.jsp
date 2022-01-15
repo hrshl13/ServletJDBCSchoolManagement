@@ -108,7 +108,7 @@
                 <td>2736826832</td>
                 <td>abc@gmail.com</td>
                 <td><button>View</button></td>
-                <td><button>Delete</button></td>
+                <td><form action=""><button>Delete</button></form></td>
             </tr>
             <tr>
                 <td>Ashoka pradhan</td>
