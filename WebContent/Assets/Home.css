@@ -1,0 +1,11 @@
+@charset "ISO-8859-1";
+body{
+	background-image:url("https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fwww.pixelstalk.net%2Fwp-content%2Fuploads%2F2016%2F11%2FEducation-Images-HD.jpg&f=1&nofb=1");
+	backround-repeat: no-repeat;
+	background-size: cover;
+}
+
+.greet{
+	padding:2em 0em 0em 2em;
+	font-size:5em;
+}

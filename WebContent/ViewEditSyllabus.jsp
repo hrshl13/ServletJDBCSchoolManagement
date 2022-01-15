@@ -109,16 +109,20 @@ List<Syllabus> l = (List<Syllabus>) session.getAttribute("List");
 		<th>Chapters</th>
 		<th>Delete</th>
 	</tr>
-	<% if(l.size()!=0){
-	for (Syllabus sub:l){
+	<%
+		if (l != null){
+			for (Syllabus sub:l){
 		%>
-			<tr><form action="#" method="post">
-				<td><div class="sylID"><%=sub.getSyllabus_id()%></div></td>
-				<td><div class="chapName"><%=sub.getChapter()%></div></td>
-				<td><button type="submit" value="Delete">Delete</button></form></td>
+			<tr>
+				<form action="#" method="post">
+					<td><div class="sylID"><%=sub.getSyllabus_id()%></div></td>
+					<td><div class="chapName"><%=sub.getChapter()%></div></td>
+					<td><button type="submit" value="Delete">Delete</button></td>
+				</form>
 			</tr>	
-		<% } }%>
-	<table>
+		<% 	}
+		} %>
+	</table>
 </div>
 
 </body>

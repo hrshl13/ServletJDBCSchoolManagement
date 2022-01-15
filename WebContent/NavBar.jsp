@@ -25,15 +25,15 @@
 	switch(type){
 	case "Student":
 		Student stud = (Student)session.getAttribute("obj");
-		name = stud.getFname()+" "+stud.getLname();
+		name = stud.getFname();
 		break;
 	case "Teacher":
 		Teacher fac = (Teacher)session.getAttribute("obj");
-		name = fac.getFname()+" "+fac.getLname();
+		name = fac.getFname();
 		break;
 	case "Principal":
 		Principal prin = (Principal)session.getAttribute("obj");
-		name = prin.getFname()+" "+prin.getLname();
+		name = prin.getFname();
 		break;
 	}
 
