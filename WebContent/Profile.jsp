@@ -11,7 +11,7 @@
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css'>
     <!-- Font Awesome CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	<link rel="stylesheet" href="Profile.css" type='text/css'>
+	<%-- <link rel="stylesheet" href="Profile.css" type='text/css'>--%>
 <style>
 body {
     background: #67B26F;  /* fallback for old browsers */
@@ -170,5 +170,6 @@ body {
         </div>
       </div>
       </div>
+
 </body>
 </html>

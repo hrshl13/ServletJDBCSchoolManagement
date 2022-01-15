@@ -65,7 +65,8 @@
 					for(AssignmentModel assm : list){
 						out.println("<li class='lyst'> <div class='asstopic'>"+assm.getAssignment_topic()+"</div>");
 						out.println("<div class='assdesp'>"+assm.getAssignment_desp()+"</div>");
-						out.println("<form action='assigndet' method='post'> <input type='hidden' value="+ assm.getAssignment_id()+" name='assid'/> <input type='submit' class='subbtn' value='Details' /> </form></li>");
+						out.println("<div class='assstd'>"+assm.getStd()+"</div>");
+						out.println("<form action='assignDetails' method='get'> <input type='hidden' value="+ assm.getAssignment_id()+" name='assid'/> <input type='submit' class='subbtn' value='Details' /> </form></li>");
 						}
 					}
 			 		%>

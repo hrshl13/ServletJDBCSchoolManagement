@@ -9,6 +9,7 @@ import java.util.List;
 
 import com.Extras.createCon;
 import com.Models.Student;
+import com.Models.Syllabus;
 
 public class StudentDAO {
 	public static int insert(Student s) {
@@ -135,6 +136,37 @@ public class StudentDAO {
 			e.printStackTrace();
 		}
 		return s;
+	}
+	
+	public static List<Student> getStudentByStandard(String Std) {
+		List<Student> list = new ArrayList<Student>();
+		try {
+			Connection con = createCon.getConnection();
+			PreparedStatement ps = con.prepareStatement("select * from student where standard=?");
+			ps.setString(1, Std);
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()) {
+				Student s = new Student(); 
+				s.setStudent_id(rs.getInt(1));
+				s.setFname(rs.getString(2));
+				s.setLname(rs.getString(3));
+				s.setDob(rs.getString(4));
+				s.setGender(rs.getString(5));
+				s.setEmail(rs.getString(6));
+				s.setPhone_no(rs.getString(7));
+				s.setAddress(rs.getString(8));
+				s.setPasswd(rs.getString(9));
+				s.setStandard(rs.getString(10));
+				s.setResult(rs.getString(11));
+				s.setAdmission_date(rs.getString(12));
+				s.setLogin_id(rs.getString(13));
+				list.add(s);
+			}
+			con.close();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}		
+		return list;
 	}
 	
 	public static List<Student> getAllStudents(){
