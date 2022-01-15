@@ -28,10 +28,14 @@ public class ToDoList extends HttpServlet {
 
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int id = Integer.parseInt(request.getParameter("id"));
-		ToDoListDAO.deleteTask(id);
+		int stat = ToDoListDAO.deleteTask(id);
 		PrintWriter out = response.getWriter();
-
-		out.print(id);
+		if (stat > 0) {
+			out.print(id);
+		}else {
+			out.print(-1);
+		}
+		
 		out.flush();
 		
 	}
@@ -57,13 +61,17 @@ public class ToDoList extends HttpServlet {
 		  }
 		  
 		  ToDoListModel obj = new ToDoListModel();
-		  System.out.println(request.getParameter("userId").split("/")[0]);
-		  obj.setStudent_id(Integer.parseInt(request.getParameter("userId").split("/")[0]));
+		  obj.setUser_id(request.getParameter("userId"));
 		  obj.setTask(request.getParameter("taskDes"));
-		   
-		  ToDoListDAO.insertTask(obj);
-		 
-		  response.sendRedirect("ToDoList.jsp");
+		  if (obj.getTask().isBlank()) {
+			  RequestDispatcher rd = request.getRequestDispatcher("ToDoList.jsp");
+			  request.setAttribute("msg", "Task Cannot be empty!!!");
+			  rd.forward(request,response);
+		  }else {
+			  ToDoListDAO.insertTask(obj);
+			  response.sendRedirect("ToDoList.jsp");
+		  }
+		  
 		  
 		
 	}

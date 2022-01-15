@@ -70,23 +70,28 @@ public class ChangePassword extends HttpServlet {
 			rd.forward(request, response);
 		}
 		else {
-			user.setPasswd(newpass);
 			if(session.getAttribute("type").equals("Student")) {
-				Student student = new Student();
-				StudentDAO.update(student);
-				response.sendRedirect("Logout");
+				Student student =  (Student) session.getAttribute("obj");
+				student.setPasswd(newpass);
+				int status = StudentDAO.update(student);
+				if (status>0) {
+					response.sendRedirect("Logout");
+				}
+				else {
+					System.out.println("Unsuccessful!");
+				}
 			}
 			else if (session.getAttribute("type").equals("Teacher")) {
-				Teacher teacher = new Teacher();
+				Teacher teacher = (Teacher) session.getAttribute("obj");
+				teacher.setPasswd(newpass);
 				TeacherDAO.updateTeacher(teacher);
 				response.sendRedirect("Logout");
 			}
 			else if (session.getAttribute("type").equals("Principal")) {
-				Principal principal = new Principal();
-				PrincipalDAO.insert(principal);
-				RequestDispatcher rd1= request.getRequestDispatcher("Logout");
-				rd1.forward(request, response);
-
+				Principal principal = (Principal) session.getAttribute("obj");
+				principal.setPasswd(newpass);
+				PrincipalDAO.update(principal);
+				response.sendRedirect("Logout");
 			}
 		}
 	}

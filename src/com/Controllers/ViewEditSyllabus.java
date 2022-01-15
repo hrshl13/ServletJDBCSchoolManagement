@@ -7,6 +7,7 @@ import com.DAO.SyllabusDAO;
 import com.Models.Syllabus;
 import com.Models.Teacher;
 
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -43,12 +44,14 @@ public class ViewEditSyllabus extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		processRequest(request,response);	
+		RequestDispatcher rd = request.getRequestDispatcher("ViewEditSyllabus.jsp");
+		rd.forward(request, response);
 	}
 	public void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
 		Teacher teacher= (Teacher)session.getAttribute("obj");
-		Syllabus s = SyllabusDAO.getSyllabusBySubject(teacher.getSubject_id());
-		List<Syllabus> ls = SyllabusDAO.getAllSyllabus();
-		
+		String standard = request.getParameter("stdlist");
+		List<Syllabus> s = SyllabusDAO.getSyllabusByStandard(standard);		
+		session.setAttribute("List", s);
 	}
 }
