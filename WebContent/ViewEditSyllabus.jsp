@@ -82,7 +82,8 @@ if (request.getParameter("sylID")!=null){
 <form action="ViewEditSyllabus" method="post">
 <h1 style="text-align: center; font-family: monospace; color: #009879;">Edit Syllabus</h1>
     <br><br><br>
-<select class="stdlist" name="stdlist">
+<select class="stdlist" name="stdlist"">
+						<option value="none" selected disabled hidden>Select Standard</option> 
 						<option value="I">I</option>
 						<option value="II">II</option>
 						<option value="III">III</option>
@@ -96,9 +97,9 @@ if (request.getParameter("sylID")!=null){
 					</select>
 					<input type="submit" id="subbtn" value="Submit" />
 </form>
+
 Your Syllabus for this Term:
 <% 
-
 List<Syllabus> l = (List<Syllabus>) session.getAttribute("List");
 %>
 
@@ -113,17 +114,50 @@ List<Syllabus> l = (List<Syllabus>) session.getAttribute("List");
 		if (l != null){
 			for (Syllabus sub:l){
 		%>
-			<tr>
-				<form action="#" method="post">
-					<td><div class="sylID"><%=sub.getSyllabus_id()%></div></td>
-					<td><div class="chapName"><%=sub.getChapter()%></div></td>
-					<td><button type="submit" value="Delete">Delete</button></td>
-				</form>
+			<tr id="<%=sub.getSyllabus_id()%>">
+				<td><div class="sylID"><%=sub.getSyllabus_id()%></div></td>
+				<td><div class="chapName"><%=sub.getChapter()%></div></td>
+				<td><button value="Delete" onclick="remove(<%=sub.getSyllabus_id()%>)">Delete</button></td>
 			</tr>	
 		<% 	}
 		} %>
 	</table>
 </div>
-
+<script>
+function remove(id){
+	if(window.XMLHttpRequest){
+		
+		ajax = new XMLHttpRequest();
+		
+	}
+	else if(window.ActiveXObject){
+		
+		ajax = new ActiveXObject("Microsoft.XMLHTTP");
+	} 
+	
+	var url="ViewEditSyllabus?id="+id;
+	try{
+		ajax.onreadystatechange=sendInfo;
+		ajax.open("DELETE",url,true);
+		ajax.send();
+		
+	}catch(e){
+		alert("Unable to connect server");
+	}
+  }
+function sendInfo(){  
+	if(this.readyState == 4 && this.status == 200){  
+		var responseVal= ajax.responseText;  
+		if(responseVal >= 0){
+			alert("Chapters Successfully Deleted!!!");
+			e = document.getElementById(responseVal);
+			 e.parentElement.remove();
+				}
+			else{
+			alert("Couldn't delete task!!\nThere's some issue on the server!!");
+		}
+	}  
+}
+</script>
 </body>
 </html>
