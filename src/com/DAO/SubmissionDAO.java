@@ -10,6 +10,7 @@ public class SubmissionDAO {
 	private static final String INSERT_Subm_SQL = "INSERT INTO submission(assignment_id, student_id, marks) VALUES (?, ?, ?);";
     private static final String SELECT_Subm_BY_ID = "select submission_id, assignment_id, student_id, marks from subject where submission_id =?;";
     private static final String SELECT_Subm_BY_Assign_ID= "select * from submission where assignment_id=?;";
+    private static final String SELECT_Subm_BY_assign_and_stud_ID = "select * from submission where assignment_id =? and student_id=?;";
     private static final String SELECT_ALL_Subm = "select * from submission;";
     private static final String DELETE_Subm_SQL = "delete from submission where submission_id = ?;";
     private static final String UPDATE_Subm_SQL = "update submission set assignment_id=?, student_id=?, marks=? where submission_id = ?;";
@@ -102,7 +103,20 @@ public class SubmissionDAO {
         }	
 		return list;
 	}		
-	
+	public static boolean checkSubmitted(int ass_id, int stud_id){
+		try {
+			Connection con = createCon.getConnection();
+			PreparedStatement ps = con.prepareStatement(SELECT_Subm_BY_assign_and_stud_ID);
+			ps.setInt(1, ass_id);
+			ps.setInt(2, stud_id);
+			ResultSet rs = ps.executeQuery();
+			con.close();
+			return !rs.next();
+		} catch (SQLException e) {
+            printSQLException(e);
+        }	
+		return false;
+	}
 	public static List<Submission> getAllSubmissions(){
 		List<Submission> list = new ArrayList<Submission>();
 		try {
