@@ -91,7 +91,7 @@
               <div class="card shadow-sm" style="border-bottom: 8px solid #165368;">
                 <div class="card-header bg-transparent text-center">
                     <div class="profile_img"><i class="fa fa-user" style="font-size: 120px; color: rgb(169, 169, 169);"></i></div>
-                  <h3>Student Name</h3>
+                  <h3><%=d.get("Name") %></h3>
                 </div>
                 <div class="card-body">
                   <p class="mb-0"><strong class="pr-1"><%=session.getAttribute("type")%> ID:</strong><%=d.get("Login ID")%></p>

@@ -4,9 +4,12 @@
 <!DOCTYPE html>
 <html>
 <head>
+<%-- <link rel="stylesheet" href="Assets/ViewAssignment.css" type='text/css'> --%>
+<link rel="stylesheet" href="Assets/ToDo.css" type='text/css'>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
-<style>
+<title>View Assignments</title>
+ <%-- 
+ <style>
 * {  
   margin: 0;
   padding: 0;
@@ -131,39 +134,17 @@ body {
 .main .tasks input[type="checkbox"]:checked ~ img {
   opacity: 0.7;
 }
-/*custom inpu file*/
-.custom-file-input {
-  color: transparent;
 
-}
-.custom-file-input::-webkit-file-upload-button {
-  visibility: hidden;
-}
-
-.custom-file-input::before {
-	content: "Upload File";
-    color: #fff;
-    display: inline-block;
-    background: #000000;
-    padding: 10px 22px;
-    outline: none;
-    white-space: nowrap;
-    -webkit-user-select: none;
-    cursor: pointer;
-    font-weight: 600;
-    border-radius: 2px;
-    outline: none;
-  
-.custom-file-input:focus {
-	outline: none !important;
-
-}
-/*.custom-file-input:active::before {
-	    transform: scale(.9) translate(0px, 2px);	   
-}
 </style>
+--%>
 </head>
 <body>
+<%@include file="NavBar.jsp" %>
+<% if(request.getAttribute("msg") != null) { %>
+	    	<p class="error">
+		     <%= request.getAttribute("msg") %>
+		    </p>
+	<% } %>
 <div id="all-tasks">
 		<h2 class="section-title">Remaining Assignments</h2>
 			<div id="free">Woohooo!! No Assignments Left!</div>
@@ -178,7 +159,7 @@ body {
 			<% 
 					for (AssignmentModel Am : list){
 						int AssgnId = Am.getAssignment_id();
-						out.println("<li class='Assgn'><input type='checkbox' onclick='remove("+AssgnId+")' class='check' id="+AssgnId+"  name='task_"+AssgnId+"'  />");
+						out.println("<li class='task'><input type='checkbox' onclick='remove("+AssgnId+")' class='check' id="+AssgnId+"  name='task_"+AssgnId+"'  />");
 						out.println("<label for='task_"+AssgnId+"' class=''>"+Am.getAssignment_topic()+"</label> <li>");
 						}
 					
@@ -224,7 +205,7 @@ body {
 					e.parentElement.style.animationPlayState = "running";
 					e.parentElement.addEventListener('animationend', () => {
 				        e.parentElement.remove();
-				        if(document.getElementsByClassName("Assgn").length == 0){
+				        if(document.getElementsByClassName("task").length == 0){
 							document.getElementById("free").style.display = "block";
 						}
 					});
@@ -235,20 +216,20 @@ body {
 			}  
 		}
 	</script>
-<div class="main">
+	
+<%-- <div class="main">
   <header>
     <h1>Assignments</h1>
   </header>
   <form action="ViewAssignment" method="post" class="tasks" id="daily-tasks">
-        <div>
-      <input type="checkbox" id="task1" checked>
-      <label for="task1">Assignment 01</label> 
-      <div class="custom-file">
-      <input type="file" class="custom-file-input">
+       <div>
+      	<input type="checkbox" id="task1" checked>
+      	<label for="task1">Assignment 01</label> 
 	</div>
-</div>
 
   </form>
   </div>
+--%>
+  
 </body>
 </html>
