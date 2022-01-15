@@ -84,11 +84,33 @@ public class SyllabusDAO {
 		}
 		return s;
 	}
+	public static List<Syllabus> getSyllabusByStandardAndSubject(String Std, int subId) {
+		List<Syllabus> list = new ArrayList<Syllabus>();
+		try {
+			Connection con = createCon.getConnection();
+			PreparedStatement ps = con.prepareStatement("select * from syllabus where standard=? and subject_id=? ;");
+			ps.setString(1, Std);
+			ps.setInt(2, subId);
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()) {
+				Syllabus s = new Syllabus(); 
+				s.setSyllabus_id(rs.getInt(1));
+				s.setSubject_id(rs.getInt(2));
+				s.setStandard(rs.getString(3));
+				s.setChapter(rs.getString(4));
+				list.add(s);
+			}
+			con.close();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}		
+		return list;
+	}
 	public static List<Syllabus> getSyllabusByStandard(String Std) {
 		List<Syllabus> list = new ArrayList<Syllabus>();
 		try {
 			Connection con = createCon.getConnection();
-			PreparedStatement ps = con.prepareStatement("select * from syllabus where standard=?");
+			PreparedStatement ps = con.prepareStatement("select * from syllabus where standard=?;");
 			ps.setString(1, Std);
 			ResultSet rs = ps.executeQuery();
 			while(rs.next()) {
