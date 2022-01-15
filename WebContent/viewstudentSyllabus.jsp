@@ -8,6 +8,7 @@
 <link href="assets/viewstudentSyllabus.css" >
 </head>
 <body>
+<%@include file="NavBar.jsp" %>
 <h2>Your Syllabus</h2>
  
 <form action="viewstudentSyllabus" method="post" class="custom-select" style="width:200px;">
