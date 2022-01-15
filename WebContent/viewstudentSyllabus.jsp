@@ -5,13 +5,13 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>viewSyllabus</title>
-<link href="assets/viewstudentSyllabus.css" >
+<link href="Assets/viewstudentSyllabus.css" rel="stylesheet" type="text/css" >
 </head>
 <body>
 <%@include file="NavBar.jsp" %>
-<header><h1>Your Syllabus</h1>
-</header>
- 
+<h1 class="title"> <i class='fas fa-book-open' style='font-size:48px; color:#191a38'></i>
+ Have a look at your Syllabus! <i class="fa fa-book" style="font-size:48px;color:#191a38"></i>
+  </h1> 
 <form action="viewstudentSyllabus" method="post" class="custom-select" style="width:200px;">
   <select name="subject" id="subject">
   <option value="0">Select Subject :</option>
