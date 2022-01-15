@@ -52,8 +52,7 @@
 				}else{
 					for (ToDoListModel el : list){
 						int taskId = el.getTask_id();
-						System.out.println(taskId);
-						out.println("<li class='task'><input type='checkbox' id="+taskId+"  name='task_"+taskId+"'  />");
+						out.println("<li class='task'><input type='checkbox' class='check' id="+taskId+"  name='task_"+taskId+"'  />");
 						out.println("<label for='task_"+taskId+"' class=''>"+el.getTask()+"</label> <li>");
 						}
 					}
@@ -65,11 +64,9 @@
 	<!-- Script for removing a task -->
 	<script>
 		var ajax;
-		const checks = document.getElementsByClassName("task");
+		const checks = document.getElementsByClassName("check");
 		for (let check =0; check < checks.length;check++){
-			console.log(checks[check].children[0].onClick);
-			checks[check].children[0].onClick = remove;
-		    console.log(checks[check].children[0].onClick);
+			checks[check].addEventListener("click",remove);
 		}
 
 		//OnClick function for checkBoxes
