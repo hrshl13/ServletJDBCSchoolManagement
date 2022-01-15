@@ -28,10 +28,14 @@ public class ToDoList extends HttpServlet {
 
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int id = Integer.parseInt(request.getParameter("id"));
-		ToDoListDAO.deleteTask(id);
+		int stat = ToDoListDAO.deleteTask(id);
 		PrintWriter out = response.getWriter();
-
-		out.print(id);
+		if (stat > 0) {
+			out.print(id);
+		}else {
+			out.print(-1);
+		}
+		
 		out.flush();
 		
 	}

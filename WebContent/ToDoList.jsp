@@ -69,7 +69,6 @@
 		}
 		//OnClick function for checkBoxes
 		function remove (id){
-			console.log(id);
 			if(window.XMLHttpRequest){
 				
 				ajax = new XMLHttpRequest();
@@ -94,9 +93,7 @@
 		function sendInfo(){  
 			if(this.readyState == 4 && this.status == 200){  
 				var responseVal= ajax.responseText;  
-				console.log(responseVal);  
 				if(responseVal >= 0){
-					console.log(document.getElementsByClassName("task").length)
 					e = document.getElementById(responseVal);
 					e.parentElement.style.animationPlayState = "running";
 					e.parentElement.addEventListener('animationend', () => {
