@@ -9,6 +9,7 @@ import com.Models.Submission;
 public class SubmissionDAO {
 	private static final String INSERT_Subm_SQL = "INSERT INTO submission(assignment_id, student_id, marks) VALUES (?, ?, ?);";
     private static final String SELECT_Subm_BY_ID = "select submission_id, assignment_id, student_id, marks from subject where submission_id =?;";
+    private static final String SELECT_Subm_BY_Assign_ID= "select * from submission where assignment_id=?;";
     private static final String SELECT_ALL_Subm = "select * from submission;";
     private static final String DELETE_Subm_SQL = "delete from submission where submission_id = ?;";
     private static final String UPDATE_Subm_SQL = "update submission set assignment_id=?, student_id=?, marks=? where submission_id = ?;";
@@ -80,6 +81,28 @@ public class SubmissionDAO {
         }
 		return s;
 	}
+	public static List<Submission> getSubmissionsBy_Assignment_ID(int id){
+		List<Submission> list = new ArrayList<Submission>();
+		try {
+			Connection con = createCon.getConnection();
+			PreparedStatement ps = con.prepareStatement(SELECT_Subm_BY_Assign_ID);
+			ps.setInt(1, id);
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()) {
+				Submission s= new Submission();
+				s.setSubmission_id(rs.getInt(1));
+				s.setAssignment_id(rs.getInt(2));
+				s.setStudent_id(rs.getInt(3));
+				s.setMarks(rs.getInt(4));
+				list.add(s);
+			}
+			con.close();
+		} catch (SQLException e) {
+            printSQLException(e);
+        }	
+		return list;
+	}		
+	
 	public static List<Submission> getAllSubmissions(){
 		List<Submission> list = new ArrayList<Submission>();
 		try {
