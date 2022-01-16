@@ -42,7 +42,8 @@
 						int stuid= assm.getStudent_id();
 						Student stuname = StudentDAO.getStudentById(stuid);
 						out.println("<li class='stud'> <div class='asstopic'>"+stuname.getFname()+" "+stuname.getLname()+"</div>");
-						out.println("<input type='number' name='marks_"+assm.getSubmission_id()+"' id= min='0' max='500' value="+assm.getMarks()+" /> </li>");
+						out.println("<input type='hidden' name='assid' value='"+id+"'><input type='number'
+							name='marks_"+assm.getSubmission_id()+"' id=min='0' max='500' value="+assm.getMarks()+" /> </li>");
 						}
 					}
 			 		%>
