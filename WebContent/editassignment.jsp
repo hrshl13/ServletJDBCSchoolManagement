@@ -37,9 +37,6 @@
 					</select>
 					<input type="submit" id="subbtn" value="Submit" />
 					
-					<script>
-					
-					</script>
 				</form>
 				</div>
 			</li>

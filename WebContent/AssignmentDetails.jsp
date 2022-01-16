@@ -45,13 +45,13 @@
 					for(Submission assm : list){
 						int stuid= assm.getStudent_id();
 						Student stuname = StudentDAO.getStudentById(stuid);
-						out.println("<li class='lyst'> <div class='asstopic'>"+stuname.getFname()+" "+stuname.getFname()+"</div>");
-						out.println("<input type='number' name='marks_"+assm.getSubmission_id()+"' id= min='0' max='500' value="+assm.getMarks()+" /> </li>");
+						out.println("<li class='lyst'> <div class='asstopic'>"+stuname.getFname()+" "+stuname.getLname()+"</div>");
+						out.println("<input type='hidden' name='asslst' value='"+list+"'><input type='number' name='marks_"+assm.getSubmission_id()+"' id= min='0' max='500' value="+assm.getMarks()+" /> </li>");
 						}
 					}
 			 		%>
-			 		
-		 <input type='submit' class='subbtn' value='Details' /> 
+			 		 <!-- name='marks_"+assm.getSubmission_id()+"' -->
+		 <input type='submit' class='addmksbtn' value='Add marks' /> 
 		 </form>
 		</ul>
 		

@@ -2,9 +2,12 @@ package com.Controllers;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
 import com.DAO.AssignmentsDAO;
+import com.DAO.StudentDAO;
 import com.Models.AssignmentModel;
+import com.Models.Submission;
 import com.Models.Teacher;
 
 import jakarta.servlet.RequestDispatcher;
@@ -36,6 +39,24 @@ private static final long serialVersionUID= 1L;
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	
+	protected void doPost (HttpServletRequest request, HttpServletResponse response){
+		
+		int i=1;
+		String bigasslist;
+		bigasslist= request.getParameter("asslst");
+		System.out.println(bigasslist);
+		
+		while (i==0){
+			bigmklist.add(i, request.getparameter());
+			
+			
+			 
+		 }
+		
+		
 	}
 	
 }
