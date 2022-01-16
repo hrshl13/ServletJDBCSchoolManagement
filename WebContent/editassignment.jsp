@@ -28,7 +28,7 @@
 				<option value="IX">IX</option>
 				<option value="X">X</option>
 			</select>
-			<input class="submit" type="submit" id="subbtn" value="Submit" />
+			<input class="submit" type="submit" id="subbtn" value="Add" />
 			
 		</form>
 		<h2 class="section-title">Current Assignments</h2>
