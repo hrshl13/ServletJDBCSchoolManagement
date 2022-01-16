@@ -17,11 +17,10 @@ public class SyllabusDAO {
 		int status=0;
 		try {
 			Connection con = createCon.getConnection();
-			PreparedStatement ps = con.prepareStatement("insert into syllabus(syllabus_id, subject_id,standard,chapter) values(?,?,?,?)");
-			ps.setInt(1, s.getSyllabus_id());
-			ps.setInt(2, s.getSubject_id());
-			ps.setString(3, s.getStandard());
-			ps.setString(4, s.getChapter());
+			PreparedStatement ps = con.prepareStatement("insert into syllabus(subject_id,standard,chapter) values(?,?,?)");
+			ps.setInt(1, s.getSubject_id());
+			ps.setString(2, s.getStandard());
+			ps.setString(3, s.getChapter());
 			status = ps.executeUpdate();
 			System.out.println("Records Inserted!");
 			con.close();		
@@ -35,11 +34,11 @@ public class SyllabusDAO {
 		int status=0;
 		try {
 			Connection con = createCon.getConnection();
-			PreparedStatement ps = con.prepareStatement("Update syllabus set syllabus_id=?, subject_id=? ,standard=?, chapter=?"); 
-			ps.setInt(1, s.getSyllabus_id());
-			ps.setInt(2, s.getSubject_id());
-			ps.setString(3, s.getStandard());
-			ps.setString(4, s.getChapter());
+			PreparedStatement ps = con.prepareStatement("Update syllabus set subject_id=? ,standard=?, chapter=? where syllabus_id=?"); 
+			ps.setInt(1, s.getSubject_id());
+			ps.setString(2, s.getStandard());
+			ps.setString(3, s.getChapter());
+			ps.setInt(4, s.getSyllabus_id());
 			status = ps.executeUpdate();
 			System.out.println("Records Updated!");
 			con.close();		

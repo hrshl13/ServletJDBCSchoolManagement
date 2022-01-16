@@ -1,62 +1,52 @@
-@charset "ISO-8859-1";
-
-/*the container must be positioned relative:*/
-.custom-select {
-  position: relative;
-  font-family: Arial;
+body {
+  background-color: #8f91ba;
+  	justify-content:center;
+  
 }
-
-.custom-select select {
-  display: none; /*hide original SELECT element:*/
+.title {
+  font-size: 4vw;
+  text-align: center;
 }
-
-.select-selected {
-  background-color: #8d87ff;
+addform{
+	width:100vw;
+	display:flex;
 }
-
-/*style the arrow inside the select element:*/
-.select-selected:after {
-  position: absolute;
-  content: "";
-  top: 14px;
-  right: 10px;
-  width: 0;
-  height: 0;
-  border: 6px solid transparent;
-  border-color: #fff transparent transparent transparent;
+.addform .subject{
+	padding: 0.5em 0.8em;
+	border:none;
+	outline:none;
+	border-radius:0.9em;
+	font-size:1.4em;
+	color: #303030;
+	background: #efefef;
+	font-weight: 700;
+	margin:0em 0.5em;
+	align-items:center;
+	position: absolute;
+  	top: 40%;
+  	left: 44%;
+  	-ms-transform: translate(-50%, -50%);
+  	transform: translate(-50%, -50%);
 }
-
-/*point the arrow upwards when the select box is open (active):*/
-.select-selected.select-arrow-active:after {
-  border-color: transparent transparent #fff transparent;
-  top: 7px;
+.addform .submit{
+	padding: 0.5em 0.8em;
+	border-radius:0.5em;
+	font-size:5em;
+	font-weight: 700;
+	outline:none;
+	border:none;
+	cursor:pointer;
+	font-size: 22px;
+  	background-color: #222a34;
+  	color: white;
+  	align-items: center;
+  	position: absolute;
+  	top: 40%;
+  	left: 56%;
+  	-ms-transform: translate(-50%, -50%);
+  	transform: translate(-50%, -50%);
 }
-
-/*style the items (options), including the selected item:*/
-.select-items div,.select-selected {
-  color: #ffffff;
-  padding: 8px 16px;
-  border: 1px solid transparent;
-  border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
-  cursor: pointer;
-  user-select: none;
-}
-
-/*style items (options):*/
-.select-items {
-  position: absolute;
-  background-color:#2a4f57;
-  top: 100%;
-  left: 0;
-  right: 0;
-  z-index: 99;
-}
-
-/*hide the items when the select box is closed:*/
-.select-hide {
-  display: none;
-}
-
-.select-items div:hover, .same-as-selected {
-  background-color: rgba(0, 0, 0, 0.1);
+.addform .submit:hover {
+    background:#1e5759;
+    cursor: pointer;
 }
