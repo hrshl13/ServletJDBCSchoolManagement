@@ -15,7 +15,6 @@
 <form action="viewstudentSyllabus" method="post" class="addform" style="width:200px;">
   <select name="subject" class="subject">
   <option value="0">Select Subject :</option>
-  
   <%
   	List<Subject> list = SubjectDAO.getAllSubjects();
   for(Subject s: list){
@@ -25,14 +24,18 @@
   </select>
   <button type="submit" class="submit"> Submit </button>
 </form>
+<div class="container">
 
+<div class="card">
 <%
 	List<Syllabus> list2 = (List<Syllabus>) request.getAttribute("sub");
 	if (list2 != null){
 		for(Syllabus syllab: list2){
-			out.println("<div class= 'label'>"  + syllab.getChapter() + "</div>");
+			out.println("<ul class= 'lyst' style='list-style-type:disc'> "  + syllab.getChapter() +  "</ul>");
 		}
 	}
 %>
+</div>
+</div>
 </body>
 </html>
