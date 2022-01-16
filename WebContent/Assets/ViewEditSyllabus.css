@@ -1,8 +1,11 @@
 @charset "ISO-8859-1";
+body{
+	background: linear-gradient(to right, #4ca2cd, #67B26F);
+}
  .head{
  text-align: center; 
  font-family: monospace; 
- color: #009879;
+ color: #004134;
  }
  .head:hover{
  cursor:alais;
@@ -10,7 +13,7 @@
  .subhead{
 text-align: center;
 font-family: monospace;
-color: #009879;
+color: #004134;
 font-size:25px;
 }
 #subbtn{
@@ -55,10 +58,16 @@ font-size:25px;
         margin-left: auto;
         margin-right: auto;
     }
-    .content-table tr td button{
+    .delBtn {
         border-radius: 5px 5px 5px 5px;
         background-color: #009879;
         color: #f3f3f3;
+    }
+    .delBtn:hover{
+    transform: translate(0,-2px);
+    cursor:pointer;
+    transition:0.5s;
+    background:linear-gradient(to right, #ff512f , #dd2476) ;
     }
     .content-table th tr{
         background-color: #009879;
@@ -79,10 +88,18 @@ font-size:25px;
     .content-table tbody tr:last-of-type{
         border-bottom: 2px solid #009879;
     }
-    .content-table tbody tr:hover{
+    .content-table tbody tr:first-of-type:hover{
+       	color: #000000;
+    }
+    .content-table tr:nth-of-type(odd):hover{
+        color: white;
+    }
+    .content-table tr:nth-of-type(even):hover{
         color: #009879;
     }
-
+    table:hover{
+    cursor:default;
+    }
     #newSyl{
     padding: 8px 12px;
         color: white;
