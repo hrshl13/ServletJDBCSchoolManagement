@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.DAO.AssignmentsDAO;
 import com.DAO.StudentDAO;
+import com.DAO.SubmissionDAO;
 import com.Models.AssignmentModel;
 import com.Models.Submission;
 import com.Models.Teacher;
@@ -44,19 +45,31 @@ private static final long serialVersionUID= 1L;
 	
 	protected void doPost (HttpServletRequest request, HttpServletResponse response){
 		
-		int i=1;
-		String bigasslist;
-		bigasslist= request.getParameter("asslst");
-		System.out.println(bigasslist);
+		int id=0;
+		String sid ;
+		sid = request.getParameter("assid");
+		id=Integer.parseInt(sid);
+		List<Submission> list = SubmissionDAO.getSubmissionsBy_Assignment_ID(id);
 		
-		while (i==0){
-			bigmklist.add(i, request.getparameter());
+		for (Submission i: list){
+			int mk;
+			mk= Integer.parseInt(request.getParameter("marks_"+i.getSubmission_id()));
+			i.setMarks(mk);
 			
-			
-			 
-		 }
+			int add;
+			add = SubmissionDAO.updateSubmission(i);	
+		  } 
 		
+		AssignmentModel assm = AssignmentsDAO.getAssignmentByAssign_ID(id);
+		assm.setSubmitted(1);
+		int upd= AssignmentsDAO.updateAssignment(assm);
 		
+		try {
+			response.sendRedirect("editassignment.jsp");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 }

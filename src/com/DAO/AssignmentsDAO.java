@@ -13,12 +13,12 @@ import com.Models.Teacher;
 public class AssignmentsDAO {
 	
 	private static final String INSERT_assignment_SQL = "INSERT INTO assignment(faculty_id,subject_id,assignment_topic,assignment_desp,submitted,standard) VALUES (?,?,?,?,?,?);";
-    private static final String SELECT_assignment_BY_Faculty_ID = "select * from assignment where faculty_id =?";
-    private static final String SELECT_assignment_BY_standard = "select * from assignment where standard =?;";
+    private static final String SELECT_assignment_BY_Faculty_ID = "select * from assignment where faculty_id =? and submitted=0;";
+    private static final String SELECT_assignment_BY_standard = "select * from assignment where standard =? and submitted=0;";
     private static final String SELECT_assignment_BY_assignment_ID = "select * from assignment where assignment_id =?;";
     private static final String SELECT_ALL_assignment = "select * from assignment;";
     private static final String DELETE_assignment_SQL = "delete from assignment where assignment_id = ?;";
-    private static final String UPDATE_assignment_SQL = "update faculty set faculty_id=? ,subject_id=? ,assignment_topic=? ,assignment_desp=? ,submitted=?, standard=? where assignment_id = ?;";
+    private static final String UPDATE_assignment_SQL = "update assignment set faculty_id=? ,subject_id=? ,assignment_topic=? ,assignment_desp=? ,submitted=?, standard=? where assignment_id = ?;";
     
     public static int insertAssignment(AssignmentModel ass) throws SQLException {
     	int status = 0;

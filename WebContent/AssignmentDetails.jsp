@@ -41,12 +41,12 @@
 					
 					
 				}else{
-					%> <form action='assigndet' method='post'>  <%
+					%> <form action='assignDetails' method='post'>  <%
 					for(Submission assm : list){
 						int stuid= assm.getStudent_id();
 						Student stuname = StudentDAO.getStudentById(stuid);
 						out.println("<li class='lyst'> <div class='asstopic'>"+stuname.getFname()+" "+stuname.getLname()+"</div>");
-						out.println("<input type='hidden' name='asslst' value='"+list+"'><input type='number' name='marks_"+assm.getSubmission_id()+"' id= min='0' max='500' value="+assm.getMarks()+" /> </li>");
+						out.println("<input type='hidden' name='assid' value='"+id+"'><input type='number' name='marks_"+assm.getSubmission_id()+"' id= min='0' max='500' value="+assm.getMarks()+" /> </li>");
 						}
 					}
 			 		%>
