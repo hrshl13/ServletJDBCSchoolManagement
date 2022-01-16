@@ -20,6 +20,7 @@ addform{
 	background: #efefef;
 	font-weight: 700;
 	margin:0em 0.5em;
+	align-items:center;
 }
 .addform .submit{
 	padding: 0.5em 0.8em;
@@ -32,6 +33,7 @@ addform{
 	font-size: 16px;
   	background-color: #222a34;
   	color: white;
+  	align-items: center;
 }
 .addform .submit:hover {
     background: #047a1e;
