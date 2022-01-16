@@ -23,10 +23,10 @@ if (request.getParameter("sylID")!=null){
 }
 %>
 
-<form action="ViewEditSyllabus" method="post">
-<h1 style="text-align: center; font-family: monospace; color: #009879;">Edit Syllabus</h1>
-    <br>
-<select class="stdlist" name="stdlist"">
+<form action="#" method="post">
+<h1 class="head">Edit Syllabus</h1>
+
+<select class="stdlist" name="stdlist">
 						<option value="none" selected disabled hidden>Select Standard</option> 
 						<option value="I">I</option>
 						<option value="II">II</option>
@@ -38,13 +38,15 @@ if (request.getParameter("sylID")!=null){
 						<option value="VIII">VIII</option>
 						<option value="IX">IX</option>
 						<option value="X">X</option>
-					</select><br>
+					</select>&nbsp;
 					<input type="submit" id="subbtn" value="Submit" />
 </form>
 
 <p class="subhead">Your Syllabus for this Term:</p>
 <% 
-List<Syllabus> l = (List<Syllabus>) session.getAttribute("List");
+String standard = request.getParameter("stdlist");
+List<Syllabus> l = SyllabusDAO.getSyllabusByStandard(standard);
+//List<Syllabus> l = (List<Syllabus>) session.getAttribute("List");
 %>
 
 <div class="content-table">
@@ -67,6 +69,24 @@ List<Syllabus> l = (List<Syllabus>) session.getAttribute("List");
 		} %>
 	</table>
 </div>
+<h1 class="head">Add Syllabus</h1>
+<form class="add-syl" action="ViewEditSyllabus" method="post">
+		<input type="text" id="newSyl" name="newSyl" placeholder="Add New Chapter"/>
+<select class="stdlist" name="std" >
+						<option value="none" selected disabled hidden>Select Standard</option> 
+						<option value="I">I</option>
+						<option value="II">II</option>
+						<option value="III">III</option>
+						<option value="IV">IV</option>
+						<option value="V">V</option>
+						<option value="VI">VI</option>
+						<option value="VII">VII</option>
+						<option value="VIII">VIII</option>
+						<option value="IX">IX</option>
+						<option value="X">X</option>
+					</select>&nbsp;
+		<input id="subbtn" type="submit" value="Add Chapter"/>
+	</form>
 <script>
 function remove(id){
 	if(window.XMLHttpRequest){
