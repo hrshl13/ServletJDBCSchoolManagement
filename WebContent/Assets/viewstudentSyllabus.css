@@ -1,5 +1,7 @@
 body {
   background-color: #8f91ba;
+  	justify-content:center;
+  
 }
 .title {
   font-size: 4vw;
@@ -8,19 +10,23 @@ body {
 addform{
 	width:100vw;
 	display:flex;
-	justify-content:center;
 }
 .addform .subject{
 	padding: 0.5em 0.8em;
 	border:none;
 	outline:none;
 	border-radius:0.9em;
-	font-size:1.2em;
+	font-size:1.4em;
 	color: #303030;
 	background: #efefef;
 	font-weight: 700;
 	margin:0em 0.5em;
 	align-items:center;
+	position: absolute;
+  	top: 40%;
+  	left: 44%;
+  	-ms-transform: translate(-50%, -50%);
+  	transform: translate(-50%, -50%);
 }
 .addform .submit{
 	padding: 0.5em 0.8em;
@@ -30,13 +36,17 @@ addform{
 	outline:none;
 	border:none;
 	cursor:pointer;
-	font-size: 16px;
+	font-size: 22px;
   	background-color: #222a34;
   	color: white;
   	align-items: center;
+  	position: absolute;
+  	top: 40%;
+  	left: 56%;
+  	-ms-transform: translate(-50%, -50%);
+  	transform: translate(-50%, -50%);
 }
 .addform .submit:hover {
-    background: #047a1e;
+    background:#1e5759;
     cursor: pointer;
-    transform: translate(0px, -2px);
 }
