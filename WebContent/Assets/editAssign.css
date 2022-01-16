@@ -27,12 +27,11 @@
 .addform .submit{
 	padding: 0.5em 0.8em;
 	border-radius:0.5em;
-	font-size:5em;
+	font-size:1.5em;
 	font-weight: 700;
 	outline:none;
 	border:none;
 	cursor:pointer;
-	font-size: 16px;
   	background-color: #222a34;
   	color: white;
 }
@@ -88,15 +87,14 @@
 	justify-content: space-between;
 	margin:0.3em 1.2em;
 }
-.subbtn{
+.bottom form .subbtn{
 	padding: 0.5em 0.8em;
+	font-size:1em;
 	border-radius:0.5em;
-	font-size:5em;
 	font-weight: 700;
 	outline:none;
 	border:none;
 	cursor:pointer;
-	font-size: 16px;
   	background-color: #222a34;
   	color: white;
 }

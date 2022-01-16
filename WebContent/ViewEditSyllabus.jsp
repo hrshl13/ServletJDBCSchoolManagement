@@ -22,7 +22,7 @@ if (request.getParameter("sylID")!=null){
 	}
 }
 %>
-
+<div class="SyllabusPage">
 <form action="#" method="post">
 <h1 class="head">Edit Syllabus</h1>
 
@@ -63,7 +63,7 @@ List<Syllabus> l = SyllabusDAO.getSyllabusByStandard(standard);
 			<tr id="<%=sub.getSyllabus_id()%>">
 				<td><div class="sylID"><%=sub.getSyllabus_id()%></div></td>
 				<td><div class="chapName"><%=sub.getChapter()%></div></td>
-				<td><button value="Delete" onclick="remove(<%=sub.getSyllabus_id()%>)">Delete</button></td>
+				<td><button class="delBtn" value="Delete" onclick="remove(<%=sub.getSyllabus_id()%>)">Delete</button></td>
 			</tr>	
 		<% 	}
 		} %>
@@ -123,5 +123,6 @@ function sendInfo(){
 	}  
 }
 </script>
+</div>
 </body>
 </html>
