@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+    pageEncoding="ISO-8859-1"
+    import="com.Controllers.ViewStudent,com.DAO.StudentDAO,com.Models.Student,java.util.List"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -99,7 +100,7 @@
 </style>
 
 <body>
-
+<form action="UpdateStudent" method="post">
    <div class="container">
         <div class="leftbox">
             <nav>
@@ -119,51 +120,57 @@
             </nav>
         </div>
         <div class="rightbox">
+        <% 
+        Student l = (Student) request.getAttribute("List");
+        %>
+	    <%
+		if (l != null){
+			
+		%>
            <div class="profile tabshow">
                <h1>personal info</h1>
                <h2>First name</h2>
-               <input type="text" class="input" value="Jonny">
+               <input type="text" class="input" value="<%= l.getFname()%>" name="fname">
                <h2>Last name</h2>
-               <input type="text" class="input" value="depp">
+               <input type="text" class="input" value="<%= l.getLname()%>" name="lname">
                <h2>Gender</h2>
-               <input type="text" class="input" value="male">
+               <input type="text" class="input" value="<%= l.getGender()%>" name="gender">
                <h2>Birthday</h2>
-               <input type="date" class="input" value="11/7/2002">
-               <button class="btn">update</button>
+               <input type="text" class="input" value="<%= l.getDob()%>" name="dob">
            </div>
            <div class="acadamics tabshow">
                 <h1>Acadamic info</h1>
                 <h2>Admission Date</h2>
-                <input type="date" class="input" value="22/1/2012">
+                <input type="text" class="input" value="<%= l.getAdmission_date()%>" name="admission_date">
                 <h2>Student ID</h2>
-                <input type="number" class="input" value="8700">
+                <input type="number" class="input" name="Student_id" value="<%= l.getStudent_id()%>" name="student_id">
                 <h2>Standard</h2>
-                <input type="text" class="input" value="VII">
+                <input type="text" class="input" value="<%= l.getStandard()%>" name="standard">
                 <h2>Result</h2>
-                <input type="text" class="input" value="A+">
-                <button class="btn">update</button>
+                <input type="text" class="input" value="<%= l.getResult()%>" name="result">
             </div> 
             <div class="contact tabshow">
                 <h1>Contact info</h1>
                 <h2>Address</h2>
-                <input type="text" class="input" value="Mumbai-70">
+                <input type="text" class="input" value="<%= l.getAddress()%>" name="address">
                 <h2>Phone number</h2>
-                <input type="text" class="input" value="654389754">
+                <input type="text" class="input" value="<%= l.getPhone_no()%>" name="phone_no">
                 <h2>Email</h2>
-                <input type="email" class="input" value="Examp@gmail.com">
-                <button class="btn">update</button>
+                <input type="email" class="input" value="<%= l.getEmail()%>" name="email">
             </div>
             <div class="login tabshow">
                 <h1>login info</h1>
                 <h2>Login ID</h2>
-                <input type="text" class="input" value="User187">
+                <input type="text" class="input" value="<%= l.getLogin_id()%>" name="login_id">
                 <h2>Password</h2>
-                <input type="text" class="input" value="VII187">
-                <button class="btn">update</button>
+                <input type="text" class="input" value="<%= l.getPasswd()%>" name="passwd">
+               <button class="btn" type="submit" name="submit_update" value="Update">Update</button>
             </div>    
         </div>
+            <% 
+		} %>
     </div>
-
+</form>
     <script src="jquery/jquer.js"></script>
     <script>
         const tabBtn = document.querySelectorAll(".tab");
@@ -181,6 +188,26 @@
             $(this).addClass("active").siblings().removeClass("active")
         })
     </script>
-
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

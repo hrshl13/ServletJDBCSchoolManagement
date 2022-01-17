@@ -27,8 +27,17 @@ import jakarta.servlet.http.HttpSession;
 public class ViewStudent extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 
-	public ViewStudent() {
-		super();
+	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		int id = Integer.parseInt(request.getParameter("id"));
+		int stat=StudentDAO.delete(id);
+		PrintWriter out = response.getWriter();
+		if (stat > 0) {
+			out.print(id);
+		}else {
+			out.print(-1);
+		}
+		
+		out.flush();
 	}
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

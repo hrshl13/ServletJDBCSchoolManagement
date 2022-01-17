@@ -73,6 +73,15 @@
     
 </style>
 <body>
+
+<% if(request.getAttribute("msg") != null) { %>
+   <p class="error">
+     <%= request.getAttribute("msg") %>
+   </p>
+<% } %>
+
+
+
 <div class="wrapper">
         <div class="title">
             New Faculty
@@ -122,7 +131,7 @@
                 <input type="number" class="input" name="subject_id">       
             </div>
             <div class="input_field">
-                <button type="submit" class="btn">Add Student</button>
+                <button type="submit" class="btn">Add Teacher</button>
             </div>
         </form>
     </div>

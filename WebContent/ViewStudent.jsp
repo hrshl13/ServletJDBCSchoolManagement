@@ -83,7 +83,7 @@ if (request.getParameter("StdID")!=null){
 <h1 style="text-align: center; font-family: monospace; color: #009879;">Students Information</h1>
     <br><br><br>
 <select class="select" name="stdlist">
-						<option value="I">I</option>
+                        <option value="I">I</option>
 						<option value="II">II</option>
 						<option value="III">III</option>
 						<option value="IV">IV</option>
@@ -93,6 +93,7 @@ if (request.getParameter("StdID")!=null){
 						<option value="VIII">VIII</option>
 						<option value="IX">IX</option>
 						<option value="X">X</option>
+						
 					</select>
 					<input type="submit" id="subbtn" value="Submit" style="border-radius: 5px 5px 5px 5px; background-color: #009879;color: #f3f3f3;"/>
 </form>
@@ -116,30 +117,58 @@ if (request.getParameter("StdID")!=null){
 	   <%
 		if (l != null){
 			for (Student s:l){
+				System.out.println(s.getStudent_id());
 		%>
-            <tr>
-              <form action="#" method="post">
+            <tr id="<%=s.getStudent_id()%>">
                 <td><%=s.getFname() %></td>
                 <td class="StdID"><%=s.getStudent_id() %></td>
                 <td><%=s.getResult() %></td>
                 <td><%=s.getPhone_no() %></td>
                 <td><%=s.getEmail() %></td>
-                <td><button>View</button></td>
-                <td><button value="Delete">Delete</button></td>
-              </form>
+                <td><form action="UpdateStudent" method="post"><input type="hidden" name="Student_id" value="<%= s.getStudent_id() %>"  /> <input type="submit" value="View"  style="border-radius: 5px 5px 5px 5px; background-color: #009879;color: #f3f3f3;"/></form></td>
+                <td><button value="Delete" onclick="remove(<%=s.getStudent_id()%>)">Delete</button></td>
             </tr>
             <% 	}
 		} %>
-            <tr>
-                <td>Dipa ranjan</td>
-                <td>183</td>
-                <td>B+</td>
-                <td>2736826832</td>
-                <td>abc@gmail.com</td>
-                <td><button>View</button></td>
-                <td><button>Delete</button></td>
-            </tr>
+
         </tbody>
     </table>
+<script>
+function remove(id){
+	if(window.XMLHttpRequest){
+		
+		ajax = new XMLHttpRequest();
+		
+	}
+	else if(window.ActiveXObject){
+		
+		ajax = new ActiveXObject("Microsoft.XMLHTTP");
+	} 
+	
+	var url="ViewStudent?id="+id;
+	try{
+		ajax.onreadystatechange=sendInfo;
+		ajax.open("DELETE",url,true);
+		ajax.send();
+		
+	}catch(e){
+		alert("Unable to connect server");
+	}
+  }
+function sendInfo(){  
+	if(this.readyState == 4 && this.status == 200){  
+		var responseVal= ajax.responseText;  
+		if(responseVal >= 0){
+			alert("Chapters Successfully Deleted!!!");
+			e = document.getElementById(responseVal);
+			 e.parentElement.remove();
+				}
+			else{
+			alert("Couldn't delete task!!\nThere's some issue on the server!!");
+		}
+	}  
+}
+</script>
+
 </body>
 </html>

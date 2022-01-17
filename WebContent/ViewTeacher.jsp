@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+    pageEncoding="ISO-8859-1"
+    import="com.Controllers.ViewTeacher,com.DAO.TeacherDAO,com.Models.Teacher,java.util.List"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -64,26 +65,39 @@
 </style>
 
 <body>
+<%
+if (request.getParameter("TeacherID")!=null){
+	int del = Integer.parseInt(request.getParameter("TeacherID"));
+	int status = TeacherDAO.deleteTeacher(del);
+	if (status==0){
+		%> <p class="error">Unsuccessful!!</p><% 
+	}else{
+		%> <p class="suc">Successful!!</p><% 
+	}
+}
+%>
 <form action="ViewTeacher" method="post">
-    <h1 style="text-align: center; font-family: monospace; color: #009879;">Students Information</h1>
+    <h1 style="text-align: center; font-family: monospace; color: #009879;">Teacher Information</h1>
     <br><br><br>
-
-    <select class="select">
-        <option selected disabled>Class</option>
-        <option value="5th">fifth</option>
-        <option value="6th">sixth</option>
-        <option value="7th">fifth</option>
-        <option value="8th">seventh</option>
-        <option value="9th">eighth</option>
-        <option value="10th">nineth</option>
-    </select>
+<select class="select" name="sbjlist">
+						<option value="1">maths</option>
+						<option value="2">science</option>
+						<option value="3">english</option>
+						<option value="4">history</option>
+						<option value="5">geography</option>
+						<option value="6">hindi</option>
+						<option value="7">sanskrit</option>
+						<option value="8">marathi</option>
+					</select>
+					<input type="submit" id="subbtn" value="Submit" style="border-radius: 5px 5px 5px 5px; background-color: #009879;color: #f3f3f3;"/>
     <br><br>
+</form>
+<form action="#" method="post">   
     <table class="content-table">
         <thead>
             <tr>
                 <th>ID</th>
-                <th>Name</th>
-                <th>Subject</th>
+                <th colspan="2">Name</th>
                 <th>Phone no.</th>
                 <th>Email</th>
                 <th>View</th>
@@ -91,19 +105,28 @@
             </tr>
         </tread>
         <tbody>
+        <% 
+        List<Teacher> l = (List<Teacher>) request.getAttribute("List");
+        %>
+	   <%
+		if (l != null){
+			for (Teacher s:l){
+		%>
             <tr>
-                <td>123</td>
-                <td>Arun upadhay</td>
-                <td>Science</td>
-                <td>2736826832</td>
-                <td>abc@gmail.com</td>
+                <td><%=s.getFaculty_id() %></td>
+                <td><%=s.getFname() %></td>
+                <td><%=s.getLname() %></td>
+                <td><%=s.getPhone_no() %></td>
+                <td><%=s.getEmail() %></td>
                 <td><button>View</button></td>
                 <td><button>Delete</button></td>
             </tr>
+         <% }
+		 } %>
             <tr>
                 <td>183</td>
-                <td>Dipa ranjan</td>
-                <td>History</td>
+                <td>Dipa</td>
+                <td>ranjan</td>
                 <td>2736826832</td>
                 <td>abc@gmail.com</td>
                 <td><button>View</button></td>
@@ -111,8 +134,8 @@
             </tr>
             <tr>
                 <td>343</td>
-                <td>Ashoka pradhan</td>
-                <td>Maths</td>
+                <td>Ashoka</td>
+                <td>pradhan</td>
                 <td>2736826832</td>
                 <td>abc@gmail.com</td>
                 <td><button>View</button></td>

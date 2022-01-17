@@ -9,16 +9,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.Extras.createCon;
+import com.Models.Student;
 import com.Models.Teacher;
 
 public class TeacherDAO {
-	private static final String INSERT_teacher_SQL = "INSERT INTO faculty(fname,lname,dob,gender,email,phone_no, address, subject_id, passwd, login_id) VALUES (?, ?,?,?,?,?,?,?,?,?);";
+	private static final String INSERT_teacher_SQL = "INSERT INTO faculty(fname,lname,dob,gender,email,phone_no, address, subject_id, passwd, login_id) VALUES (?, ?,?,?,?,?,?,(select subject_id from subject where subject_id=?),?,?);";
     private static final String SELECT_teacher_BY_Login_ID = "select * from faculty where login_id =?;";
     private static final String SELECT_ALL_teacher = "select * from faculty;";
     private static final String DELETE_teacher_SQL = "delete from faculty where faculty_id = ?;";
     private static final String UPDATE_teacher_SQL = "update faculty set fname=? ,lname=? ,dob=? ,gender=? ,email=? ,phone_no=? ,address=? ,subject_id=? ,passwd=? where faculty_id = ?;";
     
-    public int insertTeacher(Teacher s) throws SQLException {
+    public static int insertTeacher(Teacher s) throws SQLException {
     	int status = 0;
         // try-with-resource statement will auto close the connection.
         try{
@@ -157,7 +158,37 @@ public class TeacherDAO {
             printSQLException(e);
         }	
 		return list;
-	}		
+	}
+	
+	public static List<Teacher> getTeacherBySubjectId(int id) {
+		List<Teacher> list = new ArrayList<Teacher>();
+		try {
+			Connection con = createCon.getConnection();
+			PreparedStatement ps = con.prepareStatement("select * from faculty where subject_id=?");
+			ps.setInt(1, id);
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()) {
+				Teacher s = new Teacher(); 
+				s.setFaculty_id(rs.getInt(1));
+				s.setFname(rs.getString(2));
+				s.setLname(rs.getString(3));
+				s.setDob(rs.getString(4));
+				s.setGender(rs.getString(5));
+				s.setEmail(rs.getString(6));
+				s.setPhone_no(rs.getString(7));
+				s.setAddress(rs.getString(8));
+				s.setPasswd(rs.getString(9));
+				s.setSubject_id(rs.getInt(10));
+				s.setLogin_id(rs.getString(11));
+				list.add(s);
+			}
+			con.close();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}		
+		return list;
+	}
+	
     private static void printSQLException(SQLException ex) {
         for (Throwable e: ex) {
             if (e instanceof SQLException) {

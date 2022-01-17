@@ -2,7 +2,16 @@ package com.Controllers;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
+import com.DAO.StudentDAO;
+import com.DAO.SubjectDAO;
+import com.DAO.TeacherDAO;
+import com.Models.Student;
+import com.Models.Subject;
+import com.Models.Teacher;
+
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -19,17 +28,21 @@ public class ViewTeacher extends HttpServlet{
 	}
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.sendRedirect("ViewStudent.jsp");
+		doPost(request,response);
+		System.out.println("Inside get ");
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		processRequest(request, response);
+		processRequest(request,response);	
+		RequestDispatcher rd = request.getRequestDispatcher("ViewTeacher.jsp");
+		rd.forward(request, response);
+		System.out.println("Inside post ");
 	}
 	
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-		PrintWriter out = response.getWriter();
-		
-		out.println("Teacher Data here");
+		int subject_id = Integer.parseInt(request.getParameter("sbjlist"));
+		List<Teacher> list = TeacherDAO.getTeacherBySubjectId(subject_id);	
+		request.setAttribute("List", list);
+		System.out.println("Inside process ");
 	}
-
 }
