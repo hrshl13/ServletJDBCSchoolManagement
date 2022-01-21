@@ -53,13 +53,13 @@
            <div class="acadamics tabshow">
                 <h1 class="hg1">Acadamic info</h1>
                 <h2 class="hg2">Admission Date</h2>
-                <h3 class="input" name="admission_date"><%= l.getAdmission_date()%></h3>
+                <input type="text" class="input" value="<%= l.getAdmission_date()%>" name="admission_date" disabled>
                 <h2 class="hg2">Student ID</h2>
-                <h3 class="input" name="student_id"><%= l.getStudent_id()%></h3>
+                <input type="number" class="input" value="<%= l.getStudent_id()%>" name="student_id" disabled>
                 <h2 class="hg2">Standard</h2>
-                <h3 class="input" name="standard"><%= l.getStandard()%></h3>
+                <input type="text" class="input" value="<%= l.getStandard()%>" name="standard" disabled>
                 <h2 class="hg2">Result</h2>
-                <h3 class="input" name="result"><%= l.getResult()%></h3>
+                <input type="text" class="input" value="<%= l.getResult()%>" name="result" disabled>
             </div> 
             <div class="contact tabshow">
                 <h1 class="hg1">Contact info</h1>
@@ -73,12 +73,11 @@
             <div class="login tabshow">
                 <h1 class="hg1">login info</h1>
                 <h2 class="hg2">Login ID</h2>
-                <h3 class="input" name="login_id"><%= l.getLogin_id()%></h3>
-                <h2 class="hg2">Password Hash</h2>
-                <h3 class="input" name="passwd"><%= l.getPasswd()%></h3>
-               
-            </div> 
-            <button class="btn" type="submit" name="submit_update" value="Update">Update</button>   
+                <input type="text" class="input" value="<%= l.getLogin_id()%>" name="login_id" disabled>
+                <h2 class="hg2">Password</h2>
+                <input type="text" class="input" value="<%= l.getPasswd()%>" name="passwd" disabled>
+               <button class="btn" type="submit" name="submit_update" value="Update">Update</button>
+            </div>    
         </div>
             <% 
 		} %>
