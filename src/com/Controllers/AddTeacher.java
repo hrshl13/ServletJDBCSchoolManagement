@@ -74,7 +74,7 @@ public class AddTeacher extends HttpServlet{
 		if(status>0) {
 			System.out.println("Inside IF");
 			request.setAttribute("msg", "Wrong Password!!!");
-			response.sendRedirect("AddStudent.jsp");
+			response.sendRedirect("ViewTeacher.jsp");
 		}
 		else {
 	    	request.setAttribute("msg", "Wrong Password!!!");

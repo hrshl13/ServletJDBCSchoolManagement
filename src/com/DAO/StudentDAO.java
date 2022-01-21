@@ -43,7 +43,7 @@ public class StudentDAO {
 		int status =0;
 		try {
 			Connection con = createCon.getConnection();
-			PreparedStatement ps = con.prepareStatement("update student set fname=?,lname=?,dob=?,gender=?,email=?,phone_no=?,address=?,passwd=?,standard=?,result=?,admission_date=?,login_id=? where student_id=?");
+			PreparedStatement ps = con.prepareStatement("update student set fname=?,lname=?,dob=?,gender=?,email=?,phone_no=?,address=?,passwd=?,standard=?,result=?,admission_date=?,login_id=? where student_id=?;");
 			ps.setString(1, s.getFname());
 			ps.setString(2, s.getLname());
 			ps.setString(3, s.getDob());

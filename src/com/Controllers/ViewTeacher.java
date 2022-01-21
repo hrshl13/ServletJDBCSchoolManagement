@@ -4,10 +4,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
-import com.DAO.StudentDAO;
 import com.DAO.SubjectDAO;
 import com.DAO.TeacherDAO;
-import com.Models.Student;
 import com.Models.Subject;
 import com.Models.Teacher;
 
@@ -25,6 +23,19 @@ public class ViewTeacher extends HttpServlet{
 	public ViewTeacher() {
 		super();
 		// TODO Auto-generated constructor stub
+	}
+	
+	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		int id = Integer.parseInt(request.getParameter("id"));
+		int stat=TeacherDAO.deleteTeacher(id);
+		PrintWriter out = response.getWriter();
+		if (stat > 0) {
+			out.print(id);
+		}else {
+			out.print(-1);
+		}
+		
+		out.flush();
 	}
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -76,7 +76,7 @@ public class TeacherDAO {
 			System.out.println("Records Deleted!");
 			con.close();
 		} catch (SQLException e) {
-            printSQLException(e);
+			e.printStackTrace();
         }
 		return status;
 	}
@@ -164,22 +164,22 @@ public class TeacherDAO {
 		List<Teacher> list = new ArrayList<Teacher>();
 		try {
 			Connection con = createCon.getConnection();
-			PreparedStatement ps = con.prepareStatement("select * from faculty where subject_id=?");
+			PreparedStatement ps = con.prepareStatement("select * from faculty where subject_id=?;");
 			ps.setInt(1, id);
 			ResultSet rs = ps.executeQuery();
 			while(rs.next()) {
 				Teacher s = new Teacher(); 
-				s.setFaculty_id(rs.getInt(1));
-				s.setFname(rs.getString(2));
-				s.setLname(rs.getString(3));
-				s.setDob(rs.getString(4));
-				s.setGender(rs.getString(5));
-				s.setEmail(rs.getString(6));
-				s.setPhone_no(rs.getString(7));
-				s.setAddress(rs.getString(8));
-				s.setPasswd(rs.getString(9));
-				s.setSubject_id(rs.getInt(10));
-				s.setLogin_id(rs.getString(11));
+				s.setFaculty_id(rs.getInt("faculty_id"));
+				s.setFname(rs.getString("fname"));
+				s.setLname(rs.getString("lname"));
+				s.setDob(rs.getString("dob"));
+				s.setGender(rs.getString("gender"));
+				s.setEmail(rs.getString("email"));
+				s.setPhone_no(rs.getString("phone_no"));
+				s.setAddress(rs.getString("address"));
+				s.setSubject_id(rs.getInt("subject_id"));
+				s.setPasswd(rs.getString("passwd"));
+				s.setLogin_id(rs.getString("login_id"));
 				list.add(s);
 			}
 			con.close();

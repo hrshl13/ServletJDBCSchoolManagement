@@ -6,63 +6,9 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
+<link rel="stylesheet" href="Assets/ViewTeacher.css" type='text/css'>
 </head>
-<style>
-    .select{
-        padding: 8px 12px;
-        color: white;
-        font-weight: bold;
-        background-color: #eeeeee;
-        border: 1px solid #dddddd;
-        border-radius: 5px;
-        background-color: #009879;
-        color: #dddddd;
-        margin: 0 0 0 570px;
-    }
 
-    .content-table{ 
-        border-collapse: collapse;
-        margin: 25px 0;
-        font-size: 0.9em;
-        /* min-width: 400px; */
-        width: 40%;
-        font-size: 15px;
-        font-family: monospace;
-        border-radius: 5px 5px 0 0;
-        overflow: hidden;
-        box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-        margin-left: auto;
-        margin-right: auto;
-    }
-    .content-table tr td button{
-        border-radius: 5px 5px 5px 5px;
-        background-color: #009879;
-        color: #f3f3f3;
-    }
-    .content-table thead tr{
-        background-color: #009879;
-        color: #ffffff;
-        text-align: left;
-        font-weight: bold;
-    }
-    .content-table th,
-    .content-table td{
-        padding: 12px 15px;
-    }
-    .content-table tbody tr{
-        border-bottom: 1px solid #dddddd;
-    }
-    .content-table tbody tr:nth-of-type(even){
-        background-color: #f3f3f3;
-    }
-    .content-table tbody tr:last-of-type{
-        border-bottom: 2px solid #009879;
-    }
-    .content-table tbody tr:hover{
-        color: #009879;
-    }
-
-</style>
 
 <body>
 <%
@@ -92,7 +38,8 @@ if (request.getParameter("TeacherID")!=null){
 					<input type="submit" id="subbtn" value="Submit" style="border-radius: 5px 5px 5px 5px; background-color: #009879;color: #f3f3f3;"/>
     <br><br>
 </form>
-<form action="#" method="post">   
+<form action="AddTeacher.jsp" method="post"><input type="submit" value="new" style="margin-left: 55%;border-radius: 5px 5px 5px 5px; background-color: #009879;color: #f3f3f3;"/></form>
+   
     <table class="content-table">
         <thead>
             <tr>
@@ -112,37 +59,57 @@ if (request.getParameter("TeacherID")!=null){
 		if (l != null){
 			for (Teacher s:l){
 		%>
-            <tr>
+            <tr id="<%=s.getFaculty_id()%>">
                 <td><%=s.getFaculty_id() %></td>
                 <td><%=s.getFname() %></td>
                 <td><%=s.getLname() %></td>
                 <td><%=s.getPhone_no() %></td>
                 <td><%=s.getEmail() %></td>
-                <td><button>View</button></td>
-                <td><button>Delete</button></td>
+                <td><form action="UpdateTeacher" method="post"><input type="hidden" name="Student_id" value="<%= s.getFaculty_id() %>"  /> <input type="submit" value="View"  style="border-radius: 5px 5px 5px 5px; background-color: #009879;color: #f3f3f3;"/></form></td>
+                <td><button value="Delete" onclick="remove(<%=s.getFaculty_id()%>)">Delete</button></td>
             </tr>
          <% }
 		 } %>
-            <tr>
-                <td>183</td>
-                <td>Dipa</td>
-                <td>ranjan</td>
-                <td>2736826832</td>
-                <td>abc@gmail.com</td>
-                <td><button>View</button></td>
-                <td><button>Delete</button></td>
-            </tr>
-            <tr>
-                <td>343</td>
-                <td>Ashoka</td>
-                <td>pradhan</td>
-                <td>2736826832</td>
-                <td>abc@gmail.com</td>
-                <td><button>View</button></td>
-                <td><button>Delete</button></td>
-            </tr>
         </tbody>
     </table>
-</form>
+
+
+<script>
+function remove(id){
+	if(window.XMLHttpRequest){
+		
+		ajax = new XMLHttpRequest();
+		
+	}
+	else if(window.ActiveXObject){
+		
+		ajax = new ActiveXObject("Microsoft.XMLHTTP");
+	} 
+	
+	var url="ViewTeacher?id="+id;
+	try{
+		ajax.onreadystatechange=sendInfo;
+		ajax.open("DELETE",url,true);
+		ajax.send();
+		
+	}catch(e){
+		alert("Unable to connect server");
+	}
+  }
+function sendInfo(){  
+	if(this.readyState == 4 && this.status == 200){  
+		var responseVal= ajax.responseText;  
+		if(responseVal >= 0){
+			alert("Teacher info Successfully Deleted!!!");
+			e = document.getElementById(responseVal);
+			 e.parentElement.remove();
+				}
+			else{
+			alert("Couldn't delete task!!\nThere's some issue on the server!!");
+		}
+	}  
+}
+</script>
+
 </body>
 </html>

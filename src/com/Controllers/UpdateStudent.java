@@ -39,6 +39,8 @@ public class UpdateStudent extends HttpServlet {
 		String login_id = request.getParameter("login_id");
 		int student_id = Integer.parseInt(request.getParameter("student_id"));
 		
+		System.out.println(student_id);
+		
 		Student s = new Student();
 		s.setFname(fname);
 		s.setLname(lname);
