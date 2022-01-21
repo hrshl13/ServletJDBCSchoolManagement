@@ -53,13 +53,13 @@
            <div class="acadamics tabshow">
                 <h1 class="hg1">Acadamic info</h1>
                 <h2 class="hg2">Admission Date</h2>
-                <input type="text" class="input" value="<%= l.getAdmission_date()%>" name="admission_date" disabled>
+                <input type="text" class="input" value="<%= l.getAdmission_date()%>" name="admission_date" >
                 <h2 class="hg2">Student ID</h2>
-                <input type="number" class="input" value="<%= l.getStudent_id()%>" name="student_id" disabled>
+                <input type="number" class="input" value="<%= l.getStudent_id()%>" name="student_id" >
                 <h2 class="hg2">Standard</h2>
-                <input type="text" class="input" value="<%= l.getStandard()%>" name="standard" disabled>
+                <input type="text" class="input" value="<%= l.getStandard()%>" name="standard" >
                 <h2 class="hg2">Result</h2>
-                <input type="text" class="input" value="<%= l.getResult()%>" name="result" disabled>
+                <input type="text" class="input" value="<%= l.getResult()%>" name="result" >
             </div> 
             <div class="contact tabshow">
                 <h1 class="hg1">Contact info</h1>
