@@ -58,7 +58,6 @@ public class UpdateStudent extends HttpServlet {
 		int status = StudentDAO.update(s);
 		if(status>0) {
 			System.out.println("Inside IF");
-			request.setAttribute("msg", "Wrong Password!!!");
 			RequestDispatcher rd = request.getRequestDispatcher("ViewStudent.jsp");
 			rd.forward(request, response);
 		}
@@ -80,8 +79,6 @@ public class UpdateStudent extends HttpServlet {
 		String yes = request.getParameter("submit_update");
 		if (yes==null) {
 			processRequest(request,response);
-			RequestDispatcher rd = request.getRequestDispatcher("UpdateStudent.jsp");
-			rd.forward(request, response);
 		}else {
 			doUpdate(request,response);
 		
