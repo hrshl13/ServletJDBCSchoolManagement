@@ -70,7 +70,7 @@ if (request.getParameter("StdID")!=null){
                 <td><%=s.getResult() %></td>
                 <td><%=s.getPhone_no() %></td>
                 <td><%=s.getEmail() %></td>
-                <td><form action="UpdateStudent" method="post"><input type="hidden" name="Student_id" value="<%= s.getStudent_id() %>"  /> <input type="submit" value="View"  style="border-radius: 5px 5px 5px 5px; background-color: #009879;color: #f3f3f3;"/></form></td>
+                <td><form action="UpdateStudent" method="post"><input type="hidden" name="Student_id" value="<%= s.getStudent_id() %>"  /> <input type="submit" value="View"  style="margin-top: 100px; border-radius: 5px 5px 5px 5px; background-color: #009879;color: #f3f3f3;"/></form></td>
                 <td><button value="Delete" onclick="remove(<%=s.getStudent_id()%>)">Delete</button></td>
             </tr>
             <% 	}

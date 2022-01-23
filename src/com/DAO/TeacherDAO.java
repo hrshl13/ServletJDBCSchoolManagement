@@ -15,6 +15,7 @@ import com.Models.Teacher;
 public class TeacherDAO {
 	private static final String INSERT_teacher_SQL = "INSERT INTO faculty(fname,lname,dob,gender,email,phone_no, address, subject_id, passwd, login_id) VALUES (?, ?,?,?,?,?,?,(select subject_id from subject where subject_id=?),?,?);";
     private static final String SELECT_teacher_BY_Login_ID = "select * from faculty where login_id =?;";
+    private static final String SELECT_teacher_BY_Faculty_ID = "select * from faculty where faculty_id =?;";
     private static final String SELECT_ALL_teacher = "select * from faculty;";
     private static final String DELETE_teacher_SQL = "delete from faculty where faculty_id = ?;";
     private static final String UPDATE_teacher_SQL = "update faculty set fname=? ,lname=? ,dob=? ,gender=? ,email=? ,phone_no=? ,address=? ,subject_id=? ,passwd=? where faculty_id = ?;";
@@ -84,11 +85,11 @@ public class TeacherDAO {
 		Teacher s = new Teacher();
 		try {
 			Connection con = createCon.getConnection();
-			PreparedStatement ps = con.prepareStatement(SELECT_teacher_BY_Login_ID);
+			PreparedStatement ps = con.prepareStatement(SELECT_teacher_BY_Faculty_ID);
 			ps.setInt(1, id);
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
-				s.setFaculty_id(rs.getInt("faculty_id"));
+				s.setLogin_id(rs.getString("login_id"));
 				s.setFname(rs.getString("fname"));
 				s.setLname(rs.getString("lname"));
 				s.setDob(rs.getString("dob"));
@@ -98,7 +99,7 @@ public class TeacherDAO {
 				s.setAddress(rs.getString("address"));
 				s.setSubject_id(rs.getInt("subject_id"));
 				s.setPasswd(rs.getString("passwd"));
-				s.setLogin_id(rs.getString("login_id"));
+				s.setFaculty_id(rs.getInt("faculty_id"));
 			}
 			con.close();
 		} catch (SQLException e) {

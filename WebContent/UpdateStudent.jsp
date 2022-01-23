@@ -51,7 +51,7 @@
                <input type="text" class="input" value="<%= l.getDob()%>" name="dob">
            </div>
            <div class="acadamics tabshow">
-                <h1 class="hg1">Acadamic info</h1>
+                <h1 class="hg1">Academic info</h1>
                 <h2 class="hg2">Admission Date</h2>
                 <input type="text" class="input" value="<%= l.getAdmission_date()%>" name="admission_date" disabled>
                 <h2 class="hg2">Student ID</h2>
@@ -76,8 +76,9 @@
                 <input type="text" class="input" value="<%= l.getLogin_id()%>" name="login_id" disabled>
                 <h2 class="hg2">Password</h2>
                 <input type="text" class="input" value="<%= l.getPasswd()%>" name="passwd" disabled>
-               <button class="btn" type="submit" name="submit_update" value="Update">Update</button>
-            </div>    
+               
+            </div> 
+            <button class="btn" type="submit" name="submit_update" value="Update">Update</button>   
         </div>
             <% 
 		} %>

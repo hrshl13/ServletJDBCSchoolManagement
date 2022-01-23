@@ -60,12 +60,12 @@ if (request.getParameter("TeacherID")!=null){
 			for (Teacher s:l){
 		%>
             <tr id="<%=s.getFaculty_id()%>">
-                <td><%=s.getFaculty_id() %></td>
+                <td class="StdID"><%=s.getFaculty_id() %></td>
                 <td><%=s.getFname() %></td>
                 <td><%=s.getLname() %></td>
                 <td><%=s.getPhone_no() %></td>
                 <td><%=s.getEmail() %></td>
-                <td><form action="UpdateTeacher" method="post"><input type="hidden" name="Student_id" value="<%= s.getFaculty_id() %>"  /> <input type="submit" value="View"  style="border-radius: 5px 5px 5px 5px; background-color: #009879;color: #f3f3f3;"/></form></td>
+                <td><form action="UpdateTeacher" method="post"><input type="hidden" name="Faculty_id" value="<%= s.getFaculty_id() %>"  /> <input type="submit" value="View"  style="border-radius: 5px 5px 5px 5px; background-color: #009879;color: #f3f3f3;"/></form></td>
                 <td><button value="Delete" onclick="remove(<%=s.getFaculty_id()%>)">Delete</button></td>
             </tr>
          <% }
