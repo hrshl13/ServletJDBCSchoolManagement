@@ -18,7 +18,7 @@ public class TeacherDAO {
     private static final String SELECT_teacher_BY_Faculty_ID = "select * from faculty where faculty_id =?;";
     private static final String SELECT_ALL_teacher = "select * from faculty;";
     private static final String DELETE_teacher_SQL = "delete from faculty where faculty_id = ?;";
-    private static final String UPDATE_teacher_SQL = "update faculty set fname=? ,lname=? ,dob=? ,gender=? ,email=? ,phone_no=? ,address=? ,subject_id=? ,passwd=? where faculty_id = ?;";
+    private static final String UPDATE_teacher_SQL = "update faculty set fname=? ,lname=? ,dob=? ,gender=? ,email=? ,phone_no=? ,address=? ,subject_id=? where faculty_id = ?;";
     
     public static int insertTeacher(Teacher s) throws SQLException {
     	int status = 0;
@@ -57,8 +57,7 @@ public class TeacherDAO {
                 ps.setString(6, s.getPhone_no());
                 ps.setString(7, s.getAddress());
                 ps.setInt(8, s.getSubject_id());
-                ps.setString(9, s.getPasswd());
-                ps.setInt(10, s.getFaculty_id());
+                ps.setInt(9, s.getFaculty_id());
     			status = ps.executeUpdate();
     			System.out.println("Records Updated!");
     			con.close();

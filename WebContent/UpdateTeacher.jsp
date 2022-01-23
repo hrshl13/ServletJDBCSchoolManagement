@@ -52,9 +52,9 @@
            <div class="acadamics tabshow">
                 <h1 class="hg1">Academic info</h1>
                 <h2 class="hg2">Subject ID</h2>
-                <input type="number" class="input" value="<%= l.getSubject_id()%>" name="subject_id" disabled>
+                <input type="number" class="input" value="<%= l.getSubject_id()%>" name="subject_id">
                 <h2 class="hg2">Teacher ID</h2>
-                <input type="number" class="input" value="<%= l.getFaculty_id()%>" name="faculty_id" disabled>
+                <input type="number" class="input" value="<%= l.getFaculty_id()%>" name="faculty_id">
             </div> 
             <div class="contact tabshow">
                 <h1 class="hg1">Contact info</h1>
@@ -68,9 +68,9 @@
             <div class="login tabshow">
                 <h1 class="hg1">login info</h1>
                 <h2 class="hg2">Login ID</h2>
-                <input type="text" class="input" value="<%= l.getLogin_id()%>" name="login_id" disabled>
+                <input type="text" class="input" value="<%= l.getLogin_id()%>" name="login_id">
                 <h2 class="hg2">Password</h2>
-                <input type="text" class="input" value="<%= l.getPasswd()%>" name="passwd" disabled>
+                <input type="text" class="input" value="<%= l.getPasswd()%>" name="passwd">
             </div>
             <button class="btn" type="submit" name="submit_update" value="Update" style="margin-top: 360px; margin-left: 100px;">Update</button>       
         </div>

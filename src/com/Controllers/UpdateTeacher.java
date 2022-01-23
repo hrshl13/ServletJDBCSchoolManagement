@@ -49,10 +49,8 @@ public class UpdateTeacher extends HttpServlet {
 		s.setEmail(email);
 		s.setDob(dob);
 		s.setAddress(address);
-		s.setPasswd(passwd);
-		s.setLogin_id(login_id);
-		s.setFaculty_id(faculty_id);
 		s.setSubject_id(subject_id);
+		s.setFaculty_id(faculty_id);
 	
 		int status = TeacherDAO.updateTeacher(s);
 		if(status>0) {
