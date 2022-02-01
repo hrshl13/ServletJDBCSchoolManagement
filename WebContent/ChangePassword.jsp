@@ -115,6 +115,7 @@ body{
     transform: translate(0,5px);
 }
 .error {
+  position:centre;
   border-radius: 0.4vw;
   padding: 1vw;
   border: 0.1vw solid #ff304f;

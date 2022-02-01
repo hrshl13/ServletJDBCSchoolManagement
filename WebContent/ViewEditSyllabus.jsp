@@ -2,12 +2,24 @@
     pageEncoding="ISO-8859-1"
     import="com.Controllers.ViewEditSyllabus,com.DAO.SyllabusDAO,com.Models.Syllabus,java.util.List"
     %>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
 <title>View/Edit Syllabus</title>
 <link rel="stylesheet" href="Assets/ViewEditSyllabus.css" type='text/css'>
+<style>
+   .error {
+  position:centre;
+  border-radius: 0.4vw;
+  padding: 1vw;
+  border: 0.1vw solid #ff304f;
+  color: #ff304f;
+  box-shadow: 0.2vw 0.2vw 0.8vw 0.2vw #fdc6ce;
+  background-color: #fdc6ce;
+}
+</style>
 </head>
 <body>
 <%@include file="NavBar.jsp" %>
@@ -22,6 +34,11 @@ if (request.getParameter("sylID")!=null){
 	}
 }
 %>
+<% if(request.getAttribute("msg") != null) { %>
+	    	<p class="error">
+		     <%= request.getAttribute("msg") %>
+		    </p>
+		<% } %>
 <div class="SyllabusPage">
 <form action="#" method="post">
 <h1 class="head">Edit Syllabus</h1>
@@ -113,7 +130,7 @@ function sendInfo(){
 	if(this.readyState == 4 && this.status == 200){  
 		var responseVal= ajax.responseText;  
 		if(responseVal >= 0){
-			alert("Chapters Successfully Deleted!!!");
+			alert("Chapter Successfully Deleted!!!");
 			e = document.getElementById(responseVal);
 			 e.parentElement.remove();
 				}

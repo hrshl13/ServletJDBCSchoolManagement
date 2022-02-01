@@ -62,7 +62,7 @@ public class ChangePassword extends HttpServlet {
 		HttpSession session = request.getSession(false);
 		User user = (User) session.getAttribute("obj");
 		if (!curpass.equals(user.getPasswd())) {
-			request.setAttribute("msg", "Please Enter correct Current Password!!!");
+			request.setAttribute("msg", "Please Enter Correct Current Password!!!");
 			rd.forward(request, response);
 		}
 		else if (!newpass.equals(repass)) {
