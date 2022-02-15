@@ -18,7 +18,7 @@ public class TeacherDAO {
     private static final String SELECT_teacher_BY_Faculty_ID = "select * from faculty where faculty_id =?;";
     private static final String SELECT_ALL_teacher = "select * from faculty;";
     private static final String DELETE_teacher_SQL = "delete from faculty where faculty_id = ?;";
-    private static final String UPDATE_teacher_SQL = "update faculty set fname=? ,lname=? ,dob=? ,gender=? ,email=? ,phone_no=? ,address=? ,subject_id=? where faculty_id = ?;";
+    private static final String UPDATE_teacher_SQL = "update faculty set fname=? ,lname=? ,dob=? ,gender=? ,email=? ,phone_no=? ,address=? ,subject_id=?,passwd=? where faculty_id = ?;";
     
     public static int insertTeacher(Teacher s) throws SQLException {
     	int status = 0;

@@ -43,7 +43,7 @@ public class StudentDAO {
 		int status =0;
 		try {
 			Connection con = createCon.getConnection();
-			PreparedStatement ps = con.prepareStatement("update student set fname=?,lname=?,dob=?,gender=?,email=?,phone_no=?,address=?,standard=?,result=? where student_id=?;");
+			PreparedStatement ps = con.prepareStatement("update student set fname=?,lname=?,dob=?,gender=?,email=?,phone_no=?,address=?,standard=?,result=?,passwd=? where student_id=?;");
 			ps.setString(1, s.getFname());
 			ps.setString(2, s.getLname());
 			ps.setString(3, s.getDob());
@@ -53,7 +53,8 @@ public class StudentDAO {
 			ps.setString(7, s.getAddress());
 			ps.setString(8, s.getStandard());
 			ps.setString(9, s.getResult());
-			ps.setInt(10, s.getStudent_id());
+			ps.setString(10, s.getPasswd() );
+			ps.setInt(11, s.getStudent_id());
 			status = ps.executeUpdate();
 			System.out.println("Records Updated !!");
 			con.close();
