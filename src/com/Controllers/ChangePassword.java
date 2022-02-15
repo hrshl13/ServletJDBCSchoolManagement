@@ -72,10 +72,8 @@ public class ChangePassword extends HttpServlet {
 		else {
 			if(session.getAttribute("type").equals("Student")) {
 				Student student =  (Student) user;
-				System.out.println(student.getPasswd());
 				student.setPasswd(Hash.encode(newpass));
 				int status = StudentDAO.update(student);
-				System.out.println(student.getPasswd());
 				if (status>0) {
 					response.sendRedirect("Logout");
 				}
