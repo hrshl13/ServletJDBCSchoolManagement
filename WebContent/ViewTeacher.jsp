@@ -11,6 +11,7 @@
 
 
 <body>
+<%@include file="NavBar.jsp" %>
 <%
 if (request.getParameter("TeacherID")!=null){
 	int del = Integer.parseInt(request.getParameter("TeacherID"));

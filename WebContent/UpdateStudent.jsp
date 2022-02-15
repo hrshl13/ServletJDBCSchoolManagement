@@ -12,6 +12,7 @@
 
 
 <body>
+<%@include file="NavBar.jsp" %>
 <form action="UpdateStudent" method="post">
    <div class="container">
         <div class="leftbox">

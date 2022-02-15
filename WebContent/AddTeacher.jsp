@@ -10,7 +10,7 @@
 
 
 <body>
-
+<%@include file="NavBar.jsp" %>
 <% if(request.getAttribute("msg") != null) { %>
    <p class="error">
      <%= request.getAttribute("msg") %>

@@ -34,7 +34,7 @@
 					
 				}else{
 					%> 
-					<form action='assigndet' method='post'> 
+					<form action='assignDetails' method='post'> 
 					<input type='submit' class='subbtn' value='Add Marks' /> 
 					<ul class="lyst">
 					<%

@@ -13,6 +13,7 @@
 
 
 <body>
+<%@include file="NavBar.jsp" %>
 <%
 if (request.getParameter("StdID")!=null){
 	int del = Integer.parseInt(request.getParameter("StdID"));
