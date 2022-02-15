@@ -78,11 +78,17 @@ public class ViewEditSyllabus extends HttpServlet {
 		  syl.setChapter(request.getParameter("newSyl"));
 		  syl.setStandard(request.getParameter("std"));
 		  syl.setSubject_id(teacher.getSubject_id());
-		  if (syl.getChapter().isBlank()) {
-			  RequestDispatcher rd = request.getRequestDispatcher("ToDoList.jsp");
-			  request.setAttribute("msg", "Task Cannot be empty!!!");
+		  if (syl.getChapter().isEmpty()) {
+			  RequestDispatcher rd = request.getRequestDispatcher("ViewEditSyllabus.jsp");
+			  request.setAttribute("msg", "Chapter Name Cannot be empty!!!");
 			  rd.forward(request,response);
-		  }else {
+		  }
+		  if(request.getParameter("std")==null){
+			  RequestDispatcher rd = request.getRequestDispatcher("ViewEditSyllabus.jsp");
+			  request.setAttribute("msg", "Select a Standard!!!");
+			  rd.forward(request,response);
+		  }
+		  else {
 			  SyllabusDAO.insert(syl);
 			  response.sendRedirect("ViewEditSyllabus.jsp");
 		  }

@@ -114,6 +114,15 @@ body{
     background-color:rgba(72, 217, 253, 0.835);
     transform: translate(0,5px);
 }
+.error {
+  position:centre;
+  border-radius: 0.4vw;
+  padding: 1vw;
+  border: 0.1vw solid #ff304f;
+  color: #ff304f;
+  box-shadow: 0.2vw 0.2vw 0.8vw 0.2vw #fdc6ce;
+  background-color: #fdc6ce;
+}
 </style>
 </head>
 <body>
