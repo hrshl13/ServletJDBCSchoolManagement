@@ -44,19 +44,19 @@ public class ChangePassword extends HttpServlet {
 	}
 	public void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String curpass = Hash.encode(request.getParameter("curpass"));
-		String newpass = Hash.encode(request.getParameter("newpass"));
-		String repass = Hash.encode( request.getParameter("repass"));
+		String newpass = request.getParameter("newpass");
+		String repass = request.getParameter("repass");
 		RequestDispatcher rd = request.getRequestDispatcher("ChangePassword.jsp");
 		if (curpass.isBlank()) {
 			request.setAttribute("msg", "Please Enter Current Password!!!");
 			rd.forward(request, response);
 		}
 		else if(newpass.isBlank()) {
-			request.setAttribute("msg", "Please Enter Current Password!!!");
+			request.setAttribute("msg", "Please Enter New Password!!!");
 			rd.forward(request, response);
 		}
-		else if(newpass.isBlank()) {
-			request.setAttribute("msg", "Please Enter Current Password!!!");
+		else if(repass.isBlank()) {
+			request.setAttribute("msg", "Please Re-enter New Password!!!");
 			rd.forward(request, response);
 		}
 		HttpSession session = request.getSession(false);
@@ -71,27 +71,42 @@ public class ChangePassword extends HttpServlet {
 		}
 		else {
 			if(session.getAttribute("type").equals("Student")) {
-				Student student =  (Student) session.getAttribute("obj");
-				student.setPasswd(newpass);
+				Student student =  (Student) user;
+				System.out.println(student.getPasswd());
+				student.setPasswd(Hash.encode(newpass));
 				int status = StudentDAO.update(student);
+				System.out.println(student.getPasswd());
 				if (status>0) {
 					response.sendRedirect("Logout");
 				}
 				else {
-					System.out.println("Unsuccessful!");
+					request.setAttribute("msg", "Unsuccessful!!!");
+					rd.forward(request, response);
 				}
 			}
 			else if (session.getAttribute("type").equals("Teacher")) {
 				Teacher teacher = (Teacher) session.getAttribute("obj");
-				teacher.setPasswd(newpass);
-				TeacherDAO.updateTeacher(teacher);
-				response.sendRedirect("Logout");
+				teacher.setPasswd(Hash.encode(newpass));
+				int status =TeacherDAO.updateTeacher(teacher);
+				if (status>0) {
+					response.sendRedirect("Logout");
+				}
+				else {
+					request.setAttribute("msg", "Unsuccessful!!!");
+					rd.forward(request, response);
+				}
 			}
 			else if (session.getAttribute("type").equals("Principal")) {
 				Principal principal = (Principal) session.getAttribute("obj");
-				principal.setPasswd(newpass);
-				PrincipalDAO.update(principal);
-				response.sendRedirect("Logout");
+				principal.setPasswd(Hash.encode(newpass));
+				int status =PrincipalDAO.update(principal);
+				if (status>0) {
+					response.sendRedirect("Logout");
+				}
+				else {
+					request.setAttribute("msg", "Unsuccessful!!!");
+					rd.forward(request, response);
+				}
 			}
 		}
 	}
